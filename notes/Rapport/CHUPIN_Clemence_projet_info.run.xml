@@ -44,10 +44,10 @@
   <internal package="biblatex" priority="9" active="1">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>latexppmd.bcf</file>
+      <file>CHUPIN_Clemence_projet_info.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>latexppmd.bbl</file>
+      <file>CHUPIN_Clemence_projet_info.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -65,19 +65,19 @@
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>latexppmd</infile>
+      <infile>CHUPIN_Clemence_projet_info</infile>
     </cmdline>
     <input>
-      <file>latexppmd.bcf</file>
+      <file>CHUPIN_Clemence_projet_info.bcf</file>
     </input>
     <output>
-      <file>latexppmd.bbl</file>
+      <file>CHUPIN_Clemence_projet_info.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>latexppmd.bbl</file>
+      <file>CHUPIN_Clemence_projet_info.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>latexppmd.bcf</file>
+      <file>CHUPIN_Clemence_projet_info.bcf</file>
     </requires>
     <requires type="editable">
       <file>latexensg.bib</file>

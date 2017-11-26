@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.1)  23 NOV 2017 19:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.1)  26 NOV 2017 22:42
 entering extended mode
-**./latexppmd.tex
-(latexppmd.tex
+**./CHUPIN_Clemence_projet_info.tex
+(CHUPIN_Clemence_projet_info.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 75 language(s) loaded.
 (themeensg.cls
@@ -1116,8 +1116,9 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 
 \@quotelevel=\count326
 \@quotereset=\count327
-(latexppmd.aux (chap1.aux))
-\openout1 = `latexppmd.aux'.
+(CHUPIN_Clemence_projet_info.aux (chap1.aux) (chap2.aux) (chap3.aux) (chap4.aux
+))
+\openout1 = `CHUPIN_Clemence_projet_info.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
 LaTeX Font Info:    ... okay on input line 69.
@@ -1138,7 +1139,8 @@ LaTeX Font Info:    Try loading font information for T1+lmss on input line 69.
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 \AtBeginShipoutBox=\box33
- ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count328
 \scratchdimen=\dimen143
@@ -1185,9 +1187,9 @@ LaTeX Info: Redefining \ref on input line 69.
 LaTeX Info: Redefining \pageref on input line 69.
 LaTeX Info: Redefining \nameref on input line 69.
 
-(latexppmd.out) (latexppmd.out)
+(CHUPIN_Clemence_projet_info.out) (CHUPIN_Clemence_projet_info.out)
 \@outlinefile=\write5
-\openout5 = `latexppmd.out'.
+\openout5 = `CHUPIN_Clemence_projet_info.out'.
 
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
@@ -1230,14 +1232,15 @@ Package lastpage Info: Please have a look at the pageslts package at
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout4 = `latexppmd.bcf'.
+\openout4 = `CHUPIN_Clemence_projet_info.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'latexppmd.bbl' found.
-(latexppmd.bbl)
+Package biblatex Info: ... file 'CHUPIN_Clemence_projet_info.bbl' found.
+(CHUPIN_Clemence_projet_info.bbl)
 Package biblatex Info: Reference section=0 on input line 69.
 Package biblatex Info: Reference segment=0 on input line 69.
- <images/logos/logo_ensg.png, id=31, 672.5125pt x 714.67pt>
+
+<images/logos/logo_ensg.png, id=83, 672.5125pt x 714.67pt>
 File: images/logos/logo_ensg.png Graphic file (type png)
 
 <use images/logos/logo_ensg.png>
@@ -1281,12 +1284,13 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 78.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<images/logos/logo_matis.png, id=32, 241.90375pt x 301.125pt>
-File: images/logos/logo_matis.png Graphic file (type png)
+<images/logos/logo_paris_est.png, id=84, 698.52943pt x 161.70111pt>
+File: images/logos/logo_paris_est.png Graphic file (type png)
 
-<use images/logos/logo_matis.png>
-Package pdftex.def Info: images/logos/logo_matis.png used on input line 78.
-(pdftex.def)             Requested size: 99.58464pt x 123.96288pt.
+<use images/logos/logo_paris_est.png>
+Package pdftex.def Info: images/logos/logo_paris_est.png used on input line 78.
+
+(pdftex.def)             Requested size: 99.58464pt x 23.0525pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 84.
 File: images/logos/logo_ensg.png Graphic file (type png)
@@ -1309,16 +1313,16 @@ LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <10> not available
 [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./images/logos/logo_ensg.
-png> <./images/logos/logo_matis.png>] [2]
+png> <./images/logos/logo_paris_est.png>] [2]
 
 LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <10.95> not available
 (Font)              Font shape `T1/lmr/m/sc' tried instead on input line 94.
 
 [3
 
-] [4] (latexppmd.toc)
+] [4] (CHUPIN_Clemence_projet_info.toc)
 \tf@toc=\write6
-\openout6 = `latexppmd.toc'.
+\openout6 = `CHUPIN_Clemence_projet_info.toc'.
 
  [5] [6] [7
 
@@ -1327,7 +1331,8 @@ LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <10.95> not available
 ]
 \openout2 = `chap1.aux'.
 
- (chap1.tex [10
+ (chap1.tex
+[10
 
 ]
 Chapitre 1.
@@ -1345,176 +1350,134 @@ Overfull \hbox (40.99998pt too wide) in paragraph at lines 1--1
 
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
 (Font)              Font shape `T1/lmss/m/sl' tried instead on input line 3.
+) [11
 
-Underfull \hbox (badness 10000) in paragraph at lines 7--8
+]
+\openout2 = `chap2.aux'.
 
+ (chap2.tex [12
+
+
+]
+Chapitre 2.
+
+Overfull \hbox (40.99998pt too wide) in paragraph at lines 1--1
+[][] 
+ []
+
+) [13
+
+]
+\openout2 = `chap3.aux'.
+
+ (chap3.tex [14
+
+
+]
+Chapitre 3.
+
+Overfull \hbox (40.99998pt too wide) in paragraph at lines 1--1
+[][] 
+ []
+
+) [15
+
+]
+\openout2 = `chap4.aux'.
+
+ (chap4.tex [16
+
+
+]
+Chapitre 4.
+
+Overfull \hbox (40.99998pt too wide) in paragraph at lines 1--1
+[][] 
  []
 
 
-<images/Correlation_modele3D_terrain(1).png, id=93, 1559.22525pt x 699.21225pt>
-File: images/Correlation_modele3D_terrain(1).png Graphic file (type png)
-<use images/Correlation_modele3D_terrain(1).png>
-Package pdftex.def Info: images/Correlation_modele3D_terrain(1).png used on inp
-ut line 10.
-(pdftex.def)             Requested size: 184.9429pt x 82.93095pt.
-
-<images/Correlation_modele3D_terrain(2).png, id=94, 1566.45226pt x 779.3115pt>
-File: images/Correlation_modele3D_terrain(2).png Graphic file (type png)
-
-<use images/Correlation_modele3D_terrain(2).png>
-Package pdftex.def Info: images/Correlation_modele3D_terrain(2).png used on inp
-ut line 11.
-(pdftex.def)             Requested size: 184.9429pt x 92.00314pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 10--12
-[][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--16
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
 
  []
 
+[17
 
-Underfull \hbox (badness 4634) in paragraph at lines 17--18
-[]\T1/lmss/m/n/10.95 Suivant le ni-veau de dé-tail re-cher-ché, dif-
- []
-
-
-Underfull \hbox (badness 2426) in paragraph at lines 17--18
-\T1/lmss/m/n/10.95 fé-rents mo-dèles sont pos-sibles : Man-hat-tan (=
- []
-
-
-Underfull \hbox (badness 5064) in paragraph at lines 17--18
-\T1/lmss/m/n/10.95 toits plats), Bi-plan (= toits pen-tus), Mo-dé-li-
- []
-
-
-Underfull \hbox (badness 3302) in paragraph at lines 17--18
-\T1/lmss/m/n/10.95 sa-tion pré-cise (à par-tir de la tri-an-gu-la-tion du
- []
-
-
-Underfull \hbox (badness 2351) in paragraph at lines 17--18
-\T1/lmss/m/n/10.95 MNS), ... Plus le mo-dèle est évo-lué, plus le
- []
-
-
-Underfull \hbox (badness 6396) in paragraph at lines 17--18
-\T1/lmss/m/n/10.95 ni-veau de dé-tail est im-por-tant mais plus la
- []
-
-
-Underfull \hbox (badness 5563) in paragraph at lines 17--18
-\T1/lmss/m/n/10.95 gé-né-ra-li-sa-tion est com-pli-quée et lourde à co-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--18
-
- []
-
-<images/Niveau_detail.png, id=95, 1959.11925pt x 985.88326pt>
-File: images/Niveau_detail.png Graphic file (type png)
-
-<use images/Niveau_detail.png>
-Package pdftex.def Info: images/Niveau_detail.png used on input line 21.
-(pdftex.def)             Requested size: 254.69444pt x 128.16931pt.
- [11
-
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1.1}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.27 \newpage
-              Cependant, aucune mÃ©thode de reconstruction nâ€™est totalemen...
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1.2}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.27 \newpage
-              Cependant, aucune mÃ©thode de reconstruction nâ€™est totalemen...
- <./images/Correlation_modele3D_terrain(1).png> <./images/Correlation_modele3D_
-terrain(2).png> <./images/Niveau_detail.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 27--28
-
- []
-
-)
+])
 
 Package Fancyhdr Warning: \headheight is too small (12.5pt): 
  Make it at least 13.59999pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[12] [13
+[18] [19
 
 
-] [14]
+] [20]
 
-LaTeX Warning: Empty bibliography on input line 146.
-
-[15
-
-] [16] (latexppmd.lof)
-\tf@lof=\write7
-\openout7 = `latexppmd.lof'.
-
- [17] [18] (latexppmd.lot)
-\tf@lot=\write8
-\openout8 = `latexppmd.lot'.
-
- [19] [20] (latexppmd.ann)
-\tf@ann=\write9
-\openout9 = `latexppmd.ann'.
-
+LaTeX Warning: Empty bibliography on input line 151.
 
 [21
 
-] [22]
+] [22] (CHUPIN_Clemence_projet_info.lof)
+\tf@lof=\write7
+\openout7 = `CHUPIN_Clemence_projet_info.lof'.
+
+ [23] [24]
+(CHUPIN_Clemence_projet_info.lot)
+\tf@lot=\write8
+\openout8 = `CHUPIN_Clemence_projet_info.lot'.
+
+ [25] [26] (CHUPIN_Clemence_projet_info.ann)
+\tf@ann=\write9
+\openout9 = `CHUPIN_Clemence_projet_info.ann'.
+
+
+[27
+
+] [28]
 Annexe A.
 
-Overfull \hbox (40.99998pt too wide) in paragraph at lines 159--159
+Overfull \hbox (40.99998pt too wide) in paragraph at lines 164--164
 [][] 
  []
 
 
 AED: lastpage setting LastPage
-[23
+[29
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 165.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 165.
- (latexppmd.aux (chap1.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 165.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 165.
-Package rerunfilecheck Info: File `latexppmd.out' has not changed.
-(rerunfilecheck)             Checksum: F6BB3CA763D0B30B4E9E9DE83A0AC40A;417.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 170.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 170.
+ (CHUPIN_Clemence_projet_info.aux (chap1.aux) (chap2.aux) (chap3.aux)
+(chap4.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 170.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 170.
+Package rerunfilecheck Info: File `CHUPIN_Clemence_projet_info.out' has not cha
+nged.
+(rerunfilecheck)             Checksum: 9755EAC20C63CD0554E0C3E175CB3920;1386.
 
 
 LaTeX Warning: There were undefined references.
 
 
 Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                latexppmd
+(biblatex)                CHUPIN_Clemence_projet_info
 (biblatex)                and rerun LaTeX afterwards.
 
-Package logreq Info: Writing requests to 'latexppmd.run.xml'.
-\openout1 = `latexppmd.run.xml'.
+Package logreq Info: Writing requests to 'CHUPIN_Clemence_projet_info.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 165.
+\openout1 = `CHUPIN_Clemence_projet_info.run.xml'.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 170.
  ) 
 Here is how much of TeX's memory you used:
- 17034 strings out of 493323
- 268220 string characters out of 3139055
- 741864 words of memory out of 3000000
- 20220 multiletter control sequences out of 15000+200000
+ 17077 strings out of 493323
+ 268597 string characters out of 3139055
+ 751545 words of memory out of 3000000
+ 20225 multiletter control sequences out of 15000+200000
  86167 words of font info for 72 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,11n,45p,1136b,2010s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,11n,45p,1154b,2008s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program Files/M
 iKTeX 2.9/fonts/type1/public/lm/lmcsc10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
 type1/public/lm/lmss10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/l
@@ -1522,9 +1485,9 @@ mss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmsso10.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/symbols/msam10.pfb>
-Output written on latexppmd.pdf (23 pages, 1411319 bytes).
+Output written on CHUPIN_Clemence_projet_info.pdf (29 pages, 336289 bytes).
 PDF statistics:
- 198 PDF objects out of 1000 (max. 8388607)
- 39 named destinations out of 1000 (max. 500000)
- 82 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 285 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 500000)
+ 171 words of extra memory for PDF output out of 10000 (max. 10000000)
 
