@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.1)  26 NOV 2017 22:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.1)  28 NOV 2017 17:30
 entering extended mode
 **./CHUPIN_Clemence_projet_info.tex
 (CHUPIN_Clemence_projet_info.tex
@@ -1116,8 +1116,7 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 
 \@quotelevel=\count326
 \@quotereset=\count327
-(CHUPIN_Clemence_projet_info.aux (chap1.aux) (chap2.aux) (chap3.aux) (chap4.aux
-))
+(CHUPIN_Clemence_projet_info.aux (chap1.aux) (chap2.aux) (chap3.aux))
 \openout1 = `CHUPIN_Clemence_projet_info.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
@@ -1135,7 +1134,8 @@ LaTeX Font Info:    ... okay on input line 69.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 69.
 LaTeX Font Info:    ... okay on input line 69.
 LaTeX Font Info:    Try loading font information for T1+lmss on input line 69.
- ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmss.fd"
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 \AtBeginShipoutBox=\box33
@@ -1240,7 +1240,7 @@ Package biblatex Info: ... file 'CHUPIN_Clemence_projet_info.bbl' found.
 Package biblatex Info: Reference section=0 on input line 69.
 Package biblatex Info: Reference segment=0 on input line 69.
 
-<images/logos/logo_ensg.png, id=83, 672.5125pt x 714.67pt>
+<images/logos/logo_ensg.png, id=63, 672.5125pt x 714.67pt>
 File: images/logos/logo_ensg.png Graphic file (type png)
 
 <use images/logos/logo_ensg.png>
@@ -1284,7 +1284,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 78.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<images/logos/logo_paris_est.png, id=84, 698.52943pt x 161.70111pt>
+<images/logos/logo_paris_est.png, id=64, 698.52943pt x 161.70111pt>
 File: images/logos/logo_paris_est.png Graphic file (type png)
 
 <use images/logos/logo_paris_est.png>
@@ -1361,46 +1361,21 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
 ]
 Chapitre 2.
 
-Overfull \hbox (40.99998pt too wide) in paragraph at lines 1--1
-[][] 
+Underfull \hbox (badness 5939) in paragraph at lines 1--1
+[]|\T1/lmr/m/sc/24.88 Analyse fonc-tion-nelle et
  []
 
-) [13
-
-]
-\openout2 = `chap3.aux'.
-
- (chap3.tex [14
-
-
-]
-Chapitre 3.
-
-Overfull \hbox (40.99998pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-) [15
-
-]
-\openout2 = `chap4.aux'.
-
- (chap4.tex [16
-
-
-]
-Chapitre 4.
 
 Overfull \hbox (40.99998pt too wide) in paragraph at lines 1--1
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
 
  []
 
-[17
+[13
 
 ])
 
@@ -1409,52 +1384,66 @@ Package Fancyhdr Warning: \headheight is too small (12.5pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[18] [19
+[14]
+\openout2 = `chap3.aux'.
+
+ (chap3.tex
+Chapitre 3.
+
+Overfull \hbox (40.99998pt too wide) in paragraph at lines 1--1
+[][] 
+ []
+
+) [15
 
 
-] [20]
 
-LaTeX Warning: Empty bibliography on input line 151.
+] [16
 
-[21
+] [17
 
-] [22] (CHUPIN_Clemence_projet_info.lof)
+] [18]
+
+LaTeX Warning: Empty bibliography on input line 150.
+
+[19
+
+] [20] (CHUPIN_Clemence_projet_info.lof)
 \tf@lof=\write7
 \openout7 = `CHUPIN_Clemence_projet_info.lof'.
 
- [23] [24]
+ [21] [22]
 (CHUPIN_Clemence_projet_info.lot)
 \tf@lot=\write8
 \openout8 = `CHUPIN_Clemence_projet_info.lot'.
 
- [25] [26] (CHUPIN_Clemence_projet_info.ann)
+ [23] [24] (CHUPIN_Clemence_projet_info.ann)
 \tf@ann=\write9
 \openout9 = `CHUPIN_Clemence_projet_info.ann'.
 
 
-[27
+[25
 
-] [28]
+] [26]
 Annexe A.
 
-Overfull \hbox (40.99998pt too wide) in paragraph at lines 164--164
+Overfull \hbox (40.99998pt too wide) in paragraph at lines 163--163
 [][] 
  []
 
 
 AED: lastpage setting LastPage
-[29
+[27
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 170.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 170.
- (CHUPIN_Clemence_projet_info.aux (chap1.aux) (chap2.aux) (chap3.aux)
-(chap4.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 170.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 170.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 169.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 169.
+ (CHUPIN_Clemence_projet_info.aux (chap1.aux) (chap2.aux) (chap3.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 169.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 169.
 Package rerunfilecheck Info: File `CHUPIN_Clemence_projet_info.out' has not cha
 nged.
-(rerunfilecheck)             Checksum: 9755EAC20C63CD0554E0C3E175CB3920;1386.
+(rerunfilecheck)             Checksum: 4F0E1734D26FE61AD4322AC3D35B3827;960.
 
 
 LaTeX Warning: There were undefined references.
@@ -1468,13 +1457,13 @@ Package logreq Info: Writing requests to 'CHUPIN_Clemence_projet_info.run.xml'.
 
 \openout1 = `CHUPIN_Clemence_projet_info.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 170.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 169.
  ) 
 Here is how much of TeX's memory you used:
- 17077 strings out of 493323
- 268597 string characters out of 3139055
- 751545 words of memory out of 3000000
- 20225 multiletter control sequences out of 15000+200000
+ 17068 strings out of 493323
+ 268576 string characters out of 3139055
+ 749076 words of memory out of 3000000
+ 20219 multiletter control sequences out of 15000+200000
  86167 words of font info for 72 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  44i,11n,45p,1154b,2008s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1485,9 +1474,9 @@ mss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmsso10.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/symbols/msam10.pfb>
-Output written on CHUPIN_Clemence_projet_info.pdf (29 pages, 336289 bytes).
+Output written on CHUPIN_Clemence_projet_info.pdf (27 pages, 332435 bytes).
 PDF statistics:
- 285 PDF objects out of 1000 (max. 8388607)
- 60 named destinations out of 1000 (max. 500000)
- 171 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 264 PDF objects out of 1000 (max. 8388607)
+ 64 named destinations out of 1000 (max. 500000)
+ 131 words of extra memory for PDF output out of 10000 (max. 10000000)
 

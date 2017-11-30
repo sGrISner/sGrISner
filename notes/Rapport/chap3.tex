@@ -1,23 +1,56 @@
-\evenchapter[Analyse structurelle]{Analyse structurelle}
+\evenchapter[Analyse technique]{Analyse technique}
 
 \textit{...}
 
-\section{Données en entrée}
+\section{Description de l'existant}
 
+\subsection{Programme de classification}
 \begin{itemize}
-	\item Description des données en entrée
+	\item Objectif du programme de classification 
+\end{itemize}
+
+\subsection{Type de données et justification de leur utilisation}
+\begin{itemize}
+	\item CSV (lisible, ...)
+	\item TIFF
+	\item Shapefile (format vecto, ...)
+\end{itemize}
+
+
+\section{Choix techniques}
+
+\subsection{Choix de développement}
+\begin{itemize}
+	\item Non choix de réaliser un plugin QGIS
 	\begin{itemize}
-		\item Fichier avec les classes
-		\item Fichier des résultats de la classification
-		\item Dossier regroupant les emprises
-		\item Ortho-image
+		\item stratégie commandée par le commanditaire
+		\item objectif de réaliser une interface modulaire qui ne dépend pas de QGIS (de ses évolution et choix technologiques)
+		\item objectif d'utilisation à plus grande échelle de l'interface (IGN/MATIS/...) ce qui implique une flexibilité et un détachement de QGIS (et de tous ses modules qui ne sont pas forcément nécessaires pour notre cas)
 	\end{itemize}
-	\item Interface de chargement des données
+	\item Justification de l'utilisation de Qt
+		\begin{itemize}
+		\item détail des autres créateur d'interface possibles 
+		\begin{itemize}
+			\item WinForm/ Cocoa (spécifiques à un système d'exploitation)
+			\item GTK (monde unix et portatif sous Windows mais pas natif - complexité de mise en oeuvre)
+			\item HTML 5 + JavaScript (maintenance)
+			\item wxWidget (moins utilisé que Qt)
+		\end{itemize}
+	\end{itemize}
+	\item Justification de Python
+	\begin{itemize}
+		\item Possibilité de codage en C++ (+ performance) ou Python pour faire Qt
+		\item Choix de python (simplicité de codage, multiplateforme)
+	\end{itemize}
 \end{itemize}
-
-\section{Structuration des données}
-
+	
+\subsection{Framework utilisé/Dépendance}
 \begin{itemize}
-	\item Schémas séquentiels (???)
-	\item Diagramme UML ou modélisation HBDS (???)
+	\item intégrations de librairies (pq ? Avantages/inconvénients ? Alternatives ?)
+	\begin{itemize}
+		\item Numpy
+		\item Librairie pour rechercher/lire des fichiers
+		\item Librairie de lecture des shapefile
+	\end{itemize}
 \end{itemize}
+
