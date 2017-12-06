@@ -10,6 +10,7 @@
 \usepackage{color}
 \usepackage{wrapfig}
 \usepackage{graphicx}
+\usepackage{enumitem}
 
 %---Texte en filigranne---
 \SetWatermarkText{\textsc{Brouillon}}
@@ -88,23 +89,17 @@
 \infos{\author}{Novembre-Décembre 2017}
 \end{titlepage}
 
-%------------------------------------------------------------------------------
-% Remerciements
 \newevenpage
-\chapter*{Remerciements}
-
-Je remercie
-
 
 \selectlanguage{frenchb}
 
 %---Table des matières, des figures et des tableaux---
-\newevenpage
+\newpage
 \tableofcontents
 
 
 
-\newevenpage
+\newpage
 \chapter*{Glossaire et sigles utiles}
 \addcontentsline{toc}{chapter}{Glossaire et sigles utiles}
 
@@ -120,7 +115,7 @@ Je remercie
 
 
 %---Introduction------------------------------------------------------------------
-\newevenpage
+\newpage
 \chapter*{Introduction}
   \addcontentsline{toc}{chapter}{Introduction}
   
@@ -136,7 +131,7 @@ Je remercie
 
 %\begin{comment}
 %-------------------------------------------------------------------------------
-\newevenpage
+\newpage
 \chapter*{Conclusion}
   \addcontentsline{toc}{part}{Conclusion}
   \vspace{1.5cm}
@@ -150,19 +145,42 @@ Il est l'heure de conclure : bonne nuit !
 \printbibliography[title={Bibliographie}]
 \nocite{*}
 
-\newevenpage
+\newpage
 \listoffigures
 
-\newevenpage
+\newpage
 \listoftables
 %----------------------------------------------------
 
-\newevenpage
+\newpage
 \begin{appendices} 
 \label{beginappendices}
-\annexe[Filtre de Kalman]{Filtre\newline de Kalman}
-\label{annexekalman}
-Annexe 1
+\annexe[Typologie des erreurs de classification]{Typologie des erreurs de classification}
+\label{annexeerreurs}
+\footnote{Sources : Oussama ENNAFII}
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics[scale=0.8]{mind_map_001.png}  \\
+		\caption[Typologie des erreurs de classification]{Typologie des erreurs de classification}
+		\label{fig:example}
+	\end{center}
+\end{figure}
+
+
+Le premier niveau de classement correspond à la simple dualité : erreur/ absence d'erreur.\newline
+
+Le second niveau permet 3 choix : 
+\begin{enumerate}
+	\item Erreur inqualifiable (Ex : bâtiment caché, bâtiment coupé,...)
+	\item Erreur concernant l'ensemble d'un bâtiment (Ex: erreur de hauteur, sous-segmentation, ...)
+	\begin{itemize}[label=$\rightarrow$]
+		\item Niveau de détail : LOD 0/1
+	\end{itemize}
+	\item Erreur sur les facettes reconstruites
+	\begin{itemize}[label=$\rightarrow$]
+		\item Niveau de détail : LOD 2
+	\end{itemize}
+\end{enumerate}
 
 \end{appendices} 
 %\end{comment}

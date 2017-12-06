@@ -1,44 +1,48 @@
-\evenchapter[Analyse fonctionnelle et structurelle]{Analyse fonctionnelle et structurelle}
+\chapter[Analyse fonctionnelle]{Analyse fonctionnelle}
 
-\textit{Le présent chapitre a pour objectif de présenter toutes les fonctionnalités attendues, avec éventuellement la mise en évidence de priorités}
+\textit{Le présent chapitre a pour objectif de présenter la structuration de l'application et ses principales fonctionnalités.}
 
-\section{Contraintes pour l'utilisateur}
+\section{Contraintes principales du projet}
 
-\begin{itemize}
-	\item Modélisation du problème 
-	\begin{itemize}
-		\item Modèle multiclasse
-		\item Modèle multilabel
-		\begin{itemize}
-			\item Modèle multiclasse choisi pour la première implémentation MAIS flexibilité du programme
-			\begin{itemize}
-				\item impact sur le formalisme des données en entrée/sortie
-				\item impact sur le choix de l'interface à montrer
-			\end{itemize}
-		\end{itemize}
-	\end{itemize}
-\end{itemize}
+Les principales contraintes de développement de l’interface sont liées à la modélisation du problème. Deux choix sont possibles : une modélisation multi-classe, et une modélisation multi-label. Dans le premier cas, les objets classés sont répartis dans plusieurs classes, tout en sachant qu’un objet ne peut appartenir à deux classes différentes. Dans le cas de la modélisation multi-label, un objet peut appartenir à plusieurs classes, chacune ne proposant qu’un choix binaire (appartenance/non-appartenance). C’est une généralisation de la modélisation multi-classe.\newline
+
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics[scale=0.5]{modelisation.png}  \\
+		\caption[Modélisation du problème]{Modélisation du problème}
+		\label{fig:modelisation}
+	\end{center}
+\end{figure}
+
+Le choix de la modélisation du problème a un impact sur le formalisme des données en entrée et en sortie du programme. Le choix de l’interface à montrer sera aussi déterminé par la modélisation. Ainsi, dans le cas multi-classe, un objet classifié ne sera lié qu’à une seule classe, ce qui impliquera de n’afficher que la classe concernée dans l’interface.\newline
+
+Pour la première implémentation de l’interface, le modèle multi-classe a été privilégié pour faciliter la manipulation des données. Cependant, l’objectif est d’évoluer vers une modélisation multi-label du problème : l’interface programmée doit donc être flexible pour prendre en compte les différents formalismes. \newline
 
 \section{Organisation des données}
 
 \subsection{Données en entrée}
 
-\begin{itemize}
-	\item Description des données en entrée
-	\begin{itemize}
-		\item Fichier avec les classes
-		\item Fichier des résultats de la classification
-		\item Dossier regroupant les emprises
-		\item Ortho-image
-	\end{itemize}
-	\item Interface de chargement des données
+Dans une première modélisation du problème, on considère 4 jeux de données en entrée du programme :
+\begin{itemize}[label=$\rightarrow$]
+	\item \textbf{Un fichier « class.CSV »}, regroupant l’ensemble des classes d’erreur, suivies d’une brève description du type d’erreur.
+	\item \textbf{Un fichier « results.CSV »}, regroupant les résultats de la phase de classification. On retrouve donc le numéro de l’entité, la classe qui lui est associée et une probabilité d’appartenance à cette classe.
+	\item \textbf{Un dossier « emprise »}, regroupant les emprises des entités au format shapefile. L’identifiant de l’entité se retrouve dans le nom du fichier d'emprise (ex : « 2516.SHP » pour l’entité 2516).
+	\item \textbf{Une orthoimage au format TIFF} de la zone analysée, spatialement superposable aux fichiers d’emprise au format .SHP.\newline
 \end{itemize}
+
+
+L’ensemble de ces données doit être fourni par l’utilisateur avant l’exécution du programme. Pour cela, une fenêtre de chargement des fichiers doit être implémentée. \newline
+
+\textbf{Aperçu de la fenêtre de chargement}
 
 \subsection{Données en sortie}
 
-\begin{itemize}
-	\item Fichier avec les entités modifiées (ou non)
+En sortie de l'interface, un seul fichier est retourné :
+\begin{itemize}[label=$\rightarrow$]
+	\item \textbf{Un fichier « modifyresults.CSV »}, regroupant les résultats de l'interaction avec l'utilisateur, sous une forme identique au fichier « results.CSV ». Deux méthodes sont envisageables : une première hypothèse consiste à sortir un tableau avec l'ensemble des entités testées (qu'elles soient modifiées ou non), et une seconde à ne restituer que les entités qui ont été modifiées.\newline
 \end{itemize}
+
+\textbf{Question : même si l'utilisateur confirme la classification, la probabilité est quand même modifiée et passe à 1 car on est sur de la classe ?! Il faudrait donc considérer toutes les entités traitées dans le fichier de sortie }
 
 \subsection{Structuration des données}
 
