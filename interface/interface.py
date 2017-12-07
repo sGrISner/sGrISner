@@ -4,15 +4,39 @@
 
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog
 import sys
-from activeLabelling import *
+from classificationActive import *
+from choixClasse import *
+from chargementFichiers import *
 
-class ActiveLabelling (QDialog,Ui_activeLabelling):
+class ClassificationActive (QDialog,Ui_InterfacePrincipale):
+
+    def __init__ (self):
+        super().__init__()
+        self.setupUi(self)
+
+class ChargementFichiers (QDialog,Ui_ChargerFichier):
+
+    def __init__ (self):
+        super().__init__()
+        self.setupUi(self)
+
+class ChoixClasse (QDialog,Ui_ChoixClasse):
 
     def __init__ (self):
         super().__init__()
         self.setupUi(self)
 
 app = QApplication(sys.argv)
-classification = ActiveLabelling()
+classification = ClassificationActive()
 classification.show()
 app.exec_()
+
+app2 = QApplication(sys.argv)
+chargement = ChargementFichiers()
+chargement.show()
+app2.exec_()
+
+app3 = QApplication(sys.argv)
+choix = ChoixClasse()
+choix.show()
+app3.exec_()

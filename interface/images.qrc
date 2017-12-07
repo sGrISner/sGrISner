@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="Help">
+    <file>question.png</file>
+  </qresource>
+</RCC>
