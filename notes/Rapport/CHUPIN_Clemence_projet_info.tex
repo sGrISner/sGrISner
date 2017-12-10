@@ -105,11 +105,18 @@
 
   \begin{acronym}
   \acro{ENSG}{\'Ecole Nationale des Sciences Géographiques}
+  \acro {PPMD}{Mastère Spécialsé Photogrammétrie, Positionnement et Mesure de Déformations}
   \acro{IGN}{Institut National de l'Information Géographique et Forestière}  
   \acro{LaSTIG}{Laboratoire en Sciences et Technologies de l'Information Géographique}  \acro{MATIS}{Méthodes d'Analyses pour le Traitement d'Images et la Stéréorestitution}     
+  \acro{LiDAR}{Light Detection And Ranging}
   \acro{MNT}{Modèle Numérique de Terrain}
   \acro{MNS}{Modèle Numérique de Surface}  
-  \acro {LiDAR}{Light Detection And Ranging}
+  \acro{LoD}{Level Of Details}
+  \acro{SIG}{Système d'Information Géographique}
+  \acro{SHP}{Shapefile}
+  \acro{CSV}{Comma Separated Value}
+  \acro{TIFF}{Tagged Image File Format}
+
 
   \end{acronym}
 
@@ -120,7 +127,9 @@
   \addcontentsline{toc}{chapter}{Introduction}
   
   \vspace{1.5cm}
-	J'introduis
+Dans le cadre des projets informatiques des étudiants du Mastère Spécialisé PPMD de l'ENSG, le laboratoire MATIS de l'IGN a proposé un sujet se rattachant à la problématique des modèles 3D urbains. Ce sujet s'inscrit dans le cadre de la thèse de M.ENNAFII Oussama, intitulée \emph{"Evaluation and selection of 3D city modelling techniques"}. L'objectif du projet est de mettre en place une interface graphique pour améliorer les classifications de manière interactive.\\
+
+Ce premier rapport détaille les étapes d'analyse du sujet. Dans un premier temps, on cherchera à définir précisément le contexte d'étude et les objectifs du projets. Cela permettra de détailler la structure de l'application, les données nécessaires et les fonctionnalités à implémenter. Enfin, la justification des choix techniques retenue sera réalisée.
 
 %-------------------------------------------------------------------------------
 %\end{comment}
@@ -135,24 +144,17 @@
 \chapter*{Conclusion}
   \addcontentsline{toc}{part}{Conclusion}
   \vspace{1.5cm}
-Il est l'heure de conclure : bonne nuit !
+Cette première phase d'analyse a permis de mieux définir les enjeux liés au projet, ce qui était nécessaire pour mieux comprendre le sujet et se l'approprier. Les choix détaillés dans ce rapport permettront un travail plus organisé, tout en sachant que certains points poseront sans doute plus de problèmes lors de la programmation.\\
 
+Dans un premier temps, la phase de programmation aura pour objectif d'implémenter une solution simple mais fonctionnelle. Si les tests réalisés durant le codage sont concluants, d'autres fonctionnalités pourront ensuite être développées.\\
 
-%-------------------------------------------------------------------------------
-% Insertion de la bibliographie
-\newevenpage
-\printbibheading
-\printbibliography[title={Bibliographie}]
-\nocite{*}
+Avant de clore ce rapport, je tiens à remercier les commanditaires de ce projet, M. MALLET Clément et surtout M. ENNAFII Oussama, pour leur temps et leur patience !
 
 \newpage
 \listoffigures
 
-\newpage
-\listoftables
 %----------------------------------------------------
 
-\newpage
 \begin{appendices} 
 \label{beginappendices}
 \annexe[Typologie des erreurs de classification]{Typologie des erreurs de classification}
@@ -167,9 +169,9 @@ Il est l'heure de conclure : bonne nuit !
 \end{figure}
 
 
-Le premier niveau de classement correspond à la simple dualité : erreur/ absence d'erreur.\newline
+\noindent Le premier niveau de classement correspond à la simple dualité : erreur/ absence d'erreur.\newline
 
-Le second niveau permet 3 choix : 
+\noindent Le second niveau permet 3 choix : 
 \begin{enumerate}
 	\item Erreur inqualifiable (Ex : bâtiment caché, bâtiment coupé,...)
 	\item Erreur concernant l'ensemble d'un bâtiment (Ex: erreur de hauteur, sous-segmentation, ...)

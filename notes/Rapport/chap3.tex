@@ -1,56 +1,59 @@
 \chapter[Analyse technique]{Analyse technique}
 
-\textit{...}
+\textit{Différents choix techniques ont été effectués pour implémenter ce projet. Ce chapitre va permettre de décrire les structures existantes et de justifier les différents choix techniques réalisés.}
 
 \section{Description de l'existant}
 
+Cette section vise à décrire les procédés existants sur lesquels s'appuie le projet.
+
 \subsection{Programme de classification}
-\begin{itemize}
-	\item Objectif du programme de classification 
+
+La contextualisation du projet a permis de montrer que, pour corriger les maquettes 3D urbaines, il est nécessaire de qualifier les erreurs de reconstruction. Cette qualification peut passer par une comparaison avec un modèle de référence. Cependant, ce processus nécessite de mettre au point un modèle précis servant de comparaison. La reconstruction automatique perd donc tout son intérêt.\\
+
+Au sein du laboratoire MATIS, les recherches de M. ENNAFII Oussama ont donc pour objectif l’auto-qualification de la maquette 3D urbaine. Cette auto-qualification se traduit par une classification des erreurs de reconstruction. Ainsi, le processus n’utilise en entrée que la maquette 3D urbaine. Le résultat du traitement est un fichier CSV contenant l’identifiant des entités, leur classe d’erreur et leur probabilité. 
+
+\subsection{Format des données}
+
+\noindent Dans les précédents chapitres, on a pu voir que différents types de données étaient utilisées :
+\begin{itemize}[label=$\rightarrow$]
+	\item Les fichiers de données textuelles sont au format CSV (Comma-Separated Values). Dans ces fichiers, les données sont séparées par des virgules. Ce type de format est assez répandu, et est largement utilisé par les logiciels tableurs.  Le format CSV a été choisi pour sa lisibilité par rapport à des formats de type .TXT. 
+	\item L’orthohoto est fournie au format TIFF (Tagged Image File Format). C’est un format de fichier courant pour les images numériques et lu par de nombreux logiciels. De plus, c’est un format assez flexible, et qui peut contenir des données sur la géométrie de l’image.
+	\item Les données vectorielles sont au format SHP (Shapefile). C’est un format courant pour les données SIG, qui permet d’enregistrer la géométrie d’une entité vectorielle. Dans notre cas, les données sont extraites du logiciel QGIS, qui est un logiciel SIG, ce qui justifie le format SHP.
 \end{itemize}
 
-\subsection{Type de données et justification de leur utilisation}
-\begin{itemize}
-	\item CSV (lisible, ...)
-	\item TIFF
-	\item Shapefile (format vecto, ...)
-\end{itemize}
-
+\newpage
 
 \section{Choix techniques}
 
-\subsection{Choix de développement}
-\begin{itemize}
-	\item Non choix de réaliser un plugin QGIS
-	\begin{itemize}
-		\item stratégie commandée par le commanditaire
-		\item objectif de réaliser une interface modulaire qui ne dépend pas de QGIS (de ses évolution et choix technologiques)
-		\item objectif d'utilisation à plus grande échelle de l'interface (IGN/MATIS/...) ce qui implique une flexibilité et un détachement de QGIS (et de tous ses modules qui ne sont pas forcément nécessaires pour notre cas)
-	\end{itemize}
-	\item Justification de l'utilisation de Qt
-		\begin{itemize}
-		\item détail des autres créateur d'interface possibles 
-		\begin{itemize}
-			\item WinForm/ Cocoa (spécifiques à un système d'exploitation)
-			\item GTK (monde unix et portatif sous Windows mais pas natif - complexité de mise en oeuvre)
-			\item HTML 5 + JavaScript (maintenance)
-			\item wxWidget (moins utilisé que Qt)
-		\end{itemize}
-	\end{itemize}
-	\item Justification de Python
-	\begin{itemize}
-		\item Possibilité de codage en C++ (+ performance) ou Python pour faire Qt
-		\item Choix de python (simplicité de codage, multiplateforme)
-	\end{itemize}
-\end{itemize}
-	
-\subsection{Framework utilisé/Dépendance}
-\begin{itemize}
-	\item intégrations de librairies (pq ? Avantages/inconvénients ? Alternatives ?)
-	\begin{itemize}
-		\item Numpy
-		\item Librairie pour rechercher/lire des fichiers
-		\item Librairie de lecture des shapefile
-	\end{itemize}
+Après avoir détaillé les données existantes sur lesquelles s'appuie le projet, on peut analyser les différents choix de développement réalisés.  
+
+\subsection{Création d'une interface indépendante de QGIS}
+
+Le projet  a pour objectif de développer une interface graphique. Ainsi, au lieu de choisir de créer une nouvelle interface indépendante, la réalisation d’un plugin QGIS aurait pu être envisagée.  Ce choix a été imposé par les commanditaires du projet, mais il peut être justifié. \\
+
+En effet, l’objectif premier du projet est de réaliser une interface modulaire, qui ne dépend pas des évolutions et des choix techniques de QGIS. De plus, cette interface peut être amenée à être utilisée à plus grande échelle (IGN, MATIS, …). Cela implique une certaine flexibilité dans l’implémentation et un détachement de QGIS. Enfin, l’utilisation de QGIS implique de charger à chaque fois l’ensemble de ses modules qui ne sont pas tous nécessaires au projet. \\
+
+Ainsi, c’est la création d’une interface indépendante de QGIS qui a été retenue.
+
+\subsection{Utilisation de Qt}
+
+\noindent Pour créer des interfaces graphiques, plusieurs outils peuvent être utilisés :
+\begin{itemize}[label=$\rightarrow$]
+	\item La solution Winform et l’outil Interface Builder de l’environnement Cocoa permettent de réaliser des interfaces graphiques.  Cependant, elles sont spécifiques à un système d’exploitation (respectivement Windows et Apple).  
+	\item Si on considère l’environnement Unix, on peut également penser à l’outil GTK + (The GIMP Toolkit). La portabilité sous Windows est possible mais reste complexe à mettre en œuvre.
+	\item On peut également considérer l’association HTML 5 et JavaScript, qui permet de réaliser de puissantes interfaces graphiques. Cependant, ces environnements évoluent vite, ce qui pose des problèmes de maintenance de l’interface.
+	\item La bibliothèque graphique WxWidget permet de réaliser des interfaces portatives. Cependant, elle est aujourd’hui moins utilisée que Qt pour la création d’interface.
 \end{itemize}
 
+Ainsi, face à ces principaux arguments, la bibliothèque multi-plateforme Qt a été privilégiée pour la réalisation de cette interface.
+
+\subsection{Utilisation du langage Python}
+
+L'utilisation de Qt pour la réalisation de l'interface graphique ne justifie pas le choix du langage de programmation. En effet, il est possible d'utiliser Qt avec les langages C++ ou Python. De façon générale, le C++ est plus performant pour des interfaces graphiques importantes. Dans notre cas, l'interface envisagée ne nécessite pas une grande efficacité de traitement. \\
+
+Ainsi, afin de faciliter le codage, l'utilisation du langage Python a été privilégié.\\\\
+
+L'interface graphique voulue pour ce projet utilisera donc la bibliothèque Qt associée à un script Python. Cela lui permettra d'être utilisé par tous les environnements informatiques, et elle pourra être modulée sans prendre en compte le formalisme de QGIS. 
+
+
+	
