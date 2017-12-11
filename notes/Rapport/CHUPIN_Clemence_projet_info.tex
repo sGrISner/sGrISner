@@ -7,10 +7,16 @@
 %----------------------------------------------------------------
 
 \documentclass{themeensg}
+
+\usepackage{rotating}
+\usepackage{standalone}
 \usepackage{color}
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage{enumitem}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
 
 %---Texte en filigranne---
 \SetWatermarkText{\textsc{Brouillon}}
@@ -127,9 +133,11 @@
   \addcontentsline{toc}{chapter}{Introduction}
   
   \vspace{1.5cm}
-Dans le cadre des projets informatiques des étudiants du Mastère Spécialisé PPMD de l'ENSG, le laboratoire MATIS de l'IGN a proposé un sujet se rattachant à la problématique des modèles 3D urbains. Ce sujet s'inscrit dans le cadre de la thèse de M.ENNAFII Oussama, intitulée \emph{"Evaluation and selection of 3D city modelling techniques"}. L'objectif du projet est de mettre en place une interface graphique pour améliorer les classifications de manière interactive.\\
+Dans le cadre des projets informatiques des étudiants du Mastère Spécialisé PPMD de l'ENSG, le laboratoire MATIS de l'IGN a proposé un sujet se rattachant à la problématique des modèles 3D urbains. Ce sujet s'inscrit dans le cadre de la thèse de M.ENNAFII Oussama, intitulée \emph{"Evaluation and selection of 3D city modelling techniques"}. Pour détecter et caractériser les erreurs des maquettes 3D urbaines, une méthode d'auto-qualification par classification supervisée a été mise en place. Pour permettre la transition vers une classification active,le projet propose de mettre en place une interface graphique pour interagir avec un utilisateur.\\
 
-Ce premier rapport détaille les étapes d'analyse du sujet. Dans un premier temps, on cherchera à définir précisément le contexte d'étude et les objectifs du projet. Cela permettra de détailler la structure de l'application, les données nécessaires et les fonctionnalités à implémenter. Enfin, la justification des choix techniques retenue sera réalisée.
+La réalisation de ce projet se divise en deux grandes étapes. La première partie est une phase d'analyse du sujet et de rencontres avec les commanditaires. Elle a pour objectif de détailler les enjeux du projet, et de réfléchir aux méthodes d'implémentation à utiliser. La seconde phase correspond à la programmation du logiciel. A l'issu de cette étape, le projet doit être opérationnel, même si l'ensemble des fonctionnalités prévues n'est pas implémentée. De plus, une documentation doit permettre de détailler les différentes fonctionnalités du programme.\\
+
+Dans ce premier rapport, on s'attardera donc à détailler les étapes d'analyse du sujet et les problématiques qui lui sont liées. Dans un premier temps, on cherchera à définir précisément le contexte d'étude, les besoins des commanditaires et les principaux objectifs du projet. Cela permettra, dans un second temps, de détailler la structure de l'application. On analysera les données nécessaires et leurs contraintes, ainsi que les fonctionnalités à implémenter et leur organisation. Enfin, une dernière partie permettra de justifier les choix techniques réalisés pour l'implémentation.
 
 %-------------------------------------------------------------------------------
 %\end{comment}
@@ -144,11 +152,20 @@ Ce premier rapport détaille les étapes d'analyse du sujet. Dans un premier tem
 \chapter*{Conclusion}
   \addcontentsline{toc}{part}{Conclusion}
   \vspace{1.5cm}
-Cette première phase d'analyse a permis de mieux définir les enjeux liés au projet, ce qui était nécessaire pour mieux comprendre le sujet et se l'approprier. Les choix détaillés dans ce rapport permettront un travail plus organisé, tout en sachant que certains points poseront sans doute plus de problèmes lors de la programmation.\\
+Cette première phase d'analyse a permis de mieux définir les enjeux liés au projet. Pour une néophyte dans le domaine de la reconstruction 3D et de la classification, cette  étape était obligatoire. Elle m'a donnée le temps nécessaire pour comprendre le sujet et me l'approprier. De plus, elle a permis de développer les futures phases de l'implémentation. Même si certaines problématiques vont apparaitre au cours de la programmation, de nombreux pièges auront été évités, et le code réalisé sera plus organisé.\\
 
-Dans un premier temps, la phase de programmation aura pour objectif d'implémenter une solution simple mais fonctionnelle. Si les tests réalisés durant le codage sont concluants, d'autres fonctionnalités pourront ensuite être développées.\\
+Dans un premier temps, la phase de programmation aura pour objectif d'implémenter une solution simple mais fonctionnelle. Si les tests réalisés durant le codage sont concluants, d'autres fonctionnalités pourront ensuite être développées. Cette phase de programmation a été organisée selon un calendrier prévisionnel, qui pourra évoluer au cours du processus. \\
 
-Avant de clore ce rapport, je tiens à remercier les commanditaires de ce projet, M. MALLET Clément et surtout M. ENNAFII Oussama, pour leur temps et leur patience !
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics[scale=0.65]{calendrier.png}  \\
+		\caption[Calendrier prévisionnel de programmation]{Calendrier prévisionnel de programmation}
+		\label{fig:calendrier}
+	\end{center}
+\end{figure}
+
+Avant de clore ce rapport, je tiens à remercier les commanditaires de ce projet, M. MALLET Clément et M. ENNAFII Oussama, de me faire confiance pour la réalisation de cette interface. Je remercie plus particulièrement Oussama pour la patience dont il a fait preuve lors de cette phase d'analyse ! 
+
 
 \newpage
 \listoffigures
@@ -160,16 +177,8 @@ Avant de clore ce rapport, je tiens à remercier les commanditaires de ce projet
 \annexe[Typologie des erreurs de classification]{Typologie des erreurs de classification}
 \label{annexeerreurs}
 
-\begin{figure}[!h]
-	\begin{center}
-		\includegraphics[scale=0.8]{mind_map_001.png}  \\
-		\caption[Typologie des erreurs de classification]{Typologie des erreurs de classification\footnotemark{}}
-		\label{fig:example}
-	\end{center}
-\end{figure}
-\footnotetext{Sources : Oussama ENNAFII}
 
-\noindent Le premier niveau de classement correspond à la simple dualité : erreur/ absence d'erreur.\newline
+Si on analyse la figure suivante\footnotemark{}, on constate que le premier niveau de classement correspond à la simple dualité : erreur/ absence d'erreur.\newline
 
 \noindent Le second niveau permet 3 choix : 
 \begin{enumerate}
@@ -183,6 +192,16 @@ Avant de clore ce rapport, je tiens à remercier les commanditaires de ce projet
 		\item Niveau de détail : LOD 2
 	\end{itemize}
 \end{enumerate}
+
+
+\begin{sidewaysfigure}[p]
+   \begin{center}
+    \includestandalone[mode=buildnew, scale=.78]{mind_map}
+	\caption[Typologie des erreurs de classification]{\label{fig::mindmap_errors}Typologie des erreurs de classification.}
+   \end{center}
+\end{sidewaysfigure}
+\footnotetext{Sources : Oussama ENNAFII}
+
 
 \end{appendices} 
 %\end{comment}

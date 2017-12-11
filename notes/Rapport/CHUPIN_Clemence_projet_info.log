@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.1)  11 DEC 2017 17:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.1)  11 DEC 2017 20:25
 entering extended mode
 **./CHUPIN_Clemence_projet_info.tex
 (CHUPIN_Clemence_projet_info.tex
@@ -1075,37 +1075,398 @@ s
 \cftafteranntitleskip=\skip123
 \c@annexenb=\count325
 )
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\rotating.sty"
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+\c@r@tfl@t=\count326
+\rotFPtop=\skip124
+\rotFPbot=\skip125
+\rot@float@box=\box33
+\rot@mess@toks=\toks37
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\standalone\standalone.sty"
+Package: standalone 2015/07/15 v1.2 Package to include TeX sub-files with pream
+bles
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex"
+\XKV@toks=\toks38
+\XKV@tempa@toks=\toks39
+)
+\XKV@depth=\count327
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\currfile\currfile.sty"
+Package: currfile 2015/04/23 v0.7c Provides the file path elements of the curre
+nt input file
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\filehook\filehook.sty"
+Package: filehook 2011/10/12 v0.5d Hooks for input files
+)
+\c@currfiledepth=\count328
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\gincltex\gincltex.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\svn-prov\svn-prov.sty"
+Package: svn-prov 2010/04/24 v3.1862 Package Date/Version from SVN Keywords
+)
+Package: gincltex 2011/09/04 v0.3 Include external LaTeX files like graphics
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\adjustbox\adjustbox.sty"
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\adjustbox\adjcalc.sty"
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\adjustbox\trimclip.sty"
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\collectbox\collectbox.sty"
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box34
+)
+\tc@llx=\dimen143
+\tc@lly=\dimen144
+\tc@urx=\dimen145
+\tc@ury=\dimen146
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\adjustbox\tc-pdftex.def"
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen147
+\adjbox@Height=\dimen148
+\adjbox@Depth=\dimen149
+\adjbox@Totalheight=\dimen150
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ifoddpage\ifoddpage.sty"
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count329
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\ltxmisc\varwidth.sty"
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box35
+\sift@deathcycles=\count330
+\@vwid@loff=\dimen151
+\@vwid@roff=\dimen152
+))
+\gincltex@box=\box36
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\filemod\filemod-expmin.sty"
+Package: filemod-expmin 2011/09/19 v1.2 Get and compare file modification times
+ (expandable; minimal)
+))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty"
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
-\labelindent=\skip124
-\enit@outerparindent=\dimen143
-\enit@toks=\toks37
-\enit@inbox=\box33
-\enitdp@description=\count326
+\labelindent=\skip126
+\enit@outerparindent=\dimen153
+\enit@toks=\toks40
+\enit@inbox=\box37
+\enitdp@description=\count331
 )
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\frontendlayer\tikz.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgf.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfrcs.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common.tex"
+\pgfutil@everybye=\toks41
+\pgfutil@tempdima=\dimen154
+\pgfutil@tempdimb=\dimen155
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common-lists.te
+x")) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-latex.def"
+\pgfutil@abb=\box38
+("C:\Program Files\MiKTeX 2.9\tex\latex\ms\everyshi.sty"
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfrcs.code.tex"
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgfcore.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\systemlayer\pgfsys.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys.code.tex"
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex"
+\pgfkeys@pathtoks=\toks42
+\pgfkeys@temptoks=\toks43
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeysfiltered.code.te
+x"
+\pgfkeys@tmptoks=\toks44
+))
+\pgf@x=\dimen156
+\pgf@y=\dimen157
+\pgf@xa=\dimen158
+\pgf@ya=\dimen159
+\pgf@xb=\dimen160
+\pgf@yb=\dimen161
+\pgf@xc=\dimen162
+\pgf@yc=\dimen163
+\w@pgf@writea=\write5
+\r@pgf@reada=\read3
+\c@pgf@counta=\count332
+\c@pgf@countb=\count333
+\c@pgf@countc=\count334
+\c@pgf@countd=\count335
+\t@pgf@toka=\toks45
+\t@pgf@tokb=\toks46
+\t@pgf@tokc=\toks47
+ ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgf.cfg"
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-pdftex.def"
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-common-pdf.def
+"
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsyssoftpath.code.t
+ex"
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count336
+\pgfsyssoftpath@bigbuffer@items=\count337
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsysprotocol.code.t
+ex"
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+)) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcore.code.tex"
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+ ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathcalc.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathutil.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathparser.code.tex"
+\pgfmath@dimen=\dimen164
+\pgfmath@count=\count338
+\pgfmath@box=\box39
+\pgfmath@toks=\toks48
+\pgfmath@stack@operand=\toks49
+\pgfmath@stack@operation=\toks50
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.basic.code.
+tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.trigonometr
+ic.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.random.code
+.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.comparison.
+code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.base.code.t
+ex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.round.code.
+tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.misc.code.t
+ex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.integerarit
+hmetics.code.tex")))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfloat.code.tex"
+\c@pgfmathroundto@lastzeros=\count339
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepoints.code.tex
+"
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen165
+\pgf@picmaxx=\dimen166
+\pgf@picminy=\dimen167
+\pgf@picmaxy=\dimen168
+\pgf@pathminx=\dimen169
+\pgf@pathmaxx=\dimen170
+\pgf@pathminy=\dimen171
+\pgf@pathmaxy=\dimen172
+\pgf@xx=\dimen173
+\pgf@xy=\dimen174
+\pgf@yx=\dimen175
+\pgf@yy=\dimen176
+\pgf@zx=\dimen177
+\pgf@zy=\dimen178
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathconstruct.c
+ode.tex"
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen179
+\pgf@path@lasty=\dimen180
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathusage.code.
+tex"
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen181
+\pgf@shorten@start@additional=\dimen182
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorescopes.code.tex
+"
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box40
+\pgf@hbox=\box41
+\pgf@layerbox@main=\box42
+\pgf@picture@serial@count=\count340
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoregraphicstate.co
+de.tex"
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen183
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransformations
+.code.tex"
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen184
+\pgf@pt@y=\dimen185
+\pgf@pt@temp=\dimen186
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorequick.code.tex"
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreobjects.code.te
+x"
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathprocessing.
+code.tex"
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorearrows.code.tex
+"
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen187
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreshade.code.tex"
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen188
+\pgf@sys@shading@range@num=\count341
+) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreimage.code.te
+x"
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreexternal.code.t
+ex"
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box43
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorelayers.code.tex
+"
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransparency.co
+de.tex"
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepatterns.code.t
+ex"
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleshapes.code.tex"
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box44
+) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleplot.code.tex"
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-0-65.
+sty"
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen189
+\pgf@nodesepend=\dimen190
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-1-18.
+sty"
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgffor.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfkeys.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\math\pgfmath.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgffor.code.tex"
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex")
+\pgffor@iter=\dimen191
+\pgffor@skip=\dimen192
+\pgffor@stack=\toks51
+\pgffor@toks=\toks52
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\tikz.code.tex"
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryplothandlers.
+code.tex"
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count342
+\pgfplotmarksize=\dimen193
+)
+\tikz@lastx=\dimen194
+\tikz@lasty=\dimen195
+\tikz@lastxsaved=\dimen196
+\tikz@lastysaved=\dimen197
+\tikzleveldistance=\dimen198
+\tikzsiblingdistance=\dimen199
+\tikz@figbox=\box45
+\tikz@figbox@bg=\box46
+\tikz@tempbox=\box47
+\tikz@tempbox@bg=\box48
+\tikztreelevel=\count343
+\tikznumberofchildren=\count344
+\tikznumberofcurrentchild=\count345
+\tikz@fig@count=\count346
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmodulematrix.code.tex"
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count347
+\pgfmatrixcurrentcolumn=\count348
+\pgf@matrix@numberofcolumns=\count349
+)
+\tikz@expandcount=\count350
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarytopaths.code.tex"
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarydecorations.pathreplacing.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarydecorations.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduledecorations.code
+.tex"
+\pgfdecoratedcompleteddistance=\dimen256
+\pgfdecoratedremainingdistance=\dimen257
+\pgfdecoratedinputsegmentcompleteddistance=\dimen258
+\pgfdecoratedinputsegmentremainingdistance=\dimen259
+\pgf@decorate@distancetomove=\dimen260
+\pgf@decorate@repeatstate=\count351
+\pgfdecorationsegmentamplitude=\dimen261
+\pgfdecorationsegmentlength=\dimen262
+)
+\tikz@lib@dec@box=\box49
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\decorations\pgflibraryd
+ecorations.pathreplacing.code.tex"))
 
 Package hyperref Warning: Option `backref' has already been used,
-(hyperref)                setting the option has no effect on input line 52.
+(hyperref)                setting the option has no effect on input line 58.
 
 
 Package hyperref Warning: Option `pagebackref' has already been used,
-(hyperref)                setting the option has no effect on input line 52.
+(hyperref)                setting the option has no effect on input line 58.
 
 
 Package hyperref Warning: Option `hyperindex' has already been used,
-(hyperref)                setting the option has no effect on input line 52.
+(hyperref)                setting the option has no effect on input line 58.
 
-Package hyperref Info: Option `colorlinks' set `true' on input line 52.
-Package hyperref Info: Option `breaklinks' set `true' on input line 52.
+Package hyperref Info: Option `colorlinks' set `true' on input line 58.
+Package hyperref Info: Option `breaklinks' set `true' on input line 58.
 
 Package hyperref Warning: Option `bookmarks' has already been used,
-(hyperref)                setting the option has no effect on input line 52.
+(hyperref)                setting the option has no effect on input line 58.
 
 Package biblatex Info: Trying to load language 'frenchb'...
 Package biblatex Info: ... file 'frenchb.lbx' not found.
 
 Package biblatex Warning: Language 'frenchb' not supported.
-(biblatex)                Using fallback language 'english' on input line 70.
+(biblatex)                Using fallback language 'english' on input line 76.
 
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
@@ -1122,45 +1483,45 @@ File: french.lbx 2017/11/05 v3.8a biblatex localization (PK/JW/AB)
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
 
-\@quotelevel=\count327
-\@quotereset=\count328
+\@quotelevel=\count352
+\@quotereset=\count353
 (CHUPIN_Clemence_projet_info.aux (chap1.aux) (chap2.aux) (chap3.aux))
 \openout1 = `CHUPIN_Clemence_projet_info.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 70.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 76.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-\AtBeginShipoutBox=\box34
+\AtBeginShipoutBox=\box50
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count329
-\scratchdimen=\dimen144
-\scratchbox=\box35
-\nofMPsegments=\count330
-\nofMParguments=\count331
-\everyMPshowfont=\toks38
-\MPscratchCnt=\count332
-\MPscratchDim=\dimen145
-\MPnumerator=\count333
-\makeMPintoPDFobject=\count334
-\everyMPtoPDFconversion=\toks39
+\scratchcounter=\count354
+\scratchdimen=\dimen263
+\scratchbox=\box51
+\nofMPsegments=\count355
+\nofMParguments=\count356
+\everyMPshowfont=\toks53
+\MPscratchCnt=\count357
+\MPscratchDim=\dimen264
+\MPnumerator=\count358
+\makeMPintoPDFobject=\count359
+\everyMPtoPDFconversion=\toks54
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1178,16 +1539,16 @@ G,.JBIG2,.JB2,.eps]
 Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-LaTeX Info: Redefining \degres on input line 70.
-LaTeX Info: Redefining \dots on input line 70.
+LaTeX Info: Redefining \degres on input line 76.
+LaTeX Info: Redefining \dots on input line 76.
 Package frenchb.ldf Info: Setting StandardItemizeEnv=true for
 (frenchb.ldf)             compatibility with enumitem package,
-(frenchb.ldf)             reported on input line 70.
+(frenchb.ldf)             reported on input line 76.
 Package frenchb.ldf Info: Setting StandardEnumerateEnv=true for
 (frenchb.ldf)             compatibility with enumitem package,
-(frenchb.ldf)             reported on input line 70.
-LaTeX Info: Redefining \up on input line 70.
-Package hyperref Info: Link coloring ON on input line 70.
+(frenchb.ldf)             reported on input line 76.
+LaTeX Info: Redefining \up on input line 76.
+Package hyperref Info: Link coloring ON on input line 76.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1195,19 +1556,19 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count335
+\c@section@level=\count360
 )
-LaTeX Info: Redefining \ref on input line 70.
-LaTeX Info: Redefining \pageref on input line 70.
-LaTeX Info: Redefining \nameref on input line 70.
+LaTeX Info: Redefining \ref on input line 76.
+LaTeX Info: Redefining \pageref on input line 76.
+LaTeX Info: Redefining \nameref on input line 76.
 
 (CHUPIN_Clemence_projet_info.out) (CHUPIN_Clemence_projet_info.out)
-\@outlinefile=\write5
-\openout5 = `CHUPIN_Clemence_projet_info.out'.
+\@outlinefile=\write6
+\openout6 = `CHUPIN_Clemence_projet_info.out'.
 
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 70.
+(lastpage)             ! on input line 76.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1251,99 +1612,104 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'CHUPIN_Clemence_projet_info.bbl' found.
 (CHUPIN_Clemence_projet_info.bbl)
-Package biblatex Info: Reference section=0 on input line 70.
-Package biblatex Info: Reference segment=0 on input line 70.
-
-<images/logos/logo_ensg.png, id=71, 672.5125pt x 714.67pt>
+Package biblatex Info: Reference section=0 on input line 76.
+Package biblatex Info: Reference segment=0 on input line 76.
+ ABD: EveryShipout initializing macros
+<images/logos/logo_ensg.png, id=74, 672.5125pt x 714.67pt>
 File: images/logos/logo_ensg.png Graphic file (type png)
 
 <use images/logos/logo_ensg.png>
-Package pdftex.def Info: images/logos/logo_ensg.png used on input line 79.
+Package pdftex.def Info: images/logos/logo_ensg.png used on input line 85.
 (pdftex.def)             Requested size: 99.58464pt x 105.82184pt.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 79.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 85.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 79.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 85.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 79.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 85.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 79.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 85.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 79.
+(Font)              <12> on input line 85.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 79.
+(Font)              <8> on input line 85.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 79.
-LaTeX Font Info:    Try loading font information for U+msa on input line 79.
+(Font)              <6> on input line 85.
+LaTeX Font Info:    Try loading font information for U+msa on input line 85.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 79.
+LaTeX Font Info:    Try loading font information for U+msb on input line 85.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<images/logos/logo_paris_est.png, id=72, 698.52943pt x 161.70111pt>
+<images/logos/logo_paris_est.png, id=75, 698.52943pt x 161.70111pt>
 File: images/logos/logo_paris_est.png Graphic file (type png)
 
 <use images/logos/logo_paris_est.png>
-Package pdftex.def Info: images/logos/logo_paris_est.png used on input line 79.
+Package pdftex.def Info: images/logos/logo_paris_est.png used on input line 85.
 
 (pdftex.def)             Requested size: 99.58464pt x 23.0525pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 85.
+(Font)              <10.95> on input line 91.
 File: images/logos/logo_ensg.png Graphic file (type png)
  <use images/logos/logo_ensg.png>
-Package pdftex.def Info: images/logos/logo_ensg.png used on input line 85.
+Package pdftex.def Info: images/logos/logo_ensg.png used on input line 91.
 (pdftex.def)             Requested size: 80.31833pt x 85.35826pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 89.
+(Font)              <10> on input line 95.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 89.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 89.
+(Font)              <7> on input line 95.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 95.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
 LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <10> not available
-(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 89.
+(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 95.
 
 [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./images/logos/logo_ensg.
 png> <./images/logos/logo_paris_est.png>] [2]
 (CHUPIN_Clemence_projet_info.toc)
-\tf@toc=\write6
-\openout6 = `CHUPIN_Clemence_projet_info.toc'.
+\tf@toc=\write7
+\openout7 = `CHUPIN_Clemence_projet_info.toc'.
 
  [3]
 
 LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <10.95> not available
-(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 103.
+(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 109.
 
 [4
 
 ]
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 130.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 136.
 
-Underfull \hbox (badness 10000) in paragraph at lines 130--131
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
 
  []
 
@@ -1371,7 +1737,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--8
 
  []
 
-<images/Process_ini.png, id=132, 1244.05916pt x 339.59648pt>
+<images/Process_ini.png, id=135, 1244.05916pt x 339.59648pt>
 File: images/Process_ini.png Graphic file (type png)
 
 <use images/Process_ini.png>
@@ -1382,7 +1748,7 @@ Overfull \hbox (17.50328pt too wide) in paragraph at lines 11--11
  [] 
  []
 
-<images/Correlation.png, id=133, 1418.29875pt x 379.4175pt>
+<images/Correlation.png, id=136, 1418.29875pt x 379.4175pt>
 File: images/Correlation.png Graphic file (type png)
 
 <use images/Correlation.png>
@@ -1409,7 +1775,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
 
-<images/Niveau_detail.png, id=142, 1959.11925pt x 985.88326pt>
+<images/Niveau_detail.png, id=145, 1959.11925pt x 985.88326pt>
 File: images/Niveau_detail.png Graphic file (type png)
 
 <use images/Niveau_detail.png>
@@ -1453,14 +1819,14 @@ Package Fancyhdr Warning: \headheight is too small (12.5pt):
                                                   \fi \fi 
 l.57 
       <./images/Niveau_detail.png>]
-<images/Process_projet.png, id=157, 1197.40997pt x 402.92337pt>
+<images/Process_projet.png, id=160, 1197.40997pt x 402.92337pt>
 File: images/Process_projet.png Graphic file (type png)
 
 <use images/Process_projet.png>
 Package pdftex.def Info: images/Process_projet.png used on input line 60.
 (pdftex.def)             Requested size: 455.02052pt x 153.11246pt.
 
-<images/Bete_corne.png, id=158, 626.01773pt x 483.65308pt>
+<images/Bete_corne.png, id=161, 626.01773pt x 483.65308pt>
 File: images/Bete_corne.png Graphic file (type png)
 
 <use images/Bete_corne.png>
@@ -1478,13 +1844,13 @@ Package Fancyhdr Warning: \headheight is too small (12.5pt):
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.137 \include{chap1}
+l.145 \include{chap1}
                      pdfTeX warning (ext4): destination with the same identifie
 r (name{figure.1.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.137 \include{chap1}
+l.145 \include{chap1}
                       <./images/Process_projet.png> <./images/Bete_corne.png>]
 \openout2 = `chap2.aux'.
 
@@ -1501,7 +1867,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--8
 
  []
 
-<images/modelisation.png, id=167, 575.01782pt x 301.16528pt>
+<images/modelisation.png, id=170, 575.01782pt x 301.16528pt>
 File: images/modelisation.png Graphic file (type png)
 
 <use images/modelisation.png>
@@ -1543,7 +1909,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--36
 
  []
 
-<images/Interf_chargement.png, id=174, 341.47575pt x 207.77625pt>
+<images/Interf_chargement.png, id=177, 341.47575pt x 207.77625pt>
 File: images/Interf_chargement.png Graphic file (type png)
 
 <use images/Interf_chargement.png>
@@ -1607,7 +1973,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 75--76
 
  []
 
-<images/diagramme_cas_utilisation.png, id=184, 568.97519pt x 284.4876pt>
+<images/diagramme_cas_utilisation.png, id=187, 568.97519pt x 284.4876pt>
 File: images/diagramme_cas_utilisation.png Graphic file (type png)
 
 <use images/diagramme_cas_utilisation.png>
@@ -1628,7 +1994,7 @@ Package Fancyhdr Warning: \headheight is too small (12.5pt):
                                                   \fi \fi 
 l.93 
       <./images/diagramme_cas_utilisation.png>]
-<images/Analyse_fonctionnelle.png, id=192, 294.31958pt x 739.14142pt>
+<images/Analyse_fonctionnelle.png, id=195, 294.31958pt x 739.14142pt>
 File: images/Analyse_fonctionnelle.png Graphic file (type png)
 
 <use images/Analyse_fonctionnelle.png>
@@ -1692,7 +2058,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 134--135
 
  []
 
-<images/interface_schema.png, id=200, 709.8896pt x 427.33565pt>
+<images/interface_schema.png, id=203, 709.8896pt x 427.33565pt>
 File: images/interface_schema.png Graphic file (type png)
 
 <use images/interface_schema.png>
@@ -1723,7 +2089,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 148--149
 
  []
 
-<images/MVC.png, id=215, 872.07411pt x 554.95625pt>
+<images/MVC.png, id=218, 872.07411pt x 554.95625pt>
 File: images/MVC.png Graphic file (type png)
  <use images/MVC.png>
 Package pdftex.def Info: images/MVC.png used on input line 172.
@@ -1756,7 +2122,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 187--188
 
  []
 
-<images/diagramme_classes.png, id=223, 1223.51418pt x 426.85223pt>
+<images/diagramme_classes.png, id=226, 1223.51418pt x 426.85223pt>
 File: images/diagramme_classes.png Graphic file (type png)
 
 <use images/diagramme_classes.png>
@@ -1786,7 +2152,7 @@ l.202
                                                   \fi \fi 
 l.202 
        <./images/MVC.png> <./images/diagramme_classes.png>]
-<images/Maquette.png, id=233, 455.1318pt x 512.17435pt>
+<images/Maquette.png, id=236, 455.1318pt x 512.17435pt>
 File: images/Maquette.png Graphic file (type png)
 
 <use images/Maquette.png>
@@ -1804,7 +2170,7 @@ Package Fancyhdr Warning: \headheight is too small (12.5pt):
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.138 \include{chap2}
+l.146 \include{chap2}
                       <./images/Maquette.png>]
 \openout2 = `chap3.aux'.
 
@@ -1857,74 +2223,184 @@ Package Fancyhdr Warning: \headheight is too small (12.5pt):
  This may cause the page layout to be inconsistent, however.
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--150
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
 
  []
 
-[19
+<images/calendrier.png, id=256, 613.0905pt x 218.0145pt>
+File: images/calendrier.png Graphic file (type png)
+
+<use images/calendrier.png>
+Package pdftex.def Info: images/calendrier.png used on input line 161.
+(pdftex.def)             Requested size: 398.50409pt x 141.70773pt.
+ [19
 
 
-] (CHUPIN_Clemence_projet_info.lof)
-\tf@lof=\write7
-\openout7 = `CHUPIN_Clemence_projet_info.lof'.
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) 
+has been already used, duplicate ignored
 
- [20] (CHUPIN_Clemence_projet_info.ann)
-\tf@ann=\write8
-\openout8 = `CHUPIN_Clemence_projet_info.ann'.
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.170 \newpage
+               <./images/calendrier.png>] (CHUPIN_Clemence_projet_info.lof)
+\tf@lof=\write8
+\openout8 = `CHUPIN_Clemence_projet_info.lof'.
 
 
-[21
+[20] (CHUPIN_Clemence_projet_info.ann)
+\tf@ann=\write9
+\openout9 = `CHUPIN_Clemence_projet_info.ann'.
+
+ [21
 
 ] [22]
 Annexe A.
 
-Underfull \hbox (badness 2088) in paragraph at lines 160--160
+Underfull \hbox (badness 2088) in paragraph at lines 177--177
 []|\T1/lmr/m/sc/24.88 Typologie des er-reurs de
  []
 
 
-Overfull \hbox (40.99998pt too wide) in paragraph at lines 160--160
+Overfull \hbox (40.99998pt too wide) in paragraph at lines 177--177
 [][] 
  []
 
-<images/mind_map_001.png, id=286, 586.44093pt x 382.42876pt>
-File: images/mind_map_001.png Graphic file (type png)
 
-<use images/mind_map_001.png>
-Package pdftex.def Info: images/mind_map_001.png used on input line 165.
-(pdftex.def)             Requested size: 469.15337pt x 305.9434pt.
-
-Overfull \hbox (13.90926pt too wide) in paragraph at lines 165--165
- [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 172--173
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
 
  []
 
+runsystem(pdflatex -interaction=batchmode -shell-escape -jobname "mind_map" min
+d_map)...disabled (restricted).
 
+
+Package standalone Warning: Graphic 'mind_map.pdf' could not be build.
+Shell escape activated? on input line 199.
+
+(mind_map.tex
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarymindmap.code.tex"
+Runaway argument?
+Header: /cvsroot/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tik\ETC.
+! Paragraph ended before \pgf@parseid was complete.
+<to be read again> 
+                   \par 
+l.11 
+     
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarytrees.code.tex"
+Runaway argument?
+Header: /cvsroot/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tik\ETC.
+! Paragraph ended before \pgf@parseid was complete.
+<to be read again> 
+                   \par 
+l.11 
+     
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+))
+
+LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <17.28> not available
+(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 21.
+
+
+Overfull \hbox (4.34367pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmr/m/sc/10 Unqualified 
+ []
+
+
+Overfull \hbox (11.16898pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Reconstruction 
+ []
+
+
+Overfull \hbox (11.16898pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Reconstruction 
+ []
+
+
+Overfull \hbox (11.16898pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Reconstruction 
+ []
+
+
+Overfull \hbox (9.23979pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Correlation 
+ []
+
+
+Overfull \hbox (11.16898pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Reconstruction 
+ []
+
+
+Overfull \hbox (11.16898pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Reconstruction 
+ []
+
+
+Overfull \hbox (11.16898pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Reconstruction 
+ []
+
+
+Overfull \hbox (9.23979pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Correlation 
+ []
+
+
+Overfull \hbox (8.67763pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Vegetation 
+ []
+
+
+Overfull \hbox (1.95868pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Building 
+ []
+
+
+Overfull \hbox (11.16898pt too wide) in paragraph at lines 161--161
+ [][][][]\T1/lmss/m/n/6 Reconstruction 
+ []
+
+)
+File: mind_map.tex Graphic file (type tex)
+ 
 AED: lastpage setting LastPage
 [23
 
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1.A.1}
-) has been already used, duplicate ignored
+]
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 13.59999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[24pdfTeX warning (ext4): destination with the same identifier (name{figure.1.A
+.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.189 \end{document}
-                     <./images/mind_map_001.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 189.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 189.
-
-(CHUPIN_Clemence_projet_info.aux (chap1.aux) (chap2.aux) (chap3.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 189.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 189.
+l.208 \end{document}
+                    ]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 208.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 208.
+ (CHUPIN_Clemence_projet_info.aux (chap1.aux) (chap2.aux)
+(chap3.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 208.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 208.
 Package rerunfilecheck Info: File `CHUPIN_Clemence_projet_info.out' has not cha
 nged.
 (rerunfilecheck)             Checksum: CA2CF7772D4841B38E8FD8EB13D855F1;1116.
@@ -1932,31 +2408,33 @@ Package logreq Info: Writing requests to 'CHUPIN_Clemence_projet_info.run.xml'.
 
 \openout1 = `CHUPIN_Clemence_projet_info.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 189.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 208.
  ) 
 Here is how much of TeX's memory you used:
- 17487 strings out of 493323
- 275972 string characters out of 3139055
- 756471 words of memory out of 3000000
- 20592 multiletter control sequences out of 15000+200000
- 88944 words of font info for 73 fonts, out of 3000000 for 9000
+ 29117 strings out of 493323
+ 532272 string characters out of 3139055
+ 1026797 words of memory out of 3000000
+ 31934 multiletter control sequences out of 15000+200000
+ 91739 words of font info for 74 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,11n,45p,1154b,2126s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Fil
-es/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTeX 2.9/fonts/e
-nc/dvips/lm/lm-mathsy.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lm
-csc10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmmi10.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/lm/lmss10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/lm/lmss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmss8.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmss9.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/lm/lmsso10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on CHUPIN_Clemence_projet_info.pdf (23 pages, 3891355 bytes).
+ 74i,26n,105p,1154b,2660s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/M
+iKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX 2.9/fonts/e
+nc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy
+.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmcsc10.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/lm/lmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmss10.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmss12.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/lm/lmss8.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
+pe1/public/lm/lmss9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmss
+bx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsso10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/symbols/msam10.pfb>
+Output written on CHUPIN_Clemence_projet_info.pdf (24 pages, 3883277 bytes).
 PDF statistics:
- 360 PDF objects out of 1000 (max. 8388607)
- 93 named destinations out of 1000 (max. 500000)
- 217 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 388 PDF objects out of 1000 (max. 8388607)
+ 95 named destinations out of 1000 (max. 500000)
+ 271 words of extra memory for PDF output out of 10000 (max. 10000000)
 
