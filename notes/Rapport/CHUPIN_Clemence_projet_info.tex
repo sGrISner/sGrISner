@@ -7,10 +7,16 @@
 %----------------------------------------------------------------
 
 \documentclass{themeensg}
+
+\usepackage{rotating}
+\usepackage{standalone}
 \usepackage{color}
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage{enumitem}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
 
 %---Texte en filigranne---
 \SetWatermarkText{\textsc{Brouillon}}
@@ -160,14 +166,12 @@ Avant de clore ce rapport, je tiens à remercier les commanditaires de ce projet
 \annexe[Typologie des erreurs de classification]{Typologie des erreurs de classification}
 \label{annexeerreurs}
 \footnote{Sources : Oussama ENNAFII}
-\begin{figure}[!h]
-	\begin{center}
-		\includegraphics[scale=0.8]{mind_map_001.png}  \\
-		\caption[Typologie des erreurs de classification]{Typologie des erreurs de classification}
-		\label{fig:example}
-	\end{center}
-\end{figure}
-
+\begin{sidewaysfigure}[p]
+   \begin{center}
+    \includestandalone[mode=buildnew, scale=.5]{mind_map}
+	\caption[Typologie des erreurs de classification]{\label{fig::mindmap_errors}Typologie des erreurs de classification.}
+   \end{center}
+\end{sidewaysfigure}
 
 \noindent Le premier niveau de classement correspond à la simple dualité : erreur/ absence d'erreur.\newline
 
