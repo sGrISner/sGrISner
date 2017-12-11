@@ -17,7 +17,7 @@ Au sein du laboratoire MATIS, les recherches de M. ENNAFII Oussama ont donc pour
 \noindent Dans les précédents chapitres, on a pu voir que différents types de données étaient utilisées :
 \begin{itemize}[label=$\rightarrow$]
 	\item Les fichiers de données textuelles sont au format CSV (Comma-Separated Values). Dans ces fichiers, les données sont séparées par des virgules. Ce type de format est assez répandu, et est largement utilisé par les logiciels tableurs.  Le format CSV a été choisi pour sa lisibilité par rapport à des formats de type .TXT. 
-	\item L’orthohoto est fournie au format TIFF (Tagged Image File Format). C’est un format de fichier courant pour les images numériques et lu par de nombreux logiciels. De plus, c’est un format assez flexible, et qui peut contenir des données sur la géométrie de l’image.
+	\item L’orthophoto est fournie au format TIFF (Tagged Image File Format). C’est un format de fichier courant pour les images numériques et lu par de nombreux logiciels. De plus, c’est un format assez flexible, et qui peut contenir des données sur la géométrie de l’image.
 	\item Les données vectorielles sont au format SHP (Shapefile). C’est un format courant pour les données SIG, qui permet d’enregistrer la géométrie d’une entité vectorielle. Dans notre cas, les données sont extraites du logiciel QGIS, qui est un logiciel SIG, ce qui justifie le format SHP.
 \end{itemize}
 
@@ -51,9 +51,9 @@ Ainsi, face à ces principaux arguments, la bibliothèque multi-plateforme Qt a 
 
 L'utilisation de Qt pour la réalisation de l'interface graphique ne justifie pas le choix du langage de programmation. En effet, il est possible d'utiliser Qt avec les langages C++ ou Python. De façon générale, le C++ est plus performant pour des interfaces graphiques importantes. Dans notre cas, l'interface envisagée ne nécessite pas une grande efficacité de traitement. \\
 
-Ainsi, afin de faciliter le codage, l'utilisation du langage Python a été privilégié.\\\\
+Ainsi, afin de faciliter le codage, l'utilisation du langage Python a été privilégiée.\\\\
 
-L'interface graphique voulue pour ce projet utilisera donc la bibliothèque Qt associée à un script Python. Cela lui permettra d'être utilisé par tous les environnements informatiques, et elle pourra être modulée sans prendre en compte le formalisme de QGIS. 
+L'interface graphique voulue pour ce projet utilisera donc la bibliothèque Qt associée à un script Python. Cela lui permettra d'être utilisée par tous les environnements informatiques, et elle pourra être modulée sans prendre en compte le formalisme de QGIS. 
 
 
 	
