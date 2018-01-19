@@ -65,7 +65,7 @@ class ChargementFichiers (QDialog,Ui_ChargerFichier):
         self.cheminOrtho = File('')
         self.cheminEmprise = File('')
 
-        """Définition des connexions pour cherger les fichiers"""
+        """Définition des connexions pour charger les fichiers"""
         self.chargerClasseButton.clicked.connect(self.selectCheminClasse)
         self.chargerResultButton.clicked.connect(self.selectCheminResultat)
         self.chargerOrthoButton.clicked.connect(self.selectCheminOrtho)
@@ -171,20 +171,35 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
                 reader = csv.DictReader(file, fieldnames=['Nom','Description'])
                 for row in reader :
                     self.classes[row['Nom']]= row['Description']
-            print(self.classes)
+            #print(self.classes)
 
             # Lecture des résultats de la classification
             with open(chargement.cheminResult.path, newline='') as file:
                 reader = csv.DictReader(file, fieldnames=['ID','Classe','Proba'])
                 for row in reader :
                     self.results.append((row['ID'], row['Classe'], row['Proba']))
-            print(self.results)
+            #print(self.results)
 
             # Sélection des entités à transformer en objet batiment
             self.results = strategy.Random(3).filtre(self.results)
             #self.results = strategy.Naive.filtre(self.results)
             print(self.results)
 
+            # Création de la liste de Batiments
+            for k in range(len(self.results)):
+
+                # Recherche de la géométrie dans le dossier des emprises
+                try :
+                    with open(chargement.cheminEmprise.path + "/" + self.results[k][0] + ".gml") as file:
+                        # Récupérer les paramètres de géométries des fichiers ....
+
+                        # Compléter la liste de batiments
+                        self.buildings.append(batiment.Batiment(self.results[k][0],'geom',self.results[k][1],float(self.results[k][2])))
+                # Si la géométrie n'existe pas, on affiche un message d'erreur
+                except IOError:
+                    print ("Erreur! Le fichier n'existe pas dans le dossier des emprises")
+
+                print(self.buildings[k].identity, self.buildings[k].geometry, self.buildings[k].classe, self.buildings[k].probability)
 
 
 def showMainWindow():
