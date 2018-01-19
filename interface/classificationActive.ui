@@ -6,53 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
-    <height>650</height>
+    <width>1003</width>
+    <height>679</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>900</width>
+    <height>650</height>
+   </size>
   </property>
   <property name="contextMenuPolicy">
    <enum>Qt::ActionsContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>Interface de classification</string>
+   <string>Classification active</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="8" column="2" rowspan="2" colspan="9">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>60</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="2" colspan="7">
-     <spacer name="verticalSpacer_5">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="6" column="7">
-     <widget class="QLabel" name="labelClasse">
-      <property name="text">
-       <string>Classe</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="8">
-     <spacer name="horizontalSpacer_6">
+    <item row="5" column="11" rowspan="3" colspan="2">
+     <spacer name="horizontalSpacer_5">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -64,149 +37,33 @@
       </property>
      </spacer>
     </item>
-    <item row="4" column="2" colspan="7">
-     <spacer name="verticalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="7" column="8" colspan="3">
-     <spacer name="horizontalSpacer_7">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="5" column="8" colspan="3">
-     <spacer name="horizontalSpacer_8">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="12" column="2" colspan="9">
-     <widget class="QPushButton" name="noButton">
-      <property name="text">
-       <string>NON</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="2" colspan="9">
-     <widget class="QPushButton" name="okButton">
-      <property name="text">
-       <string>OUI</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1" rowspan="13">
-     <widget class="QGraphicsView" name="entiteView">
+    <item row="20" column="18" colspan="3">
+     <widget class="QDialogButtonBox" name="buttonBox">
       <property name="minimumSize">
        <size>
-        <width>500</width>
-        <height>500</height>
+        <width>0</width>
+        <height>0</height>
        </size>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Close</set>
+      </property>
+      <property name="centerButtons">
+       <bool>false</bool>
       </property>
      </widget>
     </item>
-    <item row="13" column="2" colspan="9">
-     <spacer name="verticalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="5" column="2">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>10</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="7" column="2">
-     <spacer name="horizontalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>10</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="6" column="2">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>10</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="7" column="7">
-     <widget class="QLabel" name="labelProb">
+    <item row="18" column="6">
+     <widget class="QLabel" name="margeyLabel">
       <property name="text">
-       <string>Probabilité</string>
+       <string>Marge horizontale :</string>
       </property>
      </widget>
     </item>
-    <item row="5" column="7">
-     <widget class="QLabel" name="labelId">
-      <property name="text">
-       <string>Identifiant de l'objet</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="2" colspan="9">
-     <spacer name="verticalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="6" column="10">
+    <item row="20" column="15" colspan="3">
      <spacer name="horizontalSpacer_4">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -219,8 +76,213 @@
       </property>
      </spacer>
     </item>
-    <item row="6" column="9">
-     <widget class="QLabel" name="label">
+    <item row="1" column="0" rowspan="20">
+     <spacer name="horizontalSpacer_9">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="18" column="3">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="13" rowspan="3">
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="11" colspan="12">
+     <widget class="QPushButton" name="noButton">
+      <property name="text">
+       <string>NON</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="14">
+     <widget class="QLabel" name="probaLabel">
+      <property name="text">
+       <string>Probabilité</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="10" rowspan="2" colspan="13">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>60</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="14">
+     <widget class="QLabel" name="idLabel">
+      <property name="text">
+       <string>Identifiant de l'objet</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="10" colspan="13">
+     <spacer name="verticalSpacer_5">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="18" column="8">
+     <spacer name="horizontalSpacer_14">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="6" column="14">
+     <widget class="QLabel" name="classeLabel">
+      <property name="text">
+       <string>Classe</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="11" colspan="12">
+     <widget class="QPushButton" name="yesButton">
+      <property name="text">
+       <string>OUI</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="10" colspan="13">
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="13" column="10" colspan="13">
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="18" column="5">
+     <spacer name="horizontalSpacer_13">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="3" column="12" colspan="4">
+     <widget class="QLabel" name="questionLabel">
+      <property name="text">
+       <string>Cet objet est il bien classé ?</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="24">
+     <spacer name="verticalSpacer_6">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="19" column="1" colspan="22">
+     <spacer name="verticalSpacer_7">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="23" rowspan="20">
+     <spacer name="horizontalSpacer_10">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="3" column="11">
+     <spacer name="horizontalSpacer_11">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="6" column="18">
+     <widget class="QLabel" name="helpLogo">
       <property name="maximumSize">
        <size>
         <width>20</width>
@@ -238,15 +300,118 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="5" colspan="3">
-     <widget class="QLabel" name="questionLabel">
+    <item row="15" column="11" rowspan="4" colspan="2">
+     <spacer name="horizontalSpacer_12">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="4" column="10" colspan="13">
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="15" column="15" rowspan="4" colspan="2">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="1" rowspan="15" colspan="9">
+     <widget class="QGraphicsView" name="entiteView">
+      <property name="minimumSize">
+       <size>
+        <width>500</width>
+        <height>400</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1500</width>
+        <height>1500</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="22" column="0" colspan="24">
+     <spacer name="verticalSpacer_8">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="18" column="7">
+     <widget class="QLineEdit" name="lineEdit">
       <property name="text">
-       <string>Cet objet est il bien classé ?</string>
+       <string>1.0</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1" colspan="10">
-     <spacer name="verticalSpacer_6">
+    <item row="18" column="4">
+     <widget class="QLineEdit" name="lineEdit_2">
+      <property name="text">
+       <string>1.0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="18" column="18">
+     <widget class="QLabel" name="borneyValueLabel">
+      <property name="text">
+       <string>(xmax, ymax)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="17" column="18">
+     <widget class="QLabel" name="bornexValueLabel">
+      <property name="text">
+       <string>(xmin, ymin)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="17" column="17" rowspan="2">
+     <widget class="Line" name="line_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="17" column="14">
+     <widget class="QLabel" name="borneLabel">
+      <property name="text">
+       <string>Bornes d'affichage</string>
+      </property>
+     </widget>
+    </item>
+    <item row="16" column="1" rowspan="2" colspan="9">
+     <spacer name="verticalSpacer_9">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -258,54 +423,15 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="0" rowspan="13">
-     <spacer name="horizontalSpacer_9">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="11" rowspan="13">
-     <spacer name="horizontalSpacer_10">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="14" column="0" colspan="11">
-     <spacer name="verticalSpacer_7">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="5" column="6" rowspan="3">
-     <widget class="Line" name="line">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
+    <item row="18" column="2">
+     <widget class="QLabel" name="margxLabel">
+      <property name="text">
+       <string>Marge verticale :</string>
       </property>
      </widget>
     </item>
-    <item row="5" column="3" rowspan="3" colspan="3">
-     <spacer name="horizontalSpacer_5">
+    <item row="20" column="7">
+     <spacer name="horizontalSpacer_15">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -317,8 +443,15 @@
       </property>
      </spacer>
     </item>
-    <item row="3" column="3" colspan="2">
-     <spacer name="horizontalSpacer_11">
+    <item row="20" column="8" colspan="7">
+     <widget class="QPushButton" name="lancementButton">
+      <property name="text">
+       <string>Lancer la classification</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="18" colspan="4">
+     <spacer name="horizontalSpacer_7">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -329,10 +462,43 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item row="6" column="19" colspan="3">
+     <spacer name="horizontalSpacer_6">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="18" colspan="4">
+     <spacer name="horizontalSpacer_8">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="20" column="2" colspan="5">
+     <widget class="QLabel" name="etatLabel">
+      <property name="text">
+       <string>Charger les fichiers ...</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="menuBar">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -340,7 +506,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>840</width>
+     <width>1003</width>
      <height>26</height>
     </rect>
    </property>
@@ -350,21 +516,18 @@
    <property name="defaultUp">
     <bool>false</bool>
    </property>
-   <widget class="QMenu" name="menuChager_fichier">
+   <widget class="QMenu" name="fichierMenu">
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actionCharger_fichiers"/>
+    <addaction name="chargerAction"/>
    </widget>
-   <addaction name="menuChager_fichier"/>
+   <addaction name="fichierMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionCharger_fichiers">
+  <action name="chargerAction">
    <property name="text">
     <string>Charger ...</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
  </widget>
