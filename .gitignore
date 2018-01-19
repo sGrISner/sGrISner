@@ -228,3 +228,6 @@ TSWLatexianTemp*
 # Python Binaries
 __pycache__
 *.pyc
+
+# PyQT auxilary files
+*.qrc
