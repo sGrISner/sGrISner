@@ -5,8 +5,7 @@
 """ - FICHIER DE DEFINITION DE LA CLASSE BATIMENT - """
 
 class Batiment:
-    """
-    ------ OBJET BATIMENT ------
+    """--- OBJET BATIMENT ---
 
     ATTRIBUTS :
     ===========
