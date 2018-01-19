@@ -225,3 +225,6 @@ TSWLatexianTemp*
 # standalone packages
 *.sta
 
+# Python Binaries
+__pycache__
+*.pyc
