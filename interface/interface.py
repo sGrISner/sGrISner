@@ -9,8 +9,7 @@ import csv
 from classificationActive import *
 from choixClasse import *
 from chargementFichiers import *
-from select import *
-
+import strategy
 """Classe permettant l'enregistrement d'un chemin d'accès"""
 class File():
 
