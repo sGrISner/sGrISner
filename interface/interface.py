@@ -2,14 +2,19 @@
 # -*- coding: utf-8 -*-
 # Python v3
 
-from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDialog
 import sys
 import numpy as np
 import csv
+
+from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDialog
+
 from classificationActive import *
 from choixClasse import *
 from chargementFichiers import *
+
 import strategy
+import batiment
+
 """Classe permettant l'enregistrement d'un chemin d'accès"""
 class File():
 
