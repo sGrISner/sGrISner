@@ -127,6 +127,11 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
                     self.results.append((row['ID'], row['Classe'], row['Proba']))
             print(self.results)
 
+            # Sélection des entités à transformer en objet batiment
+            self.results=strategy.Random(3).filtre(self.results)
+            #self.results = strategy.Naive.filtre(self.results)
+            print(self.results)
+
 
 """Affichage de l'interface principale."""
 def showMainWindow():

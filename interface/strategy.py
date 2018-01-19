@@ -23,5 +23,5 @@ class Random(Strategy):
     def __init__(self, selection_number):
         self.selection_number = selection_number
 
-    def filtre(buildings):
+    def filtre(self,buildings):
         return random.sample(buildings, self.selection_number)
