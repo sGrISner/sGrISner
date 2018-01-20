@@ -191,9 +191,16 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
             self.selected_results = strategy.Random(3).filtre(self.results)
             print(self.selected_results)
 
-            # Création de la liste de Batiments
-            for building_id, result in self.selected_results:
-                pass
+            # liste des Batiments
+            buildings = [
+                read_building(
+                    chargement.cheminEmprise.path,
+                    building_id,
+                    classe,
+                    prob
+                )
+                for building_id, classe, prob in self.selected_results
+            ]
 
 
 def showMainWindow():

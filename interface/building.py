@@ -1,6 +1,9 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
-# Python v3
+
+import os
+
+from osgeo import ogr
 
 """ - FICHIER DE DEFINITION DE LA CLASSE BATIMENT - """
 
@@ -21,3 +24,20 @@ class Building:
         self.geometry = geometry
         self.classe = classe
         self.probability = probability
+
+
+def read_building(directory, building_id, classe, probability):
+    return Building(
+        building_id,
+        get_geometry(directory + str(building_id) + '.gml', 'GML'),
+        classe,
+        probability
+    )
+
+
+def get_geometry(building_path, driver_name):
+    source = ogr.GetDriverByName(driver_name).Open(building_path, 0)
+    if source is None:
+        raise IOError('Could not open ' + building_path)
+    else:
+        return [feature.GetGeometryRef() for feature in source.GetLayer()]
