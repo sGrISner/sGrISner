@@ -155,51 +155,45 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
 
 
     def showChargt (self):
-
         # Affichage de l'interface de chargement des fichiers
         chargement = ChargementFichiers()
         chargement.show()
         chargement.exec_()
 
         # Test pour vérifier le bon chargement des fichiers
-        if (chargement.cheminClasse.path != '') & (chargement.cheminOrtho.path != '') & (chargement.cheminEmprise.path != '') & (chargement.cheminResult.path != ''):
+        if (
+            chargement.cheminClasse.path != ''
+            and
+            chargement.cheminOrtho.path != ''
+            and
+            chargement.cheminEmprise.path != ''
+            and
+            chargement.cheminResult.path != ''
+        ):
             # Affichage de l'état du traitement
-            self.etatLabel.setText("Fichiers chargés - Le programme peut être lancé")
+            self.etatLabel.setText("Fichiers chargés. Le programme peut être lancé.")
 
             # Lecture du fichier csv des classes et remplissage du dictionnaire
-            with open(chargement.cheminClasse.path, newline='') as file:
-                reader = csv.DictReader(file, fieldnames=['Nom','Description'])
+            with open(chargement.cheminClasse.path, newline='') as classes_file:
+                reader = csv.DictReader(classes_file, fieldnames=['Nom','Description'])
                 for row in reader :
                     self.classes[row['Nom']]= row['Description']
             #print(self.classes)
 
             # Lecture des résultats de la classification
-            with open(chargement.cheminResult.path, newline='') as file:
-                reader = csv.DictReader(file, fieldnames=['ID','Classe','Proba'])
+            with open(chargement.cheminResult.path, newline='') as resuts_file:
+                reader = csv.DictReader(resuts_file, fieldnames=['ID','Classe','Proba'])
                 for row in reader :
                     self.results.append((row['ID'], row['Classe'], row['Proba']))
             #print(self.results)
 
             # Sélection des entités à transformer en objet batiment
-            self.results = strategy.Random(3).filtre(self.results)
-            #self.results = strategy.Naive.filtre(self.results)
-            print(self.results)
+            self.selected_results = strategy.Random(3).filtre(self.results)
+            print(self.selected_results)
 
             # Création de la liste de Batiments
-            for k in range(len(self.results)):
-
-                # Recherche de la géométrie dans le dossier des emprises
-                try :
-                    with open(chargement.cheminEmprise.path + "/" + self.results[k][0] + ".gml") as file:
-                        # Récupérer les paramètres de géométries des fichiers ....
-
-                        # Compléter la liste de batiments
-                        self.buildings.append(batiment.Batiment(self.results[k][0],'geom',self.results[k][1],float(self.results[k][2])))
-                # Si la géométrie n'existe pas, on affiche un message d'erreur
-                except IOError:
-                    print ("Erreur! Le fichier n'existe pas dans le dossier des emprises")
-
-                print(self.buildings[k].identity, self.buildings[k].geometry, self.buildings[k].classe, self.buildings[k].probability)
+            for building_id, result in self.selected_results:
+                pass
 
 
 def showMainWindow():
