@@ -15,7 +15,7 @@ from choixClasse import *
 from chargementFichiers import *
 
 import strategy
-import batiment
+import building
 
 
 
@@ -126,7 +126,7 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
     ===========
         - classe : dictionnaire contenant les id des classes (clef) et leur description (valeurs)
         - results : liste de tuples (id, classe, probabilié) contenant l'ensemble des résultats de classification
-        - buildings : liste d'objets Batiment après processus de sélection des données
+        - buildings : liste d'objets Building après processus de sélection des données
 
     METHODES :
     ==========
