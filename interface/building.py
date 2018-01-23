@@ -29,7 +29,7 @@ class Building:
 def read_building(directory, building_id, classe, probability):
     return Building(
         building_id,
-        get_geometry(directory + str(building_id) + '.gml', 'GML'),
+        get_geometry(os.path(directory, str(building_id) + '.gml'), 'GML'),
         classe,
         probability
     )
