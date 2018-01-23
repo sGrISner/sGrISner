@@ -8,7 +8,8 @@ import sys
 import numpy as np
 import csv
 
-from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDialog, QGraphicsScene
+from PyQt5.QtGui import QPixmap
 
 from classificationActive import *
 from choixClasse import *
@@ -17,6 +18,8 @@ from chargementFichiers import *
 import strategy
 import building
 import background
+
+import qimage2ndarray
 
 
 class File:
@@ -152,6 +155,28 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         choix.show()
         choix.exec_()
 
+    def showData(self,building,background):
+
+        """Fonction permettant l'affichage graphique des emprises et du fond de plan"""
+
+        # Affichage de l'othoimage rognées
+        im = background.crop(building[0].get_bounding_box(),(10, 10))
+        scene = QGraphicsScene(self)
+        scene.addPixmap(QPixmap.fromImage(qimage2ndarray.array2qimage(im)))
+        self.entiteView.setScene(scene)
+
+        # Affichage de la géométrie
+
+        # Affichage du texte
+
+        # If self.noButton cliqué
+            # Affichage fenêtre ChoixClasse
+            # Enregistrement de la nouvelle classe + prob = 1
+
+        # If self.yeSButton cliqué
+            # Enregistrement classe actuelle + prob = 1
+
+
     def showChargt(self):
         # Affichage de l'interface de chargement des fichiers
         chargement = ChargementFichiers()
@@ -196,8 +221,8 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             self.selected_results = strategy.Random(3).filtre(self.results)
             print(self.selected_results)
 
-            # liste des Batiments
-            a = (
+            # showData(Liste des Batiments + ortho)
+            a=(
                 [
                     building.read_building(
                         chargement.cheminEmprise.path,
@@ -209,6 +234,8 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                 ],
                 background.read_background(chargement.cheminOrtho.path)
             )
+
+            self.showData(a[0],a[1])
 
 
 def showMainWindow():
