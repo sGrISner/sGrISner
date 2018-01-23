@@ -193,7 +193,7 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
 
             # liste des Batiments
             buildings = [
-                read_building(
+                building.read_building(
                     chargement.cheminEmprise.path,
                     building_id,
                     classe,
