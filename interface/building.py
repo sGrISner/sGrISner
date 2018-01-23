@@ -31,7 +31,7 @@ class Building:
         X,Y = zip(
             *self.get_points()
         )
-        return(min(X), min(Y),max(X),max(Y))
+        return((min(X), min(Y)), (max(X), max(Y)))
 
     def get_points(self):
         pts=[]
