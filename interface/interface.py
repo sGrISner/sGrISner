@@ -16,7 +16,7 @@ from chargementFichiers import *
 
 import strategy
 import building
-
+import background
 
 
 class File:
@@ -28,11 +28,11 @@ class File:
         -path : chemin d'accès
     """
 
-    def __init__(self,path):
+    def __init__(self, path):
         self.path = path
 
 
-class ChargementFichiers (QDialog,Ui_ChargerFichier):
+class ChargementFichiers(QDialog, Ui_ChargerFichier):
 
     """--- INTERFACE DE CHARGEMENT FICHIERS ---
 
@@ -54,7 +54,7 @@ class ChargementFichiers (QDialog,Ui_ChargerFichier):
         - selectDossierEmprises : demande et affiche le chemin du dossier des emprises
     """
 
-    def __init__ (self):
+    def __init__(self):
 
         super().__init__()
         self.setupUi(self)
@@ -72,19 +72,19 @@ class ChargementFichiers (QDialog,Ui_ChargerFichier):
         self.chargerEmpriseButton.clicked.connect(self.selectDossierEmprises)
 
     def selectCheminClasse(self):
-        classeChem, test = QFileDialog.getOpenFileName(self,"Sélection du fichier des classes", "","Fichier CSV (*.csv)", options=QFileDialog.Options())
+        classeChem, test = QFileDialog.getOpenFileName(self,"Sélection du fichier des classes", "","Fichier CSV(*.csv)", options=QFileDialog.Options())
         if classeChem:
             self.chemClasseLabel.setText(classeChem)    # Affiche le chemin du fichier de classes
             self.cheminClasse.path=classeChem           # Enregistre le chemin du fichier de classes
 
     def selectCheminResultat(self):
-        resultChem, test = QFileDialog.getOpenFileName(self,"Sélection des résultats de la classification", "","Fichiers CSV (*.csv)", options=QFileDialog.Options())
+        resultChem, test = QFileDialog.getOpenFileName(self,"Sélection des résultats de la classification", "","Fichiers CSV(*.csv)", options=QFileDialog.Options())
         if resultChem:
             self.cheminResultLabel.setText(resultChem)  # Affiche le chemin du fichier de résutlats
             self.cheminResult.path=resultChem           # Enregistre le chemin du fichier de résultats
 
     def selectCheminOrtho(self):
-        orthoChem, test = QFileDialog.getOpenFileName(self,"Sélection de l'orthoimage", "","Fichiers GEOTIFF (*.geotiff)", options=QFileDialog.Options())
+        orthoChem, test = QFileDialog.getOpenFileName(self,"Sélection de l'orthoimage", "","Fichiers GEOTIFF(*.geotiff)", options=QFileDialog.Options())
         if orthoChem:
             self.cheminOrthoLabel.setText(orthoChem)    # Affiche le chemin de l'orthophoto
             self.cheminOrtho.path=orthoChem             # Enregistre le chemin de l'orthophoto
@@ -96,7 +96,7 @@ class ChargementFichiers (QDialog,Ui_ChargerFichier):
             self.cheminEmprise.path=empriseChem             # Enregistre le chemin du dossier emprise
 
 
-class ChoixClasse (QDialog,Ui_ChoixClasse):
+class ChoixClasse(QDialog, Ui_ChoixClasse):
 
     """--- INTERFACE DE SELECTION DES CLASSES ---
 
@@ -110,12 +110,12 @@ class ChoixClasse (QDialog,Ui_ChoixClasse):
     ==========
     """
 
-    def __init__ (self):
+    def __init__(self):
         super().__init__()
         self.setupUi(self)
 
 
-class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
+class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
 
     """--- INTERFACE PRINCIPALE ---
 
@@ -124,8 +124,8 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
 
     ATTRIBUTS :
     ===========
-        - classe : dictionnaire contenant les id des classes (clef) et leur description (valeurs)
-        - results : liste de tuples (id, classe, probabilié) contenant l'ensemble des résultats de classification
+        - classe : dictionnaire contenant les id des classes(clef) et leur description(valeurs)
+        - results : liste de tuples(id, classe, probabilié) contenant l'ensemble des résultats de classification
         - buildings : liste d'objets Building après processus de sélection des données
 
     METHODES :
@@ -134,7 +134,7 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
         - showChargt : permet de récupérer les chemins des fichiers à utiliser
     """
 
-    def __init__ (self):
+    def __init__(self):
         super().__init__()
         self.setupUi(self)
 
@@ -147,21 +147,19 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
         self.noButton.clicked.connect(self.showChoix)
         self.chargerAction.triggered.connect(self.showChargt)
 
-
     def showChoix(self):
         choix = ChoixClasse()
         choix.show()
         choix.exec_()
 
-
-    def showChargt (self):
+    def showChargt(self):
         # Affichage de l'interface de chargement des fichiers
         chargement = ChargementFichiers()
         chargement.show()
         chargement.exec_()
 
         # Test pour vérifier le bon chargement des fichiers
-        if (
+        if(
             chargement.cheminClasse.path != ''
             and
             chargement.cheminOrtho.path != ''
@@ -171,36 +169,46 @@ class ClassificationActive (QMainWindow,Ui_InterfacePrincipale):
             chargement.cheminResult.path != ''
         ):
             # Affichage de l'état du traitement
-            self.etatLabel.setText("Fichiers chargés. Le programme peut être lancé.")
+            self.etatLabel.setText(
+                "Fichiers chargés. Le programme peut être lancé."
+            )
 
             # Lecture du fichier csv des classes et remplissage du dictionnaire
-            with open(chargement.cheminClasse.path, newline='') as classes_file:
-                reader = csv.DictReader(classes_file, fieldnames=['Nom','Description'])
-                for row in reader :
-                    self.classes[row['Nom']]= row['Description']
-            #print(self.classes)
+            with open(chargement.cheminClasse.path, newline='') as cls_file:
+                reader = csv.DictReader(
+                    cls_file, fieldnames=['Nom', 'Description']
+                )
+                for row in reader:
+                    self.classes[row['Nom']] = row['Description']
 
             # Lecture des résultats de la classification
             with open(chargement.cheminResult.path, newline='') as resuts_file:
-                reader = csv.DictReader(resuts_file, fieldnames=['ID','Classe','Proba'])
-                for row in reader :
-                    self.results.append((row['ID'], row['Classe'], row['Proba']))
-            #print(self.results)
+                reader = csv.DictReader(
+                    resuts_file,
+                    fieldnames=['ID', 'Classe', 'Proba']
+                )
+                for row in reader:
+                    self.results.append(
+                        (row['ID'], row['Classe'], row['Proba'])
+                    )
 
             # Sélection des entités à transformer en objet batiment
             self.selected_results = strategy.Random(3).filtre(self.results)
             print(self.selected_results)
 
             # liste des Batiments
-            buildings = [
-                building.read_building(
-                    chargement.cheminEmprise.path,
-                    building_id,
-                    classe,
-                    prob
-                )
-                for building_id, classe, prob in self.selected_results
-            ]
+            a = (
+                [
+                    building.read_building(
+                        chargement.cheminEmprise.path,
+                        building_id,
+                        classe,
+                        prob
+                    )
+                    for building_id, classe, prob in self.selected_results
+                ],
+                background.read_background(chargement.cheminOrtho.path)
+            )
 
 
 def showMainWindow():
@@ -210,6 +218,7 @@ def showMainWindow():
     classification = ClassificationActive()
     classification.show()
     app.exec_()
+
 
 """ Programme principal - Lancement de la fenêtre de classification"""
 showMainWindow()
