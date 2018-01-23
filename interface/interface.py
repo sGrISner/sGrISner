@@ -160,7 +160,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         """Fonction permettant l'affichage graphique des emprises et du fond de plan"""
 
         # Affichage de l'othoimage rognées
-        im = background.crop(building[0].get_bounding_box(),(10, 10))
+        im = background.crop(building.get_bounding_box(),(10, 10))
         scene = QGraphicsScene(self)
         scene.addPixmap(QPixmap.fromImage(qimage2ndarray.array2qimage(im)))
         self.entiteView.setScene(scene)
@@ -169,13 +169,18 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
 
         # Affichage du texte
 
-        # If self.noButton cliqué
-            # Affichage fenêtre ChoixClasse
-            # Enregistrement de la nouvelle classe + prob = 1
 
-        # If self.yeSButton cliqué
-            # Enregistrement classe actuelle + prob = 1
 
+    def validate(self, event, building):
+        # Valide ou change label
+            # If self.noButton cliqué
+                # Affichage fenêtre ChoixClasse
+                # Enregistrement de la nouvelle classe + prob = 1
+
+            # If self.yeSButton cliqué
+                # Enregistrement classe actuelle + prob = 1
+        # stock label dans building
+        self.output_buildings.append(building)
 
     def showChargt(self):
         # Affichage de l'interface de chargement des fichiers
@@ -222,20 +227,21 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             print(self.selected_results)
 
             # showData(Liste des Batiments + ortho)
-            a=(
-                [
-                    building.read_building(
-                        chargement.cheminEmprise.path,
-                        building_id,
-                        classe,
-                        prob
-                    )
-                    for building_id, classe, prob in self.selected_results
-                ],
-                background.read_background(chargement.cheminOrtho.path)
-            )
+            self.input_buildings = [
+                building.read_building(
+                    chargement.cheminEmprise.path,
+                    building_id,
+                    classe,
+                    prob
+                )
+                for building_id, classe, prob in self.selected_results
+            ]
+            self.background = background.read_background(chargement.cheminOrtho.path)
 
-            self.showData(a[0],a[1])
+            while not self.input_buildings.empty():
+                building = self.input_buildings.pop()
+                self.showData(building, self.background)
+                self.validate(eventiqucui, building)
 
 
 def showMainWindow():
