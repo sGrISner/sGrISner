@@ -3,17 +3,18 @@
 
 """FICHIER DE """
 
-import gdal, gdalconst
+import gdal
+import gdalconst
+
 import math
 import numpy as np
 
 
 class Background:
     def __init__(self, reference_point, pixel_sizes, image):
-        self.reference_point=reference_point
-        self.pixel_sizes=pixel_sizes
+        self.reference_point = reference_point
+        self.pixel_sizes = pixel_sizes
         self.image = image
-
 
     def crop(self, bbox, margins):
         (i_min, j_min), (i_max, j_max) = [
@@ -30,5 +31,10 @@ class Background:
 
 
 def read_background(filename):
-
-    return Background()
+    dataset = gdal.Open(filename, gdalconst.GA_ReadOnly)
+    Ox, px, _, Oy, _, py = dataset.GetGeoTransform()
+    return Background(
+        (Ox, Oy),
+        (px, -py),
+        dataset.GetRasterBand(1).ReadAsArray()
+    )

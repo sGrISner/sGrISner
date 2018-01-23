@@ -28,16 +28,17 @@ class Building:
         self.probability = probability
 
     def get_bounding_box(self):
-        X,Y = zip(
+        X, Y = zip(
             *self.get_points()
         )
-        return((min(X), min(Y)), (max(X), max(Y)))
+        return [(min(X), min(Y)), (max(X), max(Y))]
 
     def get_points(self):
-        pts=[]
+        pts = []
         for polygon in self.geometry:
             pts += [point for point in polygon]
         return pts
+
 
 def read_building(directory, building_id, classe, probability):
     return Building(
