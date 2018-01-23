@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
-"""FICHIER DE """
+"""FICHIER DE TRAITEMENT DES IMAGES EN ARRIERE PLAN"""
 
 import gdal
 import gdalconst
@@ -24,10 +24,19 @@ class Background:
             )
             for x, y in bbox
         ]
-        return self.image[
-            math.floor(i_min) - margins[0]: math.ceil(i_max) + margins[0],
-            math.floor(j_min) - margins[1]: math.ceil(j_max) + margins[1]
-        ]
+        return np.swapaxes(
+            np.array(
+                [
+                    band[
+                        math.floor(i_min) - margins[0]:math.ceil(i_max) + margins[0],
+                        math.floor(j_min) - margins[1]:math.ceil(j_max) + margins[1]
+                    ]
+                    for band in self.image
+                ]
+            ),
+            0,
+            2
+        )
 
 
 def read_background(filename):
@@ -36,5 +45,5 @@ def read_background(filename):
     return Background(
         (Ox, Oy),
         (px, -py),
-        dataset.GetRasterBand(1).ReadAsArray()
+        [dataset.GetRasterBand(band).ReadAsArray() for band in range(1, dataset.RasterCount + 1)]
     )
