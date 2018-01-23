@@ -1,11 +1,13 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
+"""FICHIER DE DEFINITION DE LA CLASSE BATIMENT"""
+
+
 import os
 
-from osgeo import ogr
+import shapefile
 
-""" - FICHIER DE DEFINITION DE LA CLASSE BATIMENT - """
 
 class Building:
     """
@@ -29,15 +31,14 @@ class Building:
 def read_building(directory, building_id, classe, probability):
     return Building(
         building_id,
-        get_geometry(os.path(directory, str(building_id) + '.gml'), 'GML'),
+        get_geometry(os.path.join(directory, str(building_id) + '.shp')),
         classe,
         probability
     )
 
 
-def get_geometry(building_path, driver_name):
-    source = ogr.GetDriverByName(driver_name).Open(building_path, 0)
-    if source is None:
-        raise IOError('Could not open ' + building_path)
-    else:
-        return [feature.GetGeometryRef() for feature in source.GetLayer()]
+def get_geometry(building_path):
+    return [
+        polygon.points
+        for polygon in shapefile.Reader(building_path).shapes()
+    ]
