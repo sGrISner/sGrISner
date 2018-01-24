@@ -17,30 +17,29 @@ class Background:
         self.image = image
 
     def crop(self, bbox, margins):
-        print(bbox)
-        (i_min, j_min), (i_max, j_max) = [
+        (i_max, j_min), (i_min, j_max) = [
             (
-                (x - self.reference_point[0])/(self.pixel_sizes[0]),
-                (y - self.reference_point[1])/(-self.pixel_sizes[1])
+                (y - self.reference_point[1])/self.pixel_sizes[1],
+                (x - self.reference_point[0])/self.pixel_sizes[0]
             )
             for x, y in bbox
         ]
-
-        print(self.reference_point[0],self.reference_point[1])
-        print(i_min, j_min, i_max, j_max)
-        print(math.ceil(i_max),math.ceil(j_max))
-        return np.swapaxes(
-            np.array(
-                [
-                    band[
-                        math.floor(j_max) - margins[0]:math.ceil(j_min) + margins[0],
-                        math.floor(i_min) - margins[1]:math.ceil(i_max) + margins[1]
+        print(i_min, i_max, j_min, j_max)
+        return np.transpose(
+            np.swapaxes(
+                np.array(
+                    [
+                        band[
+                            math.floor(i_min) - margins[1]:math.ceil(i_max) + margins[1],
+                            math.floor(j_min) - margins[0]:math.ceil(j_max) + margins[0]
+                        ]
+                        for band in self.image
                     ]
-                    for band in self.image
-                ]
+                ),
+                0,
+                2
             ),
-            0,
-            2
+            (1, 0, 2)
         )
 
 
@@ -49,6 +48,9 @@ def read_background(filename):
     Ox, px, _, Oy, _, py = dataset.GetGeoTransform()
     return Background(
         (Ox, Oy),
-        (px, -py),
-        [dataset.GetRasterBand(band).ReadAsArray() for band in range(1, dataset.RasterCount + 1)]
+        (px, py),
+        [
+            dataset.GetRasterBand(band).ReadAsArray()
+            for band in range(1, dataset.RasterCount + 1)
+        ]
     )
