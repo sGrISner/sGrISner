@@ -22,14 +22,16 @@ import background
 
 import qimage2ndarray
 
+import matplotlib.pyplot as plt
+
 
 class File:
 
     """ --- ENREGISTREMENT CHEMIN ACCES ---
 
-    ATTRIBUTS :
+    ATTRIBUTS:
     ===========
-        -path : chemin d'accès
+        -path: chemin d'accès
     """
 
     def __init__(self, path):
@@ -40,22 +42,22 @@ class ChargementFichiers(QDialog, Ui_ChargerFichier):
 
     """--- INTERFACE DE CHARGEMENT FICHIERS ---
 
-    HERITAGE : Boite de dialogue "ChargerFichier"
+    HERITAGE: Boite de dialogue "ChargerFichier"
     ==========
 
-    ATTRIBUTS :
+    ATTRIBUTS:
     ===========
-        - cheminClasse : chemin d'accès au fichier .CSV contenant les classes
-        - cheminResult : chemin d'accès au fichier .CSV contenant les résultats
-        - cheminOrtho : chemin d'accès au fichiet .GEOTIFF contenant l'orthoimage
-        - cheminEmprise : chemin d'accès au dossier contenant les géométries des emprises
+        - cheminClasse: chemin d'accès au fichier .CSV contenant les classes
+        - cheminResult: chemin d'accès au fichier .CSV contenant les résultats
+        - cheminOrtho: chemin d'accès au fichiet .GEOTIFF contenant l'orthoimage
+        - cheminEmprise: chemin d'accès au dossier contenant les géométries des emprises
 
-    METHODES :
+    METHODES:
     ==========
-        - selectCheminClasse : demande et affiche le chemin de la classe
-        - selectCheminResultat : demande et affiche le chemin du fichier de résultats
-        - selectCheminOrtho : demande et affiche le chemin de l'orthoimage
-        - selectDossierEmprises : demande et affiche le chemin du dossier des emprises
+        - selectCheminClasse: demande et affiche le chemin de la classe
+        - selectCheminResultat: demande et affiche le chemin du fichier de résultats
+        - selectCheminOrtho: demande et affiche le chemin de l'orthoimage
+        - selectDossierEmprises: demande et affiche le chemin du dossier des emprises
     """
 
     def __init__(self):
@@ -104,13 +106,13 @@ class ChoixClasse(QDialog, Ui_ChoixClasse):
 
     """--- INTERFACE DE SELECTION DES CLASSES ---
 
-    HERITAGE : Boite de dialogue "ChoixClasse"
+    HERITAGE: Boite de dialogue "ChoixClasse"
     ==========
 
-    ATTRIBUTS :
+    ATTRIBUTS:
     ===========
 
-    METHODES :
+    METHODES:
     ==========
     """
 
@@ -123,19 +125,19 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
 
     """--- INTERFACE PRINCIPALE ---
 
-    HERITAGE : Boite de dialogue "InterfacePrincipale"
+    HERITAGE: Boite de dialogue "InterfacePrincipale"
     ==========
 
-    ATTRIBUTS :
+    ATTRIBUTS:
     ===========
-        - classe : dictionnaire contenant les id des classes(clef) et leur description(valeurs)
-        - results : liste de tuples(id, classe, probabilié) contenant l'ensemble des résultats de classification
-        - buildings : liste d'objets Building après processus de sélection des données
+        - classe: dictionnaire contenant les id des classes(clef) et leur description(valeurs)
+        - results: liste de tuples(id, classe, probabilié) contenant l'ensemble des résultats de classification
+        - buildings: liste d'objets Building après processus de sélection des données
 
-    METHODES :
+    METHODES:
     ==========
-        - showChoix : affichage de la fenêtre de choix des classes
-        - showChargt : permet de récupérer les chemins des fichiers à utiliser
+        - showChoix: affichage de la fenêtre de choix des classes
+        - showChargt: permet de récupérer les chemins des fichiers à utiliser
     """
 
     def __init__(self):
@@ -156,28 +158,33 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         choix.show()
         choix.exec_()
 
-    def showData(self,building,background):
+    def showData(self, building, background):
 
         """Fonction permettant l'affichage graphique des emprises et du fond de plan"""
 
         # Affichage de l'othoimage rognées
-        im = background.crop(building.get_bounding_box(),(500, 500))
+        im = background.crop(building.get_bounding_box(), (0, 0))
+        print(im.shape)
         scene = QGraphicsScene(self)
         scene.addPixmap(QPixmap.fromImage(qimage2ndarray.array2qimage(im)))
         self.entiteView.setScene(scene)
 
         # Affichage de la géométrie
-        for polygon in building.geometry :
+        for polygon in building.geometry:
             poly = QPolygonF()
-            for sommet in polygon :
-                poly.append(QPointF((sommet[0] - background.reference_point[0]) / background.pixel_sizes[0],
-                                    (sommet[1] - background.reference_point[1]) / -background.pixel_sizes[1]))
+            for sommet in polygon:
+                poly.append(
+                    QPointF(
+                        (sommet[0] - background.reference_point[0]) / background.pixel_sizes[0],
+                        (sommet[1] - background.reference_point[1]) / background.pixel_sizes[1]
+                    )
+                )
             scene.addPolygon(poly)
 
         # Affichage du texte
-        self.idLabel.setText("Identitifiant : " + building.identity)
-        self.classeLabel.setText("Classe : " + building.classe)
-        self.probaLabel.setText("Probabilité : " + building.probability)
+        self.idLabel.setText("Identitifiant: " + building.identity)
+        self.classeLabel.setText("Classe: " + building.classe)
+        self.probaLabel.setText("Probabilité: " + building.probability)
 
         # Bornes d'affichage
 
