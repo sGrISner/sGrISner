@@ -16,21 +16,24 @@ class Background:
         self.pixel_sizes = pixel_sizes
         self.image = image
 
-    def crop(self, bbox, margins):
-        (i_max, j_min), (i_min, j_max) = [
+    def get_crop_points(self, bbox):
+        return [
             (
                 (y - self.reference_point[1])/self.pixel_sizes[1],
                 (x - self.reference_point[0])/self.pixel_sizes[0]
             )
             for x, y in bbox
         ]
+
+    def crop(self, bbox, margins):
+        (i_max, j_min), (i_min, j_max) = get_crop_points(self, bbox)
         return np.transpose(
             np.swapaxes(
                 np.array(
                     [
                         band[
-                            math.floor(i_min) - margins[1]:math.ceil(i_max) + margins[1],
-                            math.floor(j_min) - margins[0]:math.ceil(j_max) + margins[0]
+                            max(math.floor(i_min) - margins[1], 0):min(math.ceil(i_max) + margins[1], band.shape[0]),
+                            max(math.floor(j_min) - margins[0], 0):min(math.ceil(j_max) + margins[0], band.shape[1])
                         ]
                         for band in self.image
                     ]

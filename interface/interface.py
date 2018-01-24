@@ -161,13 +161,20 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
     def showData(self, building, background):
 
         """Fonction permettant l'affichage graphique des emprises et du fond de plan"""
+        scene = QGraphicsScene(self)
+        self.entiteView.setScene(scene)
 
         # Affichage de l'othoimage rognées
-        im = background.crop(building.get_bounding_box(), (0, 0))
-        print(im.shape)
-        scene = QGraphicsScene(self)
-        scene.addPixmap(QPixmap.fromImage(qimage2ndarray.array2qimage(im)))
-        self.entiteView.setScene(scene)
+        margins = (50, 50)
+        item = scene.addPixmap(
+            QPixmap.fromImage(
+                qimage2ndarray.array2qimage(
+                    background.crop(building.get_bounding_box(), margins)
+                )
+            )
+        )
+        # to translate in case: i_min<0 or i_max>5000
+        item.setPos(0, 0)
 
         # Affichage de la géométrie
         for polygon in building.geometry:
@@ -175,8 +182,8 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             for sommet in polygon:
                 poly.append(
                     QPointF(
-                        (building.get_bounding_box()[0][0] - sommet[0]) / background.pixel_sizes[1],
-                        (building.get_bounding_box()[1][1] - sommet[1]) / background.pixel_sizes[0]
+                        (building.get_bounding_box()[0][0] - sommet[0]) / background.pixel_sizes[1] + margins[0] ,
+                        (building.get_bounding_box()[1][1] - sommet[1]) / background.pixel_sizes[0] + margins[1]
                     )
                 )
             scene.addPolygon(poly)
