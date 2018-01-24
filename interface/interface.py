@@ -9,7 +9,8 @@ import numpy as np
 import csv
 
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDialog, QGraphicsScene
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QPolygonF
+from PyQt5.QtCore import QPointF
 
 from classificationActive import *
 from choixClasse import *
@@ -160,14 +161,25 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         """Fonction permettant l'affichage graphique des emprises et du fond de plan"""
 
         # Affichage de l'othoimage rognées
-        im = background.crop(building.get_bounding_box(),(10, 10))
+        im = background.crop(building.get_bounding_box(),(500, 500))
         scene = QGraphicsScene(self)
         scene.addPixmap(QPixmap.fromImage(qimage2ndarray.array2qimage(im)))
         self.entiteView.setScene(scene)
 
         # Affichage de la géométrie
+        for polygon in building.geometry :
+            poly = QPolygonF()
+            for sommet in polygon :
+                poly.append(QPointF((sommet[0] - background.reference_point[0]) / background.pixel_sizes[0],
+                                    (sommet[1] - background.reference_point[1]) / -background.pixel_sizes[1]))
+            scene.addPolygon(poly)
 
         # Affichage du texte
+        self.idLabel.setText("Identitifiant : " + building.identity)
+        self.classeLabel.setText("Classe : " + building.classe)
+        self.probaLabel.setText("Probabilité : " + building.probability)
+
+        # Bornes d'affichage
 
 
 
@@ -198,10 +210,6 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             and
             chargement.cheminResult.path != ''
         ):
-            # Affichage de l'état du traitement
-            self.etatLabel.setText(
-                "Fichiers chargés. Le programme peut être lancé."
-            )
 
             # Lecture du fichier csv des classes et remplissage du dictionnaire
             with open(chargement.cheminClasse.path, newline='') as cls_file:
@@ -238,10 +246,10 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             ]
             self.background = background.read_background(chargement.cheminOrtho.path)
 
-            while not self.input_buildings.empty():
-                building = self.input_buildings.pop()
-                self.showData(building, self.background)
-                self.validate(eventiqucui, building)
+            #while self.input_buildings:
+            build = self.input_buildings.pop()
+            self.showData(build, self.background)
+                #self.validate(eventiqucui, building)
 
 
 def showMainWindow():
