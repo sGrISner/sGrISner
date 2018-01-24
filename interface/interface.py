@@ -175,8 +175,8 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             for sommet in polygon:
                 poly.append(
                     QPointF(
-                        (sommet[0] - background.reference_point[0]) / background.pixel_sizes[0],
-                        (sommet[1] - background.reference_point[1]) / background.pixel_sizes[1]
+                        (building.get_bounding_box()[0][0] - sommet[0]) / background.pixel_sizes[1],
+                        (building.get_bounding_box()[1][1] - sommet[1]) / background.pixel_sizes[0]
                     )
                 )
             scene.addPolygon(poly)

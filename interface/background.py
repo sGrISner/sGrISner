@@ -24,7 +24,6 @@ class Background:
             )
             for x, y in bbox
         ]
-        print(i_min, i_max, j_min, j_max)
         return np.transpose(
             np.swapaxes(
                 np.array(
