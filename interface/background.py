@@ -26,7 +26,7 @@ class Background:
         ]
 
     def crop(self, bbox, margins):
-        (i_max, j_min), (i_min, j_max) = get_crop_points(self, bbox)
+        (i_max, j_min), (i_min, j_max) = self. get_crop_points(bbox)
         return np.transpose(
             np.swapaxes(
                 np.array(
