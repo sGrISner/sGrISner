@@ -26,7 +26,6 @@ import matplotlib.pyplot as plt
 
 
 class File:
-
     """ --- ENREGISTREMENT CHEMIN ACCES ---
 
     ATTRIBUTS:
@@ -39,7 +38,6 @@ class File:
 
 
 class ChargementFichiers(QDialog, Ui_ChargerFichier):
-
     """--- INTERFACE DE CHARGEMENT FICHIERS ---
 
     HERITAGE: Boite de dialogue "ChargerFichier"
@@ -61,7 +59,6 @@ class ChargementFichiers(QDialog, Ui_ChargerFichier):
     """
 
     def __init__(self):
-
         super().__init__()
         self.setupUi(self)
 
@@ -103,7 +100,6 @@ class ChargementFichiers(QDialog, Ui_ChargerFichier):
 
 
 class ChoixClasse(QDialog, Ui_ChoixClasse):
-
     """--- INTERFACE DE SELECTION DES CLASSES ---
 
     HERITAGE: Boite de dialogue "ChoixClasse"
@@ -128,7 +124,6 @@ class ChoixClasse(QDialog, Ui_ChoixClasse):
         self.newClass3.setText(values[2])
 
     def btnCheck(self):
-
         if self.newClass1.isChecked() == True :
             return(self.newClass1.text())
         elif self.newClass2.isChecked() == True :
@@ -139,7 +134,6 @@ class ChoixClasse(QDialog, Ui_ChoixClasse):
             return('')
 
 class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
-
     """--- INTERFACE PRINCIPALE ---
 
     HERITAGE: Boite de dialogue "InterfacePrincipale"
@@ -171,7 +165,6 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         self.chargerAction.triggered.connect(self.showChargt)
 
     def showChoix(self):
-
         # Affiche la fenêtre de sélection de la nouvelle classe
         choix = ChoixClasse()
         # Sélectionne les noms de classes à afficher
@@ -183,7 +176,6 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         self.newClasse = choix.btnCheck()
 
     def showData(self):
-
         """Fonction permettant l'affichage graphique des emprises et du fond de plan"""
         scene = QGraphicsScene(self)
         self.entiteView.setScene(scene)
@@ -252,7 +244,6 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             and
             chargement.cheminResult.path != ''
         ):
-
             # Lecture du fichier csv des classes et remplissage du dictionnaire
             with open(chargement.cheminClasse.path, newline='') as cls_file:
                 reader = csv.DictReader(
@@ -288,7 +279,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             ]
             self.background = background.read_background(chargement.cheminOrtho.path)
 
-            while self.input_buildings:
+            while not self.yesButton.clicked and not self.noButton.clicked:
                 self.current = self.input_buildings.pop()
                 print(self.current.identity)
                 self.showData()
