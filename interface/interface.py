@@ -120,6 +120,26 @@ class ChoixClasse(QDialog, Ui_ChoixClasse):
         super().__init__()
         self.setupUi(self)
 
+    def checkComplete(self,building,classes):
+
+        classesToShow = classes
+        del classesToShow[str(building.classe).strip()]
+        values = [cle for cle in classesToShow.keys()]
+
+        self.newClass1.setText(values[0])
+        self.newClass2.setText(values[1])
+        self.newClass3.setText(values[2])
+
+    def btnCheck(self):
+
+        if self.newClass1.isChecked() == True :
+            return(self.newClass1.text())
+        elif self.newClass2.isChecked() == True :
+            return(self.newClass2.text())
+        elif self.newClass3.isChecked() == True :
+            return(self.newClass3.text())
+        else :
+            return('')
 
 class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
 
@@ -148,15 +168,22 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         self.classes = {}
         self.results = []
         self.buildings = []
+        self.output_buildings = []
 
         """"Définition des signaux et connexions"""
-        self.noButton.clicked.connect(self.showChoix)
         self.chargerAction.triggered.connect(self.showChargt)
 
-    def showChoix(self):
+    def showChoix(self, building, classes):
+
+        # Affiche la fenêtre de sélection de la nouvelle classe
         choix = ChoixClasse()
+        # Sélectionne les noms de classes à afficher
+        choix.checkComplete(building, classes)
         choix.show()
         choix.exec_()
+
+        # Stock la novuelle classe sélectionnée par l'utilisateur
+        self.newClasse = choix.btnCheck()
 
     def showData(self, building, background):
 
@@ -194,18 +221,31 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         self.probaLabel.setText("Probabilité: " + building.probability)
 
         # Bornes d'affichage
+        bornes = background.get_crop_points(building.get_bounding_box())
+        self.bornexValueLabel.setText(str(round(bornes[0][0],2)) + ' , ' + str(round(bornes[0][1],2)))
+        self.borneyValueLabel.setText(str(round(bornes[1][0],2)) + ' , ' + str(round(bornes[1][1],2)))
 
+    def validate(self,building,classes):
 
+        sender = self.sender()
+        # Si le bouton cliqué est "no"
+        if sender.text() == self.noButton.text() :
+            # Afficher la fenêtre de choix de la classe
+            self.showChoix(building=building, classes=classes)
+            # Enregistrement de la nouvelle classe + prob = 1
+            building.classe = self.newClasse
+            building.probability = 1
+            # Test d'affichage
+            print(building.classe + str(building.probability) + " NO")
 
-    def validate(self, event, building):
-        # Valide ou change label
-            # If self.noButton cliqué
-                # Affichage fenêtre ChoixClasse
-                # Enregistrement de la nouvelle classe + prob = 1
+        # Si le bouton cliqué est "yes"
+        elif sender.text() == self.yesButton.text():
+            # Enregistrement classe actuelle + prob = 1
+            building.probability = 1
+            # Test d'affichage
+            print(building.classe + str(building.probability) + " YES")
 
-            # If self.yeSButton cliqué
-                # Enregistrement classe actuelle + prob = 1
-        # stock label dans building
+        # On stocke le résultats dans la liste output_buildings
         self.output_buildings.append(building)
 
     def showChargt(self):
@@ -260,10 +300,21 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             ]
             self.background = background.read_background(chargement.cheminOrtho.path)
 
-            #while self.input_buildings:
-            build = self.input_buildings.pop()
-            self.showData(build, self.background)
-                #self.validate(eventiqucui, building)
+            # On parcourt la liste des buildings sélectionnés
+            ### PROBLEME : la boucle tourne mais ne sérrête pas pour exécuter l'affichage et la validation
+            while self.input_buildings:
+                # On enlève de la liste des buildings sélectionnés le dernier élément => stocké dans build
+                build = self.input_buildings.pop()
+                print(build)
+                # On affiche l'élément build dans la fenêtre avec l'orthoimage correspondante
+                self.showData(build, self.background)
+
+                if self.noButton.clicked or self.yesButton.clicked :
+                    # On lance la fonction de validation de l'entité (varie selon l'évènement considéré)
+                    self.noButton.clicked.connect(lambda: self.validate(building=build, classes=self.classes))
+                    self.yesButton.clicked.connect(lambda: self.validate(building=build, classes=self.classes))
+
+                print(self.output_buildings)
 
 
 def showMainWindow():
