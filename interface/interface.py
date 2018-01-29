@@ -120,11 +120,8 @@ class ChoixClasse(QDialog, Ui_ChoixClasse):
         super().__init__()
         self.setupUi(self)
 
-    def checkComplete(self,building,classes):
-
-        classesToShow = classes
-        del classesToShow[str(building.classe).strip()]
-        values = [cle for cle in classesToShow.keys()]
+    def checkComplete(self, building, classes):
+        values = [cle for cle in classes.keys() if cle != building.classe]
 
         self.newClass1.setText(values[0])
         self.newClass2.setText(values[1])
