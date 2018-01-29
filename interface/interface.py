@@ -170,19 +170,19 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         """"Définition des signaux et connexions"""
         self.chargerAction.triggered.connect(self.showChargt)
 
-    def showChoix(self, building, classes):
+    def showChoix(self):
 
         # Affiche la fenêtre de sélection de la nouvelle classe
         choix = ChoixClasse()
         # Sélectionne les noms de classes à afficher
-        choix.checkComplete(building, classes)
+        choix.checkComplete(self.current, self.classes)
         choix.show()
         choix.exec_()
 
         # Stock la novuelle classe sélectionnée par l'utilisateur
         self.newClasse = choix.btnCheck()
 
-    def showData(self, building, background):
+    def showData(self):
 
         """Fonction permettant l'affichage graphique des emprises et du fond de plan"""
         scene = QGraphicsScene(self)
@@ -193,7 +193,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         item = scene.addPixmap(
             QPixmap.fromImage(
                 qimage2ndarray.array2qimage(
-                    background.crop(building.get_bounding_box(), margins)
+                    self.background.crop(self.current.get_bounding_box(), margins)
                 )
             )
         )
@@ -201,49 +201,40 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         item.setPos(0, 0)
 
         # Affichage de la géométrie
-        for polygon in building.geometry:
+        for polygon in self.current.geometry:
             poly = QPolygonF()
             for sommet in polygon:
                 poly.append(
                     QPointF(
-                        (building.get_bounding_box()[0][0] - sommet[0]) / background.pixel_sizes[1] + margins[0] ,
-                        (building.get_bounding_box()[1][1] - sommet[1]) / background.pixel_sizes[0] + margins[1]
+                        (self.current.get_bounding_box()[0][0] - sommet[0]) / self.background.pixel_sizes[1] + margins[0] ,
+                        (self.current.get_bounding_box()[1][1] - sommet[1]) / self.background.pixel_sizes[0] + margins[1]
                     )
                 )
             scene.addPolygon(poly)
 
         # Affichage du texte
-        self.idLabel.setText("Identitifiant: " + building.identity)
-        self.classeLabel.setText("Classe: " + building.classe)
-        self.probaLabel.setText("Probabilité: " + building.probability)
+        self.idLabel.setText("Identitifiant: " + self.current.identity)
+        self.classeLabel.setText("Classe: " + self.current.classe)
+        self.probaLabel.setText("Probabilité: " + self.current.probability)
 
         # Bornes d'affichage
-        bornes = background.get_crop_points(building.get_bounding_box())
+        bornes = self.background.get_crop_points(self.current.get_bounding_box())
         self.bornexValueLabel.setText(str(round(bornes[0][0],2)) + ' , ' + str(round(bornes[0][1],2)))
         self.borneyValueLabel.setText(str(round(bornes[1][0],2)) + ' , ' + str(round(bornes[1][1],2)))
 
-    def validate(self,building,classes):
+    def validate(self):
+        self.current.probability = 1
+        print('yes', self.current.identity, self.current.classe, self.current.probability)
 
-        sender = self.sender()
-        # Si le bouton cliqué est "no"
-        if sender.text() == self.noButton.text() :
-            # Afficher la fenêtre de choix de la classe
-            self.showChoix(building=building, classes=classes)
-            # Enregistrement de la nouvelle classe + prob = 1
-            building.classe = self.newClasse
-            building.probability = 1
-            # Test d'affichage
-            print('no', building.id, building.classe, building.probability)
+        self.output_buildings.append(self.current)
 
-        # Si le bouton cliqué est "yes"
-        elif sender.text() == self.yesButton.text():
-            # Enregistrement classe actuelle + prob = 1
-            building.probability = 1
-            # Test d'affichage
-            print('yes', building.id, building.classe, building.probability)
 
-        # On stocke le résultats dans la liste output_buildings
-        self.output_buildings.append(building)
+    def correct(self):
+        self.showChoix()
+        self.current.classe = self.newClasse
+        self.current.probability = 1
+        print('no', self.current.identity, self.current.classe, self.current.probability)
+        self.output_buildings.append(self.current)
 
     def showChargt(self):
         # Affichage de l'interface de chargement des fichiers
@@ -297,19 +288,14 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             ]
             self.background = background.read_background(chargement.cheminOrtho.path)
 
-            # On parcourt la liste des buildings sélectionnés
-            ### PROBLEME : la boucle tourne mais ne sérrête pas pour exécuter l'affichage et la validation
             while self.input_buildings:
-                # On enlève de la liste des buildings sélectionnés le dernier élément => stocké dans build
-                build = self.input_buildings.pop()
-                print(build.identity)
-                # On affiche l'élément build dans la fenêtre avec l'orthoimage correspondante
-                self.showData(build, self.background)
-
-                if self.noButton.clicked or self.yesButton.clicked :
-                    # On lance la fonction de validation de l'entité (varie selon l'évènement considéré)
-                    self.noButton.clicked.connect(lambda: self.validate(building=build, classes=self.classes))
-                    self.yesButton.clicked.connect(lambda: self.validate(building=build, classes=self.classes))
+                self.current = self.input_buildings.pop()
+                print(self.current.identity)
+                self.showData()
+                if self.yesButton.clicked:
+                    self.yesButton.clicked.connect(self.validate)
+                if self.noButton.clicked:
+                    self.noButton.clicked.connect(self.correct)
 
                 print(self.output_buildings)
 
