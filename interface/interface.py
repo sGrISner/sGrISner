@@ -233,14 +233,14 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             building.classe = self.newClasse
             building.probability = 1
             # Test d'affichage
-            print(building.classe + str(building.probability) + " NO")
+            print('no', building.id, building.classe, building.probability)
 
         # Si le bouton cliqué est "yes"
         elif sender.text() == self.yesButton.text():
             # Enregistrement classe actuelle + prob = 1
             building.probability = 1
             # Test d'affichage
-            print(building.classe + str(building.probability) + " YES")
+            print('yes', building.id, building.classe, building.probability)
 
         # On stocke le résultats dans la liste output_buildings
         self.output_buildings.append(building)
@@ -302,7 +302,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             while self.input_buildings:
                 # On enlève de la liste des buildings sélectionnés le dernier élément => stocké dans build
                 build = self.input_buildings.pop()
-                print(build)
+                print(build.identity)
                 # On affiche l'élément build dans la fenêtre avec l'orthoimage correspondante
                 self.showData(build, self.background)
 
