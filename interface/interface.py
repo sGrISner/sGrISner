@@ -22,87 +22,94 @@ import background
 
 import qimage2ndarray
 
-import matplotlib.pyplot as plt
 
-
-class File:
-    """ --- ENREGISTREMENT CHEMIN ACCES ---
-
-    ATTRIBUTS:
-    ===========
-        -path: chemin d'accès
+class LoaderWindow(QDialog, Ui_ChargerFichier):
     """
-
-    def __init__(self, path):
-        self.path = path
-
-
-class ChargementFichiers(QDialog, Ui_ChargerFichier):
-    """--- INTERFACE DE CHARGEMENT FICHIERS ---
+    INTERFACE DE CHARGEMENT FICHIERS
 
     HERITAGE: Boite de dialogue "ChargerFichier"
     ==========
 
     ATTRIBUTS:
     ===========
-        - cheminClasse: chemin d'accès au fichier .CSV contenant les classes
-        - cheminResult: chemin d'accès au fichier .CSV contenant les résultats
-        - cheminOrtho: chemin d'accès au fichiet .GEOTIFF contenant l'orthoimage
-        - cheminEmprise: chemin d'accès au dossier contenant les géométries des emprises
+        - classe: chemin du fichier .CSV contenant les classes.
+        - cheminResult: chemin du fichier .CSV contenant les résultats.
+        - orthoimage_path: chemin de l'orthoimage.
+        - footprint_path: chemin du dossier contenant les géométries.
 
     METHODES:
     ==========
-        - selectCheminClasse: demande et affiche le chemin de la classe
-        - selectCheminResultat: demande et affiche le chemin du fichier de résultats
-        - selectCheminOrtho: demande et affiche le chemin de l'orthoimage
-        - selectDossierEmprises: demande et affiche le chemin du dossier des emprises
+        - select_classes: demande le chemin de la classe
+        - select_results: demande le chemin du fichier de résultats
+        - select_background: demande le chemin de l'orthoimage
+        - select_buildings_dir: demande le chemin du dossier des emprises
     """
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
 
-        """Définition des objets permettant de récupérer les adresses des fichiers"""
-        self.cheminClasse = File('')
-        self.cheminResult = File('')
-        self.cheminOrtho = File('')
-        self.cheminEmprise = File('')
+        """Adresses des fichiers"""
+        self.classes_path = ''
+        self.results_path = ''
+        self.orthoimage_path = ''
+        self.footprint_path = ''
 
-        """Définition des connexions pour charger les fichiers"""
-        self.chargerClasseButton.clicked.connect(self.selectCheminClasse)
-        self.chargerResultButton.clicked.connect(self.selectCheminResultat)
-        self.chargerOrthoButton.clicked.connect(self.selectCheminOrtho)
-        self.chargerEmpriseButton.clicked.connect(self.selectDossierEmprises)
+        """Connexions pour charger les fichiers"""
+        self.chargerClasseButton.clicked.connect(self.select_classes)
+        self.chargerResultButton.clicked.connect(self.select_results)
+        self.chargerOrthoButton.clicked.connect(self.select_background)
+        self.chargerEmpriseButton.clicked.connect(self.select_buildings_dir)
 
-    def selectCheminClasse(self):
-        classeChem, test = QFileDialog.getOpenFileName(self,"Sélection du fichier des classes", "","Fichier CSV(*.csv)", options=QFileDialog.Options())
-        if classeChem:
-            self.chemClasseLabel.setText(classeChem)    # Affiche le chemin du fichier de classes
-            self.cheminClasse.path=classeChem           # Enregistre le chemin du fichier de classes
+    def select_classes(self):
+        self.classes_path, test = QFileDialog.getOpenFileName(
+            self,
+            "Sélection du fichier des classes",
+            "",
+            "Fichier CSV(*.csv)",
+            options=QFileDialog.Options()
+        )
+        if self.classes_path:
+            self.chemClasseLabel.setText(self.classes_path)
 
-    def selectCheminResultat(self):
-        resultChem, test = QFileDialog.getOpenFileName(self,"Sélection des résultats de la classification", "","Fichiers CSV(*.csv)", options=QFileDialog.Options())
-        if resultChem:
-            self.cheminResultLabel.setText(resultChem)  # Affiche le chemin du fichier de résutlats
-            self.cheminResult.path=resultChem           # Enregistre le chemin du fichier de résultats
+    def select_results(self):
+        self.results_path, test = QFileDialog.getOpenFileName(
+            self,
+            "Sélection des résultats de la classification",
+            "",
+            "Fichiers CSV(*.csv)",
+            options=QFileDialog.Options()
+        )
+        if self.results_path:
+            self.cheminResultLabel.setText(self.results_path)
 
-    def selectCheminOrtho(self):
-        orthoChem, test = QFileDialog.getOpenFileName(self,"Sélection de l'orthoimage", "","Fichiers GEOTIFF(*.geotiff)", options=QFileDialog.Options())
-        if orthoChem:
-            self.cheminOrthoLabel.setText(orthoChem)    # Affiche le chemin de l'orthophoto
-            self.cheminOrtho.path=orthoChem             # Enregistre le chemin de l'orthophoto
+    def select_background(self):
+        self.orthoimage_path, test = QFileDialog.getOpenFileName(
+            self,
+            "Sélection de l'orthoimage",
+            "",
+            "Fichiers GEOTIFF(*.geotiff)",
+            options=QFileDialog.Options()
+        )
+        if self.orthoimage_path:
+            self.cheminOrthoLabel.setText(self.orthoimage_path)
 
-    def selectDossierEmprises(self):
-        empriseChem = QFileDialog.getExistingDirectory(self,"Sélection du dossier contenant les emprises", "", options=QFileDialog.Options())
-        if empriseChem:
-            self.cheminEmpriseLabel.setText(empriseChem)    # Affiche le chemin du dossier emprise
-            self.cheminEmprise.path=empriseChem             # Enregistre le chemin du dossier emprise
+    def select_buildings_dir(self):
+        self.footprint_path = QFileDialog.getExistingDirectory(
+            self,
+            "Sélection du dossier contenant les emprises",
+            "",
+            options=QFileDialog.Options()
+        )
+        if self.footprint_path:
+            self.cheminEmpriseLabel.setText(self.footprint_path)
 
 
-class ChoixClasse(QDialog, Ui_ChoixClasse):
-    """--- INTERFACE DE SELECTION DES CLASSES ---
+class CorrectionWindow(QDialog, Ui_ChoixClasse):
+    """
+    INTERFACE DE SELECTION DES CLASSES
 
-    HERITAGE: Boite de dialogue "ChoixClasse"
+    HERITAGE: Boite de dialogue "CorrectionWindow"
     ==========
 
     ATTRIBUTS:
@@ -116,69 +123,71 @@ class ChoixClasse(QDialog, Ui_ChoixClasse):
         super().__init__()
         self.setupUi(self)
 
-    def checkComplete(self, building, classes):
+    def check(self, building, classes):
         values = [cle for cle in classes.keys() if cle != building.classe]
 
         self.newClass1.setText(values[0])
         self.newClass2.setText(values[1])
         self.newClass3.setText(values[2])
 
-    def btnCheck(self):
-        if self.newClass1.isChecked() == True :
-            return(self.newClass1.text())
-        elif self.newClass2.isChecked() == True :
-            return(self.newClass2.text())
-        elif self.newClass3.isChecked() == True :
-            return(self.newClass3.text())
-        else :
-            return('')
+    def new_choice(self):
+        if self.newClass1.isChecked():
+            return self.newClass1.text()
+        elif self.newClass2.isChecked():
+            return self.newClass2.text()
+        elif self.newClass3.isChecked():
+            return self.newClass3.text()
+        else:
+            return ''
+
 
 class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
-    """--- INTERFACE PRINCIPALE ---
+    """
+    INTERFACE PRINCIPALE
 
     HERITAGE: Boite de dialogue "InterfacePrincipale"
     ==========
 
     ATTRIBUTS:
     ===========
-        - classe: dictionnaire contenant les id des classes(clef) et leur description(valeurs)
-        - results: liste de tuples(id, classe, probabilié) contenant l'ensemble des résultats de classification
-        - buildings: liste d'objets Building après processus de sélection des données
+        - classe: dictionnary of classes and the corresponding descriptions.
+        - results: liste of 4-tuples representing classification results.
+        - buildings: Building list after selection.
 
     METHODES:
     ==========
-        - showChoix: affichage de la fenêtre de choix des classes
-        - showChargt: permet de récupérer les chemins des fichiers à utiliser
+        - show_correction_window: show correction window.
+        - show_loading_window: show loader window.
     """
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
 
-        """Initialisation des variables"""
         self.classes = {}
         self.results = []
         self.buildings = []
         self.output_buildings = []
 
-        """"Définition des signaux et connexions"""
-        self.chargerAction.triggered.connect(self.showChargt)
+        self.new_label = None
+
+        self.chargerAction.triggered.connect(self.show_loading_window)
         self.yesButton.clicked.connect(self.validate)
         self.noButton.clicked.connect(self.correct)
 
-    def showChoix(self):
-        # Affiche la fenêtre de sélection de la nouvelle classe
-        choix = ChoixClasse()
-        # Sélectionne les noms de classes à next
-        choix.checkComplete(self.current, self.classes)
+    def show_correction_window(self):
+        choix = CorrectionWindow()
+        choix.check(self.current, self.classes)
         choix.show()
         choix.exec_()
 
         # Stock la novuelle classe sélectionnée par l'utilisateur
-        self.newClasse = choix.btnCheck()
+        self.new_label = choix.new_choice()
 
-    def showData(self):
-        """Fonction permettant l'affichage graphique des emprises et du fond de plan"""
+    def show_building(self):
+        """
+        Affichage graphique des emprises et du fond de plan.
+        """
         scene = QGraphicsScene(self)
         self.entiteView.setScene(scene)
 
@@ -187,7 +196,10 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         item = scene.addPixmap(
             QPixmap.fromImage(
                 qimage2ndarray.array2qimage(
-                    self.background.crop(self.current.get_bounding_box(), margins)
+                    self.background.crop(
+                        self.current.get_bounding_box(),
+                        margins
+                    )
                 )
             )
         )
@@ -200,7 +212,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             for sommet in polygon:
                 poly.append(
                     QPointF(
-                        (self.current.get_bounding_box()[0][0] - sommet[0]) / self.background.pixel_sizes[1] + margins[0] ,
+                        (self.current.get_bounding_box()[0][0] - sommet[0]) / self.background.pixel_sizes[1] + margins[0],
                         (self.current.get_bounding_box()[1][1] - sommet[1]) / self.background.pixel_sizes[0] + margins[1]
                     )
                 )
@@ -209,23 +221,30 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         # Affichage du texte
         self.idLabel.setText("Identitifiant: " + self.current.identity)
         self.classeLabel.setText("Classe: " + self.current.classe)
-        self.probaLabel.setText("Probabilité: " + str(self.current.probability))
+        self.probaLabel.setText(
+            "Probabilité: " + str(self.current.probability)
+        )
 
         # Bornes d'affichage
-        bornes = self.background.get_crop_points(self.current.get_bounding_box())
-        self.bornexValueLabel.setText(str(round(bornes[0][0],2)) + ' , ' + str(round(bornes[0][1],2)))
-        self.borneyValueLabel.setText(str(round(bornes[1][0],2)) + ' , ' + str(round(bornes[1][1],2)))
+        bornes = self.background.get_crop_points(
+            self.current.get_bounding_box()
+        )
+        self.bornexValueLabel.setText(
+            '{:0.2f}, {:0.2f}'.format(bornes[0][0], bornes[0][1])
+        )
+        self.borneyValueLabel.setText(
+            '{:0.2f}, {:0.2f}'.format(bornes[1][0], bornes[1][1])
+        )
 
     def validate(self):
         self.current.probability = 1
-        print('test n°', self.i, 'yes', self.current.identity, self.current.classe, self.current.probability)
         self.output_buildings.append(self.current)
         self.i += 1
         self.next()
 
     def correct(self):
-        self.showChoix()
-        self.current.classe = self.newClasse
+        self.show_correction_window()
+        self.current.classe = self.new_label
         self.current.probability = 1
         self.output_buildings.append(self.current)
         self.i += 1
@@ -234,7 +253,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
     def next(self):
         if self.i != len(self.input_buildings):
             self.current = self.input_buildings[self.i]
-            self.showData()
+            self.show_building()
         else:
             self.save()
             self.close()
@@ -243,24 +262,22 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         # save self.output_buildings
         print(self.output_buildings)
 
-    def showChargt(self):
-        # Affichage de l'interface de chargement des fichiers
-        chargement = ChargementFichiers()
-        chargement.show()
-        chargement.exec_()
+    def show_loading_window(self):
+        loader = LoaderWindow()
+        loader.show()
+        loader.exec_()
 
-        # Test pour vérifier le bon chargement des fichiers
         if(
-            chargement.cheminClasse.path != ''
+            loader.classes_path != ''
             and
-            chargement.cheminOrtho.path != ''
+            loader.orthoimage_path != ''
             and
-            chargement.cheminEmprise.path != ''
+            loader.footprint_path != ''
             and
-            chargement.cheminResult.path != ''
+            loader.results_path != ''
         ):
             # Lecture du fichier csv des classes et remplissage du dictionnaire
-            with open(chargement.cheminClasse.path, newline='') as cls_file:
+            with open(loader.classes_path, newline='') as cls_file:
                 reader = csv.DictReader(
                     cls_file, fieldnames=['Nom', 'Description']
                 )
@@ -268,7 +285,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                     self.classes[row['Nom']] = row['Description']
 
             # Lecture des résultats de la classification
-            with open(chargement.cheminResult.path, newline='') as resuts_file:
+            with open(loader.results_path, newline='') as resuts_file:
                 reader = csv.DictReader(
                     resuts_file,
                     fieldnames=['ID', 'Classe', 'Proba']
@@ -278,14 +295,11 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                         (row['ID'], row['Classe'], row['Proba'])
                     )
 
-            # Sélection des entités à transformer en objet batiment
-            self.selected_results = strategy.Random(5).filtre(self.results)
-            print(self.selected_results)
+            self.selected_results = strategy.Random(3).filtre(self.results)
 
-            # showData(Liste des Batiments + ortho)
             self.input_buildings = [
                 building.read_building(
-                    chargement.cheminEmprise.path,
+                    loader.footprint_path,
                     building_id,
                     classe,
                     prob
@@ -293,15 +307,14 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                 for building_id, classe, prob in self.selected_results
             ]
             self.background = background.read_background(
-                chargement.cheminOrtho.path
+                loader.orthoimage_path
             )
 
-            # Affichage par réccurence
             self.i = 0
             self.next()
 
 
-def showMainWindow():
+def show_main_window():
     """Affichage de l'interface principale."""
 
     app = QApplication(sys.argv)
@@ -310,5 +323,5 @@ def showMainWindow():
     app.exec_()
 
 
-""" Programme principal - Lancement de la fenêtre de classification"""
-showMainWindow()
+if __name__ == '__main__':
+    show_main_window()
