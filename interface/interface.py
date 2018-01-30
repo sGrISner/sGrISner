@@ -207,26 +207,43 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         # Affichage du texte
         self.idLabel.setText("Identitifiant: " + self.current.identity)
         self.classeLabel.setText("Classe: " + self.current.classe)
-        self.probaLabel.setText("Probabilité: " + self.current.probability)
+        self.probaLabel.setText("Probabilité: " + str(self.current.probability))
 
         # Bornes d'affichage
         bornes = self.background.get_crop_points(self.current.get_bounding_box())
         self.bornexValueLabel.setText(str(round(bornes[0][0],2)) + ' , ' + str(round(bornes[0][1],2)))
         self.borneyValueLabel.setText(str(round(bornes[1][0],2)) + ' , ' + str(round(bornes[1][1],2)))
 
-    def validate(self):
+    def validate(self,i):
         self.current.probability = 1
-        print('yes', self.current.identity, self.current.classe, self.current.probability)
-
+        print('test n°', i, 'yes', self.current.identity, self.current.classe, self.current.probability)
         self.output_buildings.append(self.current)
+        self.i = self.i + 1
+        self.afficher(self.i)
 
-
-    def correct(self):
+    def correct(self,i):
         self.showChoix()
         self.current.classe = self.newClasse
         self.current.probability = 1
-        print('no', self.current.identity, self.current.classe, self.current.probability)
+        print('test n°', i, 'no', self.current.identity, self.current.classe, self.current.probability)
         self.output_buildings.append(self.current)
+        self.i = self.i + 1
+        self.afficher(self.i)
+
+    def afficher(self,i):
+        if i != len(self.input_buildings):
+            self.current = self.input_buildings[self.i]
+            self.showData()
+            if self.yesButton.clicked :
+                self.yesButton.clicked.connect(lambda: self.validate(i=self.i))
+            if self.noButton.clicked:
+                self.noButton.clicked.connect(lambda: self.correct(i=self.i))
+        else:
+            print("Plus d'entités à présenter ...")
+            print(self.output_buildings)
+            return
+
+
 
     def showChargt(self):
         # Affichage de l'interface de chargement des fichiers
@@ -279,17 +296,9 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             ]
             self.background = background.read_background(chargement.cheminOrtho.path)
 
-            while not self.yesButton.clicked and not self.noButton.clicked:
-                self.current = self.input_buildings.pop()
-                print(self.current.identity)
-                self.showData()
-                if self.yesButton.clicked:
-                    self.yesButton.clicked.connect(self.validate)
-                if self.noButton.clicked:
-                    self.noButton.clicked.connect(self.correct)
-
-                print(self.output_buildings)
-
+            # Affichage par réccurence
+            self.i = 0
+            self.afficher(self.i)
 
 def showMainWindow():
     """Affichage de l'interface principale."""
