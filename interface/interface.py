@@ -163,11 +163,13 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
 
         """"Définition des signaux et connexions"""
         self.chargerAction.triggered.connect(self.showChargt)
+        self.yesButton.clicked.connect(self.validate)
+        self.noButton.clicked.connect(self.correct)
 
     def showChoix(self):
         # Affiche la fenêtre de sélection de la nouvelle classe
         choix = ChoixClasse()
-        # Sélectionne les noms de classes à afficher
+        # Sélectionne les noms de classes à next
         choix.checkComplete(self.current, self.classes)
         choix.show()
         choix.exec_()
@@ -219,29 +221,27 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         print('test n°', self.i, 'yes', self.current.identity, self.current.classe, self.current.probability)
         self.output_buildings.append(self.current)
         self.i += 1
-        self.afficher()
+        self.next()
 
     def correct(self):
         self.showChoix()
         self.current.classe = self.newClasse
         self.current.probability = 1
-        print('test n°', self.i, 'no', self.current.identity, self.current.classe, self.current.probability)
         self.output_buildings.append(self.current)
         self.i += 1
-        self.afficher()
+        self.next()
 
-    def afficher(self):
+    def next(self):
         if self.i != len(self.input_buildings):
             self.current = self.input_buildings[self.i]
             self.showData()
-            if self.yesButton.clicked:
-                self.yesButton.clicked.connect(self.validate)
         else:
-            print("Plus d'entités à présenter ...")
-            print(self.output_buildings)
+            self.save()
             self.close()
 
-
+    def save(self):
+        # save self.output_buildings
+        print(self.output_buildings)
 
     def showChargt(self):
         # Affichage de l'interface de chargement des fichiers
@@ -292,11 +292,14 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                 )
                 for building_id, classe, prob in self.selected_results
             ]
-            self.background = background.read_background(chargement.cheminOrtho.path)
+            self.background = background.read_background(
+                chargement.cheminOrtho.path
+            )
 
             # Affichage par réccurence
             self.i = 0
-            self.afficher()
+            self.next()
+
 
 def showMainWindow():
     """Affichage de l'interface principale."""
