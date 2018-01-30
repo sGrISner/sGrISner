@@ -257,8 +257,25 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             self.close()
 
     def save(self):
-        # save self.output_buildings
-        print(self.output_buildings)
+        
+        # Sélection du chemin d'enregistrement
+        self.save_results_path, test = QFileDialog.getSaveFileName(
+            self,
+            "Création du fichier de sauvegarde",
+            "",
+            "Fichiers CSV(*.csv)",
+            options=QFileDialog.Options()
+        )
+
+        # Lecture du fichier csv et remplissage avec output_buildings
+        with open(self.save_results_path, 'w', newline='') as save_file:
+            output_writer = csv.writer(
+                save_file, delimiter=',', quoting=csv.QUOTE_MINIMAL
+            )
+            for build in self.output_buildings:
+                output_writer.writerow(
+                    [build.identity, build.classe, build.probability]
+                )
 
     def show_loading_window(self):
         loader = LoaderWindow()
