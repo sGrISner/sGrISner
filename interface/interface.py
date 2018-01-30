@@ -239,7 +239,6 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
     def validate(self):
         self.current.probability = 1
         self.output_buildings.append(self.current)
-        self.i += 1
         self.next()
 
     def correct(self):
@@ -247,12 +246,11 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         self.current.classe = self.new_label
         self.current.probability = 1
         self.output_buildings.append(self.current)
-        self.i += 1
         self.next()
 
     def next(self):
-        if self.i != len(self.input_buildings):
-            self.current = self.input_buildings[self.i]
+        if self.input_buildings:
+            self.current = self.input_buildings.pop()
             self.show_building()
         else:
             self.save()
@@ -310,7 +308,6 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                 loader.orthoimage_path
             )
 
-            self.i = 0
             self.next()
 
 
