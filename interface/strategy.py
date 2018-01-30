@@ -18,7 +18,7 @@ class Strategy:
 
 class Naive(Strategy):
     """
-    Définition d'une fonction de sélection de toutes les entités présentes
+    Naive selection strategy
     """
     def filtre(self, buildings):
         return buildings
@@ -26,7 +26,7 @@ class Naive(Strategy):
 
 class Random(Strategy):
     """
-    Définition d'une fonction de sélection d'entités aléatoiremenet sélectionnées
+    Random selection strategy
     """
     def __init__(self, selection_number):
         self.selection_number = selection_number
