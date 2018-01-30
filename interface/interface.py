@@ -104,6 +104,14 @@ class LoaderWindow(QDialog, Ui_ChargerFichier):
         if self.footprint_path:
             self.cheminEmpriseLabel.setText(self.footprint_path)
 
+    def get_margins(self):
+        return(
+            (
+                int(self.margeXEdit.text()),
+                int(self.margeYEdit.text())
+            )
+        )
+
 
 class CorrectionWindow(QDialog, Ui_ChoixClasse):
     """
@@ -192,13 +200,12 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         self.entiteView.setScene(scene)
 
         # Affichage de l'othoimage rognées
-        margins = (50, 50)
         item = scene.addPixmap(
             QPixmap.fromImage(
                 qimage2ndarray.array2qimage(
                     self.background.crop(
                         self.current.get_bounding_box(),
-                        margins
+                        self.margins
                     )
                 )
             )
@@ -212,8 +219,8 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             for sommet in polygon:
                 poly.append(
                     QPointF(
-                        (self.current.get_bounding_box()[0][0] - sommet[0]) / self.background.pixel_sizes[1] + margins[0],
-                        (self.current.get_bounding_box()[1][1] - sommet[1]) / self.background.pixel_sizes[0] + margins[1]
+                        (self.current.get_bounding_box()[0][0] - sommet[0]) / self.background.pixel_sizes[1] + self.margins[0],
+                        (self.current.get_bounding_box()[1][1] - sommet[1]) / self.background.pixel_sizes[0] + self.margins[1]
                     )
                 )
             scene.addPolygon(poly)
@@ -257,7 +264,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
             self.close()
 
     def save(self):
-        
+
         # Sélection du chemin d'enregistrement
         self.save_results_path, test = QFileDialog.getSaveFileName(
             self,
@@ -281,6 +288,8 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         loader = LoaderWindow()
         loader.show()
         loader.exec_()
+
+        self.margins = loader.get_margins()
 
         if(
             loader.classes_path != ''
