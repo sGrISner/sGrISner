@@ -7,6 +7,8 @@
 import numpy as np
 import random
 
+import inspect
+
 
 class Strategy:
     def __init__(self):
@@ -37,3 +39,12 @@ class Random(Strategy):
 
     def filtre(self, buildings):
         return random.sample(buildings, self.selection_number)
+
+
+STRATEGIES = {
+    strategy.__name__: (
+        inspect.getargspec(strategy.__init__),
+        inspect.getargspec(strategy.filtre)
+    )
+    for strategy in Strategy.__subclasses__()
+}
