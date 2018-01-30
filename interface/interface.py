@@ -214,34 +214,32 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         self.bornexValueLabel.setText(str(round(bornes[0][0],2)) + ' , ' + str(round(bornes[0][1],2)))
         self.borneyValueLabel.setText(str(round(bornes[1][0],2)) + ' , ' + str(round(bornes[1][1],2)))
 
-    def validate(self,i):
+    def validate(self):
         self.current.probability = 1
-        print('test n°', i, 'yes', self.current.identity, self.current.classe, self.current.probability)
+        print('test n°', self.i, 'yes', self.current.identity, self.current.classe, self.current.probability)
         self.output_buildings.append(self.current)
-        self.i = self.i + 1
-        self.afficher(self.i)
+        self.i += 1
+        self.afficher()
 
-    def correct(self,i):
+    def correct(self):
         self.showChoix()
         self.current.classe = self.newClasse
         self.current.probability = 1
-        print('test n°', i, 'no', self.current.identity, self.current.classe, self.current.probability)
+        print('test n°', self.i, 'no', self.current.identity, self.current.classe, self.current.probability)
         self.output_buildings.append(self.current)
-        self.i = self.i + 1
-        self.afficher(self.i)
+        self.i += 1
+        self.afficher()
 
-    def afficher(self,i):
-        if i != len(self.input_buildings):
+    def afficher(self):
+        if self.i != len(self.input_buildings):
             self.current = self.input_buildings[self.i]
             self.showData()
-            if self.yesButton.clicked :
-                self.yesButton.clicked.connect(lambda: self.validate(i=self.i))
-            if self.noButton.clicked:
-                self.noButton.clicked.connect(lambda: self.correct(i=self.i))
+            if self.yesButton.clicked:
+                self.yesButton.clicked.connect(self.validate)
         else:
             print("Plus d'entités à présenter ...")
             print(self.output_buildings)
-            return
+            self.close()
 
 
 
@@ -281,7 +279,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                     )
 
             # Sélection des entités à transformer en objet batiment
-            self.selected_results = strategy.Random(3).filtre(self.results)
+            self.selected_results = strategy.Random(5).filtre(self.results)
             print(self.selected_results)
 
             # showData(Liste des Batiments + ortho)
@@ -298,7 +296,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
 
             # Affichage par réccurence
             self.i = 0
-            self.afficher(self.i)
+            self.afficher()
 
 def showMainWindow():
     """Affichage de l'interface principale."""
