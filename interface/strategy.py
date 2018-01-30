@@ -7,21 +7,29 @@
 import numpy as np
 import random
 
+
 class Strategy:
     def __init__(self):
         pass
-    def filtre(buildings):
+
+    def filtre(self, buildings):
         pass
 
+
 class Naive(Strategy):
-    """Définition d'une fonction de sélection de toutes les entités présentes"""
-    def filtre(buildings):
+    """
+    Définition d'une fonction de sélection de toutes les entités présentes
+    """
+    def filtre(self, buildings):
         return buildings
 
+
 class Random(Strategy):
-    """Définition d'une fonction de sélection d'entités aléatoiremenet sélectionnées"""
+    """
+    Définition d'une fonction de sélection d'entités aléatoiremenet sélectionnées
+    """
     def __init__(self, selection_number):
         self.selection_number = selection_number
 
-    def filtre(self,buildings):
+    def filtre(self, buildings):
         return random.sample(buildings, self.selection_number)
