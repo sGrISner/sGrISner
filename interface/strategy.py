@@ -20,6 +20,9 @@ class Naive(Strategy):
     """
     Naive selection strategy
     """
+    def __init__(self):
+        super().__init__()
+
     def filtre(self, buildings):
         return buildings
 
@@ -29,6 +32,7 @@ class Random(Strategy):
     Random selection strategy
     """
     def __init__(self, selection_number):
+        super().__init__()
         self.selection_number = selection_number
 
     def filtre(self, buildings):
