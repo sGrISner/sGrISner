@@ -22,7 +22,6 @@ import background
 
 import qimage2ndarray
 
-
 class LoaderWindow(QDialog, Ui_ChargerFichier):
     """
     INTERFACE DE CHARGEMENT FICHIERS
@@ -60,6 +59,20 @@ class LoaderWindow(QDialog, Ui_ChargerFichier):
         self.chargerResultButton.clicked.connect(self.select_results)
         self.chargerOrthoButton.clicked.connect(self.select_background)
         self.chargerEmpriseButton.clicked.connect(self.select_buildings_dir)
+
+        """Connexion pour la comboBox"""
+        self.modeComboBox.activated.connect(self.param_stratregy)
+
+    def param_stratregy(self):
+        type_strategy = self.modeComboBox.currentText()
+
+        if type_strategy == 'Naive':
+            self.nbrLabel.setEnabled(False)
+            self.nbrEdit.setEnabled(False)
+
+        if type_strategy == 'Random':
+            self.nbrLabel.setEnabled(True)
+            self.nbrEdit.setEnabled(True)
 
     def select_classes(self):
         self.classes_path, test = QFileDialog.getOpenFileName(
@@ -111,6 +124,15 @@ class LoaderWindow(QDialog, Ui_ChargerFichier):
                 int(self.margeYEdit.text())
             )
         )
+
+    def current_strategy(self, results):
+        strat = [cle for cle in strategy.STRATEGIES.keys()
+                            if cle == self.modeComboBox.currentText()]
+
+        if strat[0] == 'Naive':
+            return(strategy.Naive().filtre(results))
+        if strat[0] == 'Random':
+            return(strategy.Random(int(self.nbrEdit.text())).filtre(results))
 
 
 class CorrectionWindow(QDialog, Ui_ChoixClasse):
@@ -322,7 +344,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                         (row['ID'], row['Classe'], row['Proba'])
                     )
 
-            self.selected_results = strategy.Random(3).filtre(self.results)
+            self.selected_results = loader.current_strategy(self.results)
 
             self.input_buildings = [
                 building.read_building(
