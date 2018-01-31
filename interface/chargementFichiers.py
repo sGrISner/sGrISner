@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import strategy
 
 class Ui_ChargerFichier(object):
     def setupUi(self, ChargerFichier):
@@ -204,8 +205,6 @@ class Ui_ChargerFichier(object):
         self.affichLabel.setText(_translate("ChargerFichier", "Affichage"))
         self.nbrLabel.setText(_translate("ChargerFichier", "Nombre d\'entités à afficher :"))
         self.margeXEdit.setText(_translate("ChargerFichier", "50"))
-        self.modeComboBox.setItemText(0, _translate("ChargerFichier", "Naive"))
-        self.modeComboBox.setItemText(1, _translate("ChargerFichier", "Aleatoire"))
         self.empriseLabel.setText(_translate("ChargerFichier", "Dossier des emprises"))
         self.cheminEmpriseLabel.setText(_translate("ChargerFichier", "[CheminEmprise]"))
         self.margeYEdit.setText(_translate("ChargerFichier", "50"))
@@ -215,3 +214,9 @@ class Ui_ChargerFichier(object):
         self.chemClasseLabel.setText(_translate("ChargerFichier", "[CheminClasses]"))
         self.cheminResultLabel.setText(_translate("ChargerFichier", "[CheminResultats]"))
         self.cheminOrthoLabel.setText(_translate("ChargerFichier", "[CheminOrtho]"))
+
+        # Affiche les strategies dans la ComboBox
+        j=0
+        for i in strategy.STRATEGIES :
+            self.modeComboBox.setItemText(j, _translate("ChargerFichier", i))
+            j+=1
