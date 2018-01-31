@@ -154,11 +154,14 @@ class CorrectionWindow(QDialog, Ui_ChoixClasse):
         self.setupUi(self)
 
     def check(self, building, classes):
-        values = [cle for cle in classes.keys() if cle != building.classe]
+        values = [cle for cle in classes.keys() if cle != building.classe.strip()]
 
         self.newClass1.setText(values[0])
+        self.helpLabel1.setToolTip(classes[values[0]])
         self.newClass2.setText(values[1])
+        self.helpLabel2.setToolTip(classes[values[1]])
         self.newClass3.setText(values[2])
+        self.helpLabel3.setToolTip(classes[values[2]])
 
     def new_choice(self):
         if self.newClass1.isChecked():
@@ -253,6 +256,7 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         self.probaLabel.setText(
             "Probabilité: " + str(self.current.probability)
         )
+        self.helpLogo.setToolTip(self.classes[self.current.classe.strip()])
 
         # Bornes d'affichage
         bornes = self.background.get_crop_points(
