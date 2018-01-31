@@ -8,7 +8,7 @@ import sys
 import numpy as np
 import csv
 
-from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDialog, QGraphicsScene
+from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDialog, QGraphicsScene, QMessageBox
 from PyQt5.QtGui import QPixmap, QPolygonF
 from PyQt5.QtCore import QPointF
 
@@ -269,20 +269,23 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
         self.save_results_path, test = QFileDialog.getSaveFileName(
             self,
             "Création du fichier de sauvegarde",
-            "",
+            "output_results.csv",
             "Fichiers CSV(*.csv)",
             options=QFileDialog.Options()
         )
 
         # Lecture du fichier csv et remplissage avec output_buildings
-        with open(self.save_results_path, 'w', newline='') as save_file:
-            output_writer = csv.writer(
-                save_file, delimiter=',', quoting=csv.QUOTE_MINIMAL
-            )
-            for build in self.output_buildings:
-                output_writer.writerow(
-                    [build.identity, build.classe, build.probability]
+        if self.save_results_path:
+            with open(self.save_results_path, 'w', newline='') as save_file:
+                output_writer = csv.writer(
+                    save_file, delimiter=',', quoting=csv.QUOTE_MINIMAL
                 )
+                for build in self.output_buildings:
+                    output_writer.writerow(
+                        [build.identity, build.classe, build.probability]
+                    )
+        else:
+            QMessageBox.about(self,'Error','Chemin d\'enregistrement non défini')
 
     def show_loading_window(self):
         loader = LoaderWindow()
