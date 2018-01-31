@@ -108,8 +108,6 @@ class Ui_ChargerFichier(object):
         self.gridLayout.addItem(spacerItem11, 13, 4, 1, 1)
         self.modeComboBox = QtWidgets.QComboBox(ChargerFichier)
         self.modeComboBox.setObjectName("modeComboBox")
-        self.modeComboBox.addItem("")
-        self.modeComboBox.addItem("")
         self.gridLayout.addWidget(self.modeComboBox, 13, 5, 1, 4)
         self.empriseLabel = QtWidgets.QLabel(ChargerFichier)
         font = QtGui.QFont()
@@ -216,7 +214,4 @@ class Ui_ChargerFichier(object):
         self.cheminOrthoLabel.setText(_translate("ChargerFichier", "[CheminOrtho]"))
 
         # Affiche les strategies dans la ComboBox
-        j=0
-        for i in strategy.STRATEGIES :
-            self.modeComboBox.setItemText(j, _translate("ChargerFichier", i))
-            j+=1
+        self.modeComboBox.addItems([str(i) for i in strategy.STRATEGIES])
