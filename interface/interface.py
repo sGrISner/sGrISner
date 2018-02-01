@@ -10,7 +10,7 @@ import csv
 
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDialog, QGraphicsScene, QMessageBox
 from PyQt5.QtGui import QPixmap, QPolygonF
-from PyQt5.QtCore import QPointF
+from PyQt5.QtCore import QPointF, Qt
 
 from classificationActive import *
 from choixClasse import *
@@ -249,6 +249,8 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                     )
                 )
             scene.addPolygon(poly)
+
+        self.entiteView.fitInView(item, Qt.KeepAspectRatio)
 
         # Affichage du texte
         self.idLabel.setText("Identitifiant: " + self.current.identity)
