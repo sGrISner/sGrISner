@@ -313,7 +313,12 @@ class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
                         [build.identity, build.classe, build.probability]
                     )
         else:
-            QMessageBox.about(self,'Error','Chemin d\'enregistrement non défini')
+            QMessageBox.about(
+                self,
+                'Error',
+                'Chemin d\'enregistrement non défini'
+            )
+            self.save()
 
     def show_loading_window(self):
         loader = LoaderWindow()
