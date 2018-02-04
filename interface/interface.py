@@ -203,6 +203,7 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
         self.output_buildings = []
 
         self.new_label = None
+        self.current = None
 
         self.chargerAction.triggered.connect(self.show_loading_window)
         self.yesButton.clicked.connect(self.validate)
@@ -272,16 +273,19 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
         )
 
     def validate(self):
-        self.current.probability = 1
-        self.output_buildings.append(self.current)
-        self.next()
+        if self.current :
+            self.current.probability = 1
+            self.output_buildings.append(self.current)
+            self.next()
 
     def correct(self):
-        self.show_correction_window()
-        self.current.classe = self.new_label
-        self.current.probability = 1
-        self.output_buildings.append(self.current)
-        self.next()
+        if self.current :
+            self.show_correction_window()
+            self.current.classe = self.new_label
+            self.current.probability = 1
+            self.output_buildings.append(self.current)
+            self.next()
+
 
     def next(self):
         if self.input_buildings:
