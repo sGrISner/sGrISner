@@ -174,7 +174,7 @@ class CorrectionWindow(QDialog, Ui_ChoixClasse):
             return ''
 
 
-class ClassificationActive(QMainWindow, Ui_InterfacePrincipale):
+class MainWindow(QMainWindow, Ui_InterfacePrincipale):
     """
     INTERFACE PRINCIPALE
 
@@ -377,7 +377,7 @@ def show_main_window():
     """Affichage de l'interface principale."""
 
     app = QApplication(sys.argv)
-    classification = ClassificationActive()
+    classification = MainWindow()
     classification.show()
     app.exec_()
 
