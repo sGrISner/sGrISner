@@ -1,0 +1,161 @@
+%----------------------------------------------------------------
+% FEUILLE DE STYLE ENSG au format Latex
+%Classe de document pour le thème Latex de l'ENSG
+% v.1 sept. 2010, D Lercier : création
+% v.2 sept. 2012, T Coupin : création fichier classe et modif.
+% v.3 sept. 2016, J. Beilin, modification de la gestion de la biblio + modifs mineures 
+%----------------------------------------------------------------
+
+\documentclass{themeensg}
+
+\usepackage{rotating}
+\usepackage{standalone}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{array}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+
+%---Texte en filigranne---
+\SetWatermarkText{\textsc{Brouillon}}
+%pour l'enlever : \SetWatermarkText{}
+\SetWatermarkText{}
+
+% mise en page no-stress
+\renewcommand{\familydefault}{\sfdefault}
+%-------------------------
+
+%---Mes packages à moi---
+%\usepackage{}
+%------------------------
+
+%---Mes raccourcis---
+\newcommand{\transpose}[1]{{}^t \! #1}
+\newcommand{\ensg}{\textsc{Ensg}}
+
+\renewcommand{\author}{CHUPIN Clémence}
+
+%--------------------
+
+%---Paramètres du pdf---
+    \hypersetup{
+       backref=true,                           % Permet d'ajouter des liens dans
+       pagebackref=true,                       % les bibliographies
+       hyperindex=true,                        % Ajoute des liens dans les index.
+       colorlinks=true,  %Colorise les liens : true pour version numérique, false pour version d'impression
+       breaklinks=true,                        % Permet le retour à la ligne dans les liens trop longs.
+       urlcolor= blue,                         % Couleur des hyperliens.
+       linkcolor= blue,                       % Couleur des liens internes.
+       bookmarks=true,                         % Créé des signets pour Acrobat.
+       %bookmarksopen=true,                    % Si les signets Acrobat sont créés,
+                                               % les afficher complètement.
+       pdftitle={Thème ENSG},                 % Titre du document.
+                                               % Informations apparaissant dans
+       pdfauthor={\author},                      % dans les informations du document
+       pdfsubject={Feuille de style ENSG}           % sous Acrobat.
+    }
+
+%-----------------------
+
+
+
+%-------------------------------------------------------------
+
+\setcounter{tocdepth}{1} %profondeur de la table des matières
+
+\title{Développement d’une interface graphique pour améliorer des classifications de manière interactive}
+
+\bibliography{latexensg}
+
+%
+%-------------------------------------------------------------
+% Début du document
+%--------------------------------------------------------------
+\begin{document}
+%--------------------------------------------------------------
+\begin{titlepage}
+%Inclusion des labels des entreprises
+%Pour un seul label (à gauche), mettre NULL pour les 3e et 4e argument
+\enterprise 
+{logos/logo_ensg}
+{Ecole Nationale des Sciences Géographiques}
+{logos/logo_paris_est}
+{Université Paris-Est}
+
+%Inclusion du titre
+
+%\textit{{\color{red}Choisir les intitulés et responsables pédagogiques (p2) qui conviennent suivant votre cursus - ing3 ou MS PPMD-}}
+
+\maketitle{-PROJET INFORMATIQUE -\\Rapport de programmation\\{Mastère spécialisé $\circledR$ Photogrammétrie, Positionnement, Mesure de Déformations}}{logos/logo_ensg}
+
+
+
+\infos{\author}{Novembre-Décembre 2017}
+\end{titlepage}
+
+\newevenpage
+
+\selectlanguage{frenchb}
+
+%---Table des matières, des figures et des tableaux---
+\newpage
+\tableofcontents
+
+
+
+\newpage
+\chapter*{Glossaire et sigles utiles}
+\addcontentsline{toc}{chapter}{Glossaire et sigles utiles}
+
+  \begin{acronym}
+  \acro{ENSG}{\'Ecole Nationale des Sciences Géographiques}
+  \acro {PPMD}{Mastère Spécialsé Photogrammétrie, Positionnement et Mesure de Déformations}
+  \acro{IGN}{Institut National de l'Information Géographique et Forestière}  
+  \acro{LaSTIG}{Laboratoire en Sciences et Technologies de l'Information Géographique}  \acro{MATIS}{Méthodes d'Analyses pour le Traitement d'Images et la Stéréorestitution}     
+  \acro{LiDAR}{Light Detection And Ranging}
+  \acro{MNT}{Modèle Numérique de Terrain}
+  \acro{MNS}{Modèle Numérique de Surface}  
+  \acro{LoD}{Level Of Details}
+  \acro{SIG}{Système d'Information Géographique}
+  \acro{SHP}{Shapefile}
+  \acro{CSV}{Comma Separated Value}
+  \acro{TIFF}{Tagged Image File Format}
+
+
+  \end{acronym}
+
+
+%---Introduction------------------------------------------------------------------
+\newpage
+\chapter*{Introduction}
+  \addcontentsline{toc}{chapter}{Introduction}
+  
+  \vspace{1.5cm}
+J'introduis ...
+
+%-------------------------------------------------------------------------------
+%\end{comment}
+
+\include{chap1}
+\include{chap2}
+\include{chap3}
+
+%\begin{comment}
+%-------------------------------------------------------------------------------
+\newpage
+\chapter*{Conclusion}
+  \addcontentsline{toc}{part}{Conclusion}
+  \vspace{1.5cm}
+Je conclus.\\
+
+
+
+\newpage
+\listoffigures
+
+%----------------------------------------------------
+%\end{comment}
+\end{document}
