@@ -1,15 +1,21 @@
 \chapter[Limites et évolutions de la solution]{Limites et évolutions de la solution}
 
-\textit{Le présent chapitre a pour objectif de ...}
+\textit{La phase de programmation a permis de développer une première solution au sujet posé. Cependant, certaines fonctionnalités manquent encore. Ce chapitre détaille donc les améliorations pouvant être apportées au programme.}
 
 \section{Limites de la solution proposée}
 
-- Certaines variables sont codées "en dur" (affichage des fonction de sélection, ...)\\
-- Tests avec plusieurs jeux de données\\
-...
+Bien que la solution proposée soit fonctionnelle et réponde à la problématique du projet, certaines fonctionnalités manquent encore :
+\begin{itemize}[label=$\rightarrow$]
+	\item Fonction de zoom : pour permettre à l'utilisateur d'agrandir ou de réduire l'entité présentée, une fonction de zoom peut être implémentée. Cette fonctionnalité pourra se baser sur les méthodes de la classe \textit{QGraphicsView}, et sur une fonction enregistrant les rotations de la molette de la souris.
+	\item Gestion des marges trop grandes : dans la fenêtre de chargement, l'utilisateur peut définir des marges pour visualiser l'environnement des bâtiments. Pour l'instant, aucune fonctionnalité ne gère les cas de marges dépassant les bordures de l'orthoimage.
+	\item Affichage des MNS : grâce aux méthodes de la classe \textit{QPixMap}, l'interface peut afficher une orthoimage couleur, constituée de trois bandes. Une nouvelle fonctionnalité pourrait gérer le cas de l'afficher des MNS constitués d'une seule bande. \\
+\end{itemize}
 
-\section{Fonctionnalités à développer}
+De plus, l'implémentation de cette solution a été réalisée en s'appuyant sur un jeu de données types. Leur formalisme étant imposé à l'utilisateur, le programme devrait fonctionner avec d'autres données. Cependant, des tests complémentaires pourraient être réalisés pour vérifier la compatibilité de l'interface (utilisation d'une autre orthophoto, utilisation de plus d'emprises, ...).
+
+
+\section{Évolution de la solution}
 
 - Autres méthodes de filtrage\\
-- Classification active	\\
-...
+- Autre type de classification\\
+
