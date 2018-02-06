@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Python v3
 
-""" - PROGRAMME PRINCIPAL - """
+""" PROGRAMME PRINCIPAL """
 
 import sys
 import numpy as np
@@ -29,12 +29,12 @@ class LoaderWindow(QDialog, Ui_ChargerFichier):
     HERITAGE: Boite de dialogue "ChargerFichier"
     ==========
 
-    ATTRIBUTS:
-    ===========
-        - classe: chemin du fichier .CSV contenant les classes.
-        - cheminResult: chemin du fichier .CSV contenant les résultats.
-        - orthoimage_path: chemin de l'orthoimage.
-        - footprint_path: chemin du dossier contenant les géométries.
+    ATTRIBUTS PRINCIPAUX :
+    ======================
+        - classe_path: chemin du fichier .CSV contenant les classes
+        - result_path: chemin du fichier .CSV contenant les résultats
+        - orthoimage_path: chemin de l'orthoimage
+        - footprint_path: chemin du dossier contenant les géométries
 
     METHODES:
     ==========
@@ -42,6 +42,10 @@ class LoaderWindow(QDialog, Ui_ChargerFichier):
         - select_results: demande le chemin du fichier de résultats
         - select_background: demande le chemin de l'orthoimage
         - select_buildings_dir: demande le chemin du dossier des emprises
+        - param_stratregy: activation/désactivation des Label des stratégies
+        - get_margins: retourne les valeurs des marges
+        - current_strategy(results=list):
+                sélectionne les entités à présenter selon la stratégie
     """
 
     def __init__(self):
@@ -142,11 +146,11 @@ class CorrectionWindow(QDialog, Ui_ChoixClasse):
     HERITAGE: Boite de dialogue "CorrectionWindow"
     ==========
 
-    ATTRIBUTS:
-    ===========
-
     METHODES:
     ==========
+        - check(building=Building, classes=dictionnary):
+                affiche les classes possibles
+        - new_choice: retourne la classe sélectionnée
     """
 
     def __init__(self):
@@ -181,16 +185,23 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
     HERITAGE: Boite de dialogue "InterfacePrincipale"
     ==========
 
-    ATTRIBUTS:
-    ===========
-        - classe: dictionnary of classes and the corresponding descriptions.
-        - results: liste of 4-tuples representing classification results.
-        - buildings: Building list after selection.
+    ATTRIBUTS PRINCIPAUX :
+    ======================
+        - classes: dictionnaire des classes et de leur description.
+        - results: liste de 4-tuples avec les résultats de classification.
+        - output_buildings: liste d'objets Building après validation.
+        - new_label: classe sélectionnée par l'utilisateur.
+        - current: objet Building en cours de visualisation.
 
     METHODES:
     ==========
-        - show_correction_window: show correction window.
-        - show_loading_window: show loader window.
+        - show_correction_window: affiche la fenêtre de correction.
+        - show_loading_window: affiche la fenêtre de chargement et lis les données.
+        - show_building: affiche des emprises et de l'orthoimage dans l'espace graphique.
+        - validate: enregistre le Building validé par l'utilisateur.
+        - correct: enregistre le Building corrgié par l'utilisateur.
+        - save: sélectionne le chemin d'enregistrement et créer le fichier de sortie.
+        - next: parcourt les entités.
     """
 
     def __init__(self):
@@ -199,7 +210,6 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
 
         self.classes = {}
         self.results = []
-        self.buildings = []
         self.output_buildings = []
 
         self.new_label = None
@@ -219,9 +229,6 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
         self.new_label = choix.new_choice()
 
     def show_building(self):
-        """
-        Affichage graphique des emprises et du fond de plan.
-        """
         scene = QGraphicsScene(self)
         self.entiteView.setScene(scene)
 
@@ -285,7 +292,6 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
             self.current.probability = 1
             self.output_buildings.append(self.current)
             self.next()
-
 
     def next(self):
         if self.input_buildings:
@@ -359,8 +365,10 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
                         (row['ID'], row['Classe'], row['Proba'])
                     )
 
+            # Selection des entités à présenter
             self.selected_results = loader.current_strategy(self.results)
 
+            # Création d'une liste d'objets Building
             self.input_buildings = [
                 building.read_building(
                     loader.footprint_path,
@@ -370,10 +378,12 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
                 )
                 for building_id, classe, prob in self.selected_results
             ]
+            # Chargement de l'orthoimage
             self.background = background.read_background(
                 loader.orthoimage_path
             )
 
+            # Affichage et interaction
             self.next()
 
 

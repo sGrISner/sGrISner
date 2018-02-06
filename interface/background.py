@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
-"""FICHIER DE TRAITEMENT DES IMAGES EN ARRIERE PLAN"""
+""" FICHIER DE TRAITEMENT DES IMAGES EN ARRIERE PLAN """
 
 import gdal
 import gdalconst
@@ -11,6 +11,21 @@ import numpy as np
 
 
 class Background:
+    """
+    GESTION DE L'ARRIERE PLAN
+
+    ATTRIBUTS:
+    ===========
+        - reference_point: tuple contenant les coordonnées origine de l'image.
+        - pixel_sizes: tuple contenant la taille des pixels.
+        - image: matrice contenant l'image.
+
+    METHODES:
+    ==========
+        - get_crop_points(bbox=list): retourne les limites de rognage.
+        - crop(bbox=list, margins=tuple): rogne l'image.
+    """
+
     def __init__(self, reference_point, pixel_sizes, image):
         self.reference_point = reference_point
         self.pixel_sizes = pixel_sizes
@@ -46,6 +61,7 @@ class Background:
 
 
 def read_background(filename):
+    """Lecture de l'image et création d'un objet Background"""
     dataset = gdal.Open(filename, gdalconst.GA_ReadOnly)
     Ox, px, _, Oy, _, py = dataset.GetGeoTransform()
     return Background(

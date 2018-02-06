@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Python v3
 
-""" - FICHIER DE DEFINITION DES METHODES DE SELECTION DES ENTITES - """
+""" FICHIER DE DEFINITION DES METHODES DE SELECTION DES ENTITES """
 
 import numpy as np
 import random
@@ -11,6 +11,14 @@ import inspect
 
 
 class Strategy:
+    """
+    CLASSE STRATEGIE
+
+    METHODES:
+    ==========
+        - filtre(buildings=liste): filtrage d'une liste données.
+    """
+
     def __init__(self):
         pass
 
@@ -20,8 +28,16 @@ class Strategy:
 
 class Naive(Strategy):
     """
-    Naive selection strategy
+    STRATEGIE NAIVE
+
+    HERITAGE : Classe Strategy
+    ==========
+
+    METHODES:
+    ==========
+        - filtre(buildings=liste): retourne la liste d'entrée.
     """
+
     def __init__(self):
         super().__init__()
 
@@ -31,7 +47,19 @@ class Naive(Strategy):
 
 class Random(Strategy):
     """
-    Random selection strategy
+    STRATEGIE RANDOM
+
+    HERITAGE : Classe Strategy
+    ==========
+
+    ATTRIBUTS :
+    ==========
+        - selection_number: nombre d'entités à sélectionner.
+
+    METHODES :
+    ==========
+        - filtre(buildings=filtre):
+            retourne un nombre donné d'objet de la liste, aléatoirement sélectionnés.
     """
     def __init__(self, selection_number):
         super().__init__()
