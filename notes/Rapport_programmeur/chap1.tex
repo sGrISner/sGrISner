@@ -1,0 +1,53 @@
+\chapter[Structure générale]{Structure générale}
+
+\section{Configuration requise}
+
+Le langage de programmation utilisé pour le code est le Python. La partie interface graphique utilise la bibliothèque Qt, et c'est la version 5 de PyQt qui a été utilisée.\\
+
+\noindent D'autres packages de Python sont nécessaires au bon fonctionnement du programme :
+\begin{itemize}
+	\item gdal, permettant la gestion données géospatiales vectorielles ou raster ;
+	\item pyshp, permettant l'extraction et la manipulation de Shapefile ;
+	\item qimage2ndarray, une extension permettant la conversion entre les QImages et numpy.ndarray.\\
+\end{itemize}
+
+Le programme est multi-plateforme : il peut donc être ouvert sous Linux, Windows ou MAc OS.
+
+\section{Données et formalisme}
+
+Le programme considère plusieurs données en entrée, sélectionnées par l'utilisateur via une première interface :
+
+\renewcommand{\arraystretch}{1.4}
+\begin{figure}[!h]
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			Données & Type de donnés & Correspondance dans le code\\
+			\hline
+			Classes d'erreurs possibles & Fichier .CSV & Variable de type dictionnaire\\
+			Résultats de l'auto-qualification & Fichier .CSV & Liste de tuples\\
+			Géométrie des entités & Dossier de .SHP & Attribut \textit{geometry} de la classe Bâtiment\\
+			Orthophoto & Fichier .TIFF & Tuple (résolution + référence) + Matrice\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption[Données en entrée]{Données en entrée}
+	\label{tab:dataentre}
+\end{figure}
+
+\noindent De même, le formalisme des données en sortie est imposé :
+
+\renewcommand{\arraystretch}{1.4}
+\begin{figure}[!h]
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			Données & Type de donnés & Correspondance dans le code \\
+			\hline
+			Résultats de l'interaction & Fichier .CSV & Liste de tuples \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption[Données en sortie]{Données en sortie}
+	\label{tab:datasortie}
+\end{figure}
