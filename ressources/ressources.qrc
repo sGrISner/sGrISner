@@ -1,0 +1,5 @@
+<!DOCTYPE RCC><RCC>
+    <qresource prefix="/">
+        <file alias="help.png">icons/question.png</file>
+    </qresource>
+</RCC>
