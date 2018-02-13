@@ -1,7 +1,27 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
-""" FICHIER DE DEFINITION DES METHODES DE SELECTION DES ENTITES """
+"""
+    ``Strategies`` module.
+    ======================
+
+    Defines an interface like structure for strategies:
+
+    1. Naive strategy
+    -------------------
+
+    Defines the naive strategy where you need all samples. It is suitable for
+    annotation correction.
+
+    2. Random strategy
+    -------------------
+
+    Defines the random strategy where you sample randomly among input samples.
+    It is suitable for annotation verification.
+"""
+
+__docformat__ = 'reStructuredText'
+
 
 import numpy as np
 import random
@@ -11,67 +31,81 @@ import inspect
 
 class Strategy:
     """
-    CLASSE STRATEGIE
-
-    METHODES:
-    ==========
-        - filtre(buildings=liste): filtrage d'une liste données.
+        Strategy interface.
     """
 
     def __init__(self):
+        """
+            Initiate `Strategy`.
+        """
         pass
 
-    def filtre(self, buildings):
+    def filter(self, buildings):
+        """
+            Virtual method to filter input.
+
+            :param buildings: Buildings list to filter
+            :type buildings: list
+        """
         pass
 
 
 class Naive(Strategy):
     """
-    STRATEGIE NAIVE
+        Naive strategy.
 
-    HERITAGE : Classe Strategy
-    ==========
-
-    METHODES:
-    ==========
-        - filtre(buildings=liste): retourne la liste d'entrée.
+        Extends `Strategy`.
     """
 
     def __init__(self):
+        """
+            Extend `Strategy` to initiate `Naive`.
+        """
         super().__init__()
 
-    def filtre(self, buildings):
+    def filter(self, buildings):
+        """
+            Filter inputs.
+
+            :param buildings: Buildings list to filter
+            :type buildings: list
+            :return: filtered buildings to show. i.e. all of them
+            :rtype: list
+        """
         return buildings
 
 
 class Random(Strategy):
     """
-    STRATEGIE RANDOM
+        Random strategy.
 
-    HERITAGE : Classe Strategy
-    ==========
-
-    ATTRIBUTS :
-    ==========
-        - selection_number: nombre d'entités à sélectionner.
-
-    METHODES :
-    ==========
-        - filtre(buildings=filtre):
-            retourne un nombre donné d'objet de la liste, aléatoirement sélectionnés.
+        Extends `Strategy`. Attribute `selection_number` represents the number
+        of samples to return.
     """
+
     def __init__(self, selection_number):
+        """
+            Extend `Strategy` to initiate `Random.selection_number`.
+        """
         super().__init__()
         self.selection_number = selection_number
 
-    def filtre(self, buildings):
+    def filter(self, buildings):
+        """
+            Filter `selection_number` inputs randomly.
+
+            :param buildings: Buildings list to filter
+            :type buildings: list
+            :return: filtered buildings to show. i.e. all of them
+            :rtype: list
+        """
         return random.sample(buildings, self.selection_number)
 
 
 STRATEGIES = {
     strategy.__name__: (
         inspect.getargspec(strategy.__init__),
-        inspect.getargspec(strategy.filtre)
+        inspect.getargspec(strategy.filter)
     )
     for strategy in Strategy.__subclasses__()
 }
