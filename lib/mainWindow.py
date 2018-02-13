@@ -136,5 +136,3 @@ class Ui_mainWindow(object):
         self.fileMenu.setTitle(_translate("mainWindow", "File"))
         self.loaderAction.setText(_translate("mainWindow", "Open..."))
         self.actionExit.setText(_translate("mainWindow", "Exit"))
-
-import ressources_rc
