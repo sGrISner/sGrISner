@@ -9,8 +9,6 @@ from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDi
 from PyQt5.QtGui import QPixmap, QPolygonF
 import PyQt5.QtCore
 
-import qimage2ndarray
-
 from lib.classificationActive import *
 from lib.choixClasse import *
 from lib.chargementFichiers import *
@@ -129,13 +127,15 @@ class LoaderWindow(QDialog, Ui_ChargerFichier):
         )
 
     def current_strategy(self, results):
-        strat = [cle for cle in strategy.STRATEGIES.keys()
-                            if cle == self.modeComboBox.currentText()]
+        strat = [
+            cle for cle in lib.strategy.STRATEGIES.keys()
+            if cle == self.modeComboBox.currentText()
+        ]
 
         if strat[0] == 'Naive':
-            return(strategy.Naive().filter(results))
+            return(lib.strategy.Naive().filter(results))
         if strat[0] == 'Random':
-            return(strategy.Random(int(self.nbrEdit.text())).filter(results))
+            return(lib.strategy.Random(int(self.nbrEdit.text())).filter(results))
 
 
 class CorrectionWindow(QDialog, Ui_ChoixClasse):
@@ -157,7 +157,7 @@ class CorrectionWindow(QDialog, Ui_ChoixClasse):
         self.setupUi(self)
 
     def check(self, building, classes):
-        values = [cle for cle in classes.keys() if cle != building.classe.strip()]
+        values = [cle for cle in classes.keys() if cle != lib.building.classe.strip()]
 
         self.newClass1.setText(values[0])
         self.helpLabel1.setToolTip(classes[values[0]])
@@ -233,13 +233,9 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
 
         # Affichage de l'othoimage rognées
         item = scene.addPixmap(
-            QPixmap.fromImage(
-                qimage2ndarray.array2qimage(
-                    self.background.crop(
-                        self.current.get_bounding_box(),
-                        self.margins
-                    )
-                )
+            self.background.crop(
+                self.current.get_bounding_box(),
+                self.margins
             )
         )
         # to translate in case: i_min<0 or i_max>5000
@@ -369,7 +365,7 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
 
             # Création d'une liste d'objets Building
             self.input_buildings = [
-                building.read_building(
+                lib.building.read_building(
                     loader.footprint_path,
                     building_id,
                     classe,
@@ -378,7 +374,7 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
                 for building_id, classe, prob in self.selected_results
             ]
             # Chargement de l'orthoimage
-            self.background = background.read_background(
+            self.background = lib.background.read_background(
                 loader.orthoimage_path
             )
 
