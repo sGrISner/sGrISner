@@ -63,10 +63,12 @@ class Background:
         return cls(
             (Ox, Oy),
             (px, py),
-            [
-                dataset.GetRasterBand(band).ReadAsArray()
-                for band in range(1, dataset.RasterCount + 1)
-            ]
+            np.dstack(
+                [
+                    dataset.GetRasterBand(band).ReadAsArray()
+                    for band in range(1, dataset.RasterCount + 1)
+                ]
+            )
         )
 
     def get_crop_points(self, bbox):
@@ -86,6 +88,23 @@ class Background:
             for x, y in bbox
         ]
 
+    def get_translation(self, bbox, margins):
+        """
+            Get translation if crop points are outside image.
+
+            :param bbox: bounding box
+            :type bbox: list
+            :param margins: crop margins
+            :type margins: tuple
+            :return: vertical and horizontal translation
+            :rtype: tuple
+        """
+        (i_max, j_min), (i_min, j_max) = self. get_crop_points(bbox)
+        return [
+            max(l_min, 0) - max(l_max - self.image.shape[0], 0)
+            for l_min, l_max in [(j_min, j_max), (i_min, i_max)]
+        ]
+
     def crop(self, bbox, margins):
         """
             Crop the corresponding matrix to the bounding box and the defined
@@ -99,24 +118,15 @@ class Background:
             :rtype: np.array
         """
         (i_max, j_min), (i_min, j_max) = self. get_crop_points(bbox)
-
+        (pi_min, pi_max), (pj_min, pj_max) = [
+            (
+                max(math.floor(l_min) - margins[1], 0),
+                min(math.ceil(l_max) + margins[1], self.image.shape[0])
+            )
+            for l_min, l_max in [(i_min, i_max), (j_min, j_max)]
+        ]
         return PyQt5.QtGui.QPixmap.fromImage(
             qimage2ndarray.array2qimage(
-                np.transpose(
-                    np.swapaxes(
-                        np.array(
-                            [
-                                band[
-                                    max(math.floor(i_min) - margins[1], 0):min(math.ceil(i_max) + margins[1], band.shape[0]),
-                                    max(math.floor(j_min) - margins[0], 0):min(math.ceil(j_max) + margins[0], band.shape[1])
-                                ]
-                                for band in self.image
-                            ]
-                        ),
-                        0,
-                        2
-                    ),
-                    (1, 0, 2)
-                )
+                self.image[pi_min: pi_max, pj_min: pj_max, :]
             )
         )
