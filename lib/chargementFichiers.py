@@ -7,7 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import strategy
+
+from lib import strategy
 
 class Ui_ChargerFichier(object):
     def setupUi(self, ChargerFichier):
