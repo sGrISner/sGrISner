@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
-# Python v3
 
 """ FICHIER DE DEFINITION DES METHODES DE SELECTION DES ENTITES """
 
