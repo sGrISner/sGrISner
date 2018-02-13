@@ -30,6 +30,7 @@ import numpy as np
 
 
 import PyQt5.QtGui
+import PyQt5.QtCore
 import qimage2ndarray
 
 import os
@@ -110,9 +111,9 @@ class Background:
             :return: vertical and horizontal translation
             :rtype: tuple
         """
-        (i_max, j_min), (i_min, j_max) = self. get_crop_points(bbox)
+        (i_max, j_min), (i_min, j_max) = self.get_crop_points(bbox)
         return [
-            max(l_min, 0) - max(l_max - self.image.shape[0], 0)
+            max(-l_min, 0) - max(l_max - self.image.shape[0], 0)
             for l_min, l_max in [(j_min, j_max), (i_min, i_max)]
         ]
 
@@ -198,6 +199,25 @@ class Building:
             classe,
             probability
         )
+
+    def get_qgeometry(self, background, margins):
+        (x_min, y_min), (x_max, y_max) = self.get_bounding_box()
+        dx, dy = background.get_translation(
+            [(x_min, y_min), (x_max, y_max)],
+            margins
+        )
+        return [
+            PyQt5.QtGui.QPolygonF(
+                [
+                    PyQt5.QtCore.QPointF(
+                        (x_min - x) / background.pixel_sizes[1] + margins[0],
+                        (y_max - y) / background.pixel_sizes[0] + margins[1]
+                    )
+                    for x, y in polygon
+                ]
+            ).translated(dx, dy)
+            for polygon in self.geometry
+        ]
 
     def get_bounding_box(self):
         """

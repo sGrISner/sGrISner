@@ -1,3 +1,5 @@
+# Ignore file
+
 # Python Binaries
 __pycache__
 *.pyc
