@@ -196,7 +196,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.classes = {}
         self.entries = []
-        self.output_buildings = self.entries
+        self.output_buildings = []
 
         self.new_label = None
         self.current = None
