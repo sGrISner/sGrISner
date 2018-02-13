@@ -15,8 +15,7 @@ from lib.chargementFichiers import *
 
 
 import lib.strategy
-import lib.building
-import lib.background
+import lib.model
 
 
 class LoaderWindow(QDialog, Ui_ChargerFichier):
@@ -365,7 +364,7 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
 
             # Création d'une liste d'objets Building
             self.input_buildings = [
-                lib.building.read_building(
+                lib.model.Building.from_shapefile(
                     loader.footprint_path,
                     building_id,
                     classe,
@@ -374,7 +373,7 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
                 for building_id, classe, prob in self.selected_results
             ]
             # Chargement de l'orthoimage
-            self.background = lib.background.Background.from_geotiff(
+            self.background = lib.model.Background.from_geotiff(
                 loader.orthoimage_path
             )
 

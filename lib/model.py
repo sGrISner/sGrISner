@@ -2,11 +2,19 @@
 # -*- coding: utf-8 -*-
 
 """
-    ``Background`` module.
-    ======================
+    `Model` module
+    ==============
+    This module assembles the model functionnalities in the MVC paradigm.
 
+    `Background`
+    ---------------------
     Defines a class to deal with backgrounds. For now, it works only with
     orthoimages.
+
+    `Building`
+    ---------------------
+    Defines a class to deal with instances, namely buildings. For now, it reads
+    only shapefiles.
 """
 
 __docformat__ = 'reStructuredText'
@@ -15,13 +23,16 @@ __docformat__ = 'reStructuredText'
 import gdal
 import gdalconst
 
+import shapefile
+
 import math
 import numpy as np
 
 
 import PyQt5.QtGui
-
 import qimage2ndarray
+
+import os
 
 
 class Background:
@@ -130,3 +141,81 @@ class Background:
                 self.image[pi_min: pi_max, pj_min: pj_max, :]
             )
         )
+
+
+class Building:
+    """
+        Building to show and annotate.
+
+        Attribute `identity` stores the building identity.
+        Attribute `geometry` stores the building geometry.
+        Attribute `classe` stores the building class or label.
+        Attribute `probability` stores the building class probability.
+    """
+
+    def __init__(self, identity, geometry, classe, probability):
+        """
+            Initiate Building class.
+
+            :param identity: building identity
+            :type identity: string
+            :param geometry: building geometry
+            :type geometry: list
+            :param classe: building label
+            :type classe: string
+            :param probability: building label probability
+            :type probability: float
+        """
+        self.identity = identity
+        self.geometry = geometry
+        self.classe = classe
+        self.probability = probability
+
+    @classmethod
+    def from_shapefile(cls, directory, building_id, classe, probability):
+        """
+            Create Building `cls` from shapefile in `directory`.
+
+            :param directory: directory path
+            :type directory: string
+            :param building_id: building identity
+            :type building_id: string
+            :param classe: building label
+            :type classe: string
+            :param probability: building label probability
+            :type probability: float
+            :return: cls
+            :rtype: Building
+        """
+        return cls(
+            building_id,
+            [
+                polygon.points
+                for polygon in shapefile.Reader(
+                    os.path.join(directory, str(building_id) + '.shp')
+                ).shapes()
+            ],
+            classe,
+            probability
+        )
+
+    def get_bounding_box(self):
+        """
+            Get building bounding box.
+
+            :return: bounding box rectangle
+            :rtype: list
+        """
+        X, Y = zip(
+            *self.get_points()
+        )
+        return [(min(X), min(Y)), (max(X), max(Y))]
+
+    def get_points(self):
+        """
+            Get all building points.
+
+            :return: all points
+            :rtype: list
+        """
+        return [point for polygon in self.geometry for point in polygon]
