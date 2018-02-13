@@ -6,12 +6,10 @@ import numpy as np
 import csv
 
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDialog, QGraphicsScene, QMessageBox
-from PyQt5.QtGui import QPixmap, QPolygonF
 import PyQt5.QtCore
 
-from lib.classificationActive import *
 from lib.mainWindow import Ui_mainWindow
-from lib.choixClasse import *
+from lib.classChoice import Ui_classChoice
 from lib.chargementFichiers import *
 
 
@@ -138,7 +136,7 @@ class LoaderWindow(QDialog, Ui_ChargerFichier):
             return(lib.strategy.Random(int(self.nbrEdit.text())).filter(entries))
 
 
-class CorrectionWindow(QDialog, Ui_ChoixClasse):
+class CorrectionWindow(QDialog, Ui_classChoice):
     """
     INTERFACE DE SELECTION DES CLASSES
 
@@ -149,32 +147,17 @@ class CorrectionWindow(QDialog, Ui_ChoixClasse):
     ==========
         - check(building=Building, classes=dictionnary):
                 affiche les classes possibles
-        - new_choice: retourne la classe sélectionnée
+        - get_choice: retourne la classe sélectionnée
     """
 
-    def __init__(self):
+    def __init__(self, classes):
         super().__init__()
-        self.setupUi(self)
+        self.setupUi(self, classes)
+        self.okButton.clicked.connect(self.close)
 
-    def check(self, building, classes):
-        values = [cle for cle in classes.keys() if cle != lib.building.classe.strip()]
-
-        self.newClass1.setText(values[0])
-        self.helpLabel1.setToolTip(classes[values[0]])
-        self.newClass2.setText(values[1])
-        self.helpLabel2.setToolTip(classes[values[1]])
-        self.newClass3.setText(values[2])
-        self.helpLabel3.setToolTip(classes[values[2]])
-
-    def new_choice(self):
-        if self.newClass1.isChecked():
-            return self.newClass1.text()
-        elif self.newClass2.isChecked():
-            return self.newClass2.text()
-        elif self.newClass3.isChecked():
-            return self.newClass3.text()
-        else:
-            return ''
+    def get_choice(self):
+        _id = self.choice_group.checkedId()
+        return _id
 
 
 class MainWindow(QMainWindow, Ui_mainWindow):
@@ -206,14 +189,22 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.validateButton.clicked.connect(self.validate)
         self.correctButton.clicked.connect(self.correct)
 
-    def show_correction_window(self):
-        choix = CorrectionWindow()
-        choix.check(self.current, self.classes)
-        choix.show()
-        choix.exec_()
+    def correction_window(self):
+        possible_classes = [
+            cls
+            for cls in self.classes.keys()
+            if cls != self.current.classe
+        ]
+        choice_window = CorrectionWindow(
+            possible_classes
+        )
+        choice_window.show()
+        choice_window.exec_()
 
-        # Stock la novuelle classe sélectionnée par l'utilisateur
-        self.new_label = choix.new_choice()
+        _id = choice_window.get_choice()
+        self.new_label = (
+            possible_classes[_id] if _id >= 0 else self.correction_window()
+        )
 
     def show_building(self):
         scene = QGraphicsScene(self)
@@ -226,24 +217,16 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 self.margins
             )
         )
-        # to translate in case: i_min<0 or i_max>5000
-        item.setPos(0, 0)
 
         # Affichage de la géométrie
-        for polygon in self.current.geometry:
-            poly = QPolygonF()
-            for sommet in polygon:
-                poly.append(
-                    PyQt5.QtCore.QPointF(
-                        (self.current.get_bounding_box()[0][0] - sommet[0]) / self.background.pixel_sizes[1] + self.margins[0],
-                        (self.current.get_bounding_box()[1][1] - sommet[1]) / self.background.pixel_sizes[0] + self.margins[1]
-                    )
-                )
-            scene.addPolygon(poly)
+        for polygon in self.current.get_qgeometry(
+            self.background,
+            self.margins
+        ):
+            scene.addPolygon(polygon)
 
         self.instanceView.fitInView(item, PyQt5.QtCore.Qt.KeepAspectRatio)
 
-        # Affichage du texte
         self.idLabel.setText("Identitifiant: " + self.current.identity)
         self.classLabel.setText("Classe: " + self.current.classe)
         self.probaLabel.setText(
@@ -251,26 +234,25 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         )
         self.helpLogo.setToolTip(self.classes[self.current.classe.strip()])
 
-        # Bornes d'affichage
-        bornes = self.background.get_crop_points(
+        (i_max, j_min), (i_min, j_max) = self.background.get_crop_points(
             self.current.get_bounding_box()
         )
         self.boundxValueLabel.setText(
-            '{:0.2f}, {:0.2f}'.format(bornes[0][0], bornes[0][1])
+            '{:0.2f}, {:0.2f}'.format(j_min, j_max)
         )
         self.boundyValueLabel.setText(
-            '{:0.2f}, {:0.2f}'.format(bornes[1][0], bornes[1][1])
+            '{:0.2f}, {:0.2f}'.format(i_max, i_min)
         )
 
     def validate(self):
-        if self.current :
+        if self.current:
             self.current.probability = 1
             self.output_buildings.append(self.current)
             self.next()
 
     def correct(self):
-        if self.current :
-            self.show_correction_window()
+        if self.current:
+            self.correction_window()
             self.current.classe = self.new_label
             self.current.probability = 1
             self.output_buildings.append(self.current)
