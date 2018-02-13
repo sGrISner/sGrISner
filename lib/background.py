@@ -48,6 +48,27 @@ class Background:
         self.pixel_sizes = pixel_sizes
         self.image = image
 
+    @classmethod
+    def from_geotiff(cls, filename):
+        """
+            Create Background `cls` from geotiff in `filname`.
+
+            :param filename: geotiff path
+            :type filename: string
+            :return: cls
+            :rtype: Background
+        """
+        dataset = gdal.Open(filename, gdalconst.GA_ReadOnly)
+        Ox, px, _, Oy, _, py = dataset.GetGeoTransform()
+        return cls(
+            (Ox, Oy),
+            (px, py),
+            [
+                dataset.GetRasterBand(band).ReadAsArray()
+                for band in range(1, dataset.RasterCount + 1)
+            ]
+        )
+
     def get_crop_points(self, bbox):
         """
             Get crop points in coordinates in image.
@@ -99,17 +120,3 @@ class Background:
                 )
             )
         )
-
-
-def read_background(filename):
-    """Lecture de l'image et création d'un objet Background"""
-    dataset = gdal.Open(filename, gdalconst.GA_ReadOnly)
-    Ox, px, _, Oy, _, py = dataset.GetGeoTransform()
-    return Background(
-        (Ox, Oy),
-        (px, py),
-        [
-            dataset.GetRasterBand(band).ReadAsArray()
-            for band in range(1, dataset.RasterCount + 1)
-        ]
-    )

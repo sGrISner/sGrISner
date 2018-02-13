@@ -374,7 +374,7 @@ class MainWindow(QMainWindow, Ui_InterfacePrincipale):
                 for building_id, classe, prob in self.selected_results
             ]
             # Chargement de l'orthoimage
-            self.background = lib.background.read_background(
+            self.background = lib.background.Background.from_geotiff(
                 loader.orthoimage_path
             )
 
