@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1003</width>
-    <height>679</height>
+    <width>1025</width>
+    <height>697</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -36,26 +36,6 @@
        </size>
       </property>
      </spacer>
-    </item>
-    <item row="5" column="11" colspan="3">
-     <spacer name="horizontalSpacer_8">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="3" column="5" colspan="4">
-     <widget class="QLabel" name="questionLabel">
-      <property name="text">
-       <string>Cet objet est il bien classé ?</string>
-      </property>
-     </widget>
     </item>
     <item row="0" column="0" colspan="16">
      <spacer name="verticalSpacer_6">
@@ -86,109 +66,30 @@
     <item row="7" column="7">
      <widget class="QLabel" name="probaLabel">
       <property name="text">
-       <string>Probabilité</string>
+       <string>Probability</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="3" colspan="12">
-     <spacer name="verticalSpacer_5">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="8" column="3" rowspan="2" colspan="12">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>60</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
     <item row="6" column="7">
-     <widget class="QLabel" name="classeLabel">
+     <widget class="QLabel" name="classLabel">
       <property name="text">
-       <string>Classe</string>
+       <string>Class</string>
       </property>
      </widget>
     </item>
     <item row="5" column="6" rowspan="3">
-     <widget class="Line" name="line">
+     <widget class="Line" name="buildingLine">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
      </widget>
-    </item>
-    <item row="10" column="4" colspan="11">
-     <widget class="QPushButton" name="yesButton">
-      <property name="text">
-       <string>OUI</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="3" colspan="12">
-     <spacer name="verticalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="13" column="3" colspan="12">
-     <spacer name="verticalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
     </item>
     <item row="5" column="7">
      <widget class="QLabel" name="idLabel">
       <property name="text">
-       <string>Identifiant de l'objet</string>
+       <string>Identifier</string>
       </property>
      </widget>
-    </item>
-    <item row="12" column="4" colspan="11">
-     <widget class="QPushButton" name="noButton">
-      <property name="text">
-       <string>NON</string>
-      </property>
-     </widget>
-    </item>
-    <item row="18" column="1" colspan="14">
-     <spacer name="verticalSpacer_7">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
     </item>
     <item row="3" column="4">
      <spacer name="horizontalSpacer_11">
@@ -203,24 +104,58 @@
       </property>
      </spacer>
     </item>
-    <item row="6" column="11">
-     <widget class="QLabel" name="helpLogo">
-      <property name="maximumSize">
+    <item row="16" column="10" rowspan="2">
+     <widget class="Line" name="sceneLine">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="3" rowspan="2" colspan="12">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
+        <height>60</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="10" column="4" colspan="11">
+     <widget class="QPushButton" name="validateButton">
+      <property name="text">
+       <string>Validate</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="11" colspan="3">
+     <spacer name="horizontalSpacer_7">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
         <height>20</height>
        </size>
       </property>
-      <property name="text">
-       <string/>
+     </spacer>
+    </item>
+    <item row="5" column="11" colspan="3">
+     <spacer name="horizontalSpacer_8">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="pixmap">
-       <pixmap>:/Help/question.png</pixmap>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
       </property>
-      <property name="scaledContents">
-       <bool>true</bool>
-      </property>
-     </widget>
+     </spacer>
     </item>
     <item row="1" column="15" rowspan="19">
      <spacer name="horizontalSpacer_10">
@@ -235,63 +170,10 @@
       </property>
      </spacer>
     </item>
-    <item row="4" column="3" colspan="12">
-     <spacer name="verticalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="15" column="4" rowspan="3" colspan="2">
-     <spacer name="horizontalSpacer_12">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="15" column="8" rowspan="3" colspan="2">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="17" column="11">
-     <widget class="QLabel" name="borneyValueLabel">
-      <property name="text">
-       <string>(xmax, ymax)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="16" column="10" rowspan="2">
-     <widget class="Line" name="line_2">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
     <item row="16" column="7">
      <widget class="QLabel" name="borneLabel">
       <property name="text">
-       <string>Bornes d'affichage</string>
+       <string>Scene bounds:</string>
       </property>
      </widget>
     </item>
@@ -302,15 +184,22 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="11" colspan="3">
-     <spacer name="horizontalSpacer_7">
+    <item row="17" column="11">
+     <widget class="QLabel" name="borneyValueLabel">
+      <property name="text">
+       <string>(xmax, ymax)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="3" colspan="12">
+     <spacer name="verticalSpacer_2">
       <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+       <enum>Qt::Vertical</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>40</width>
-        <height>20</height>
+        <width>20</width>
+        <height>40</height>
        </size>
       </property>
      </spacer>
@@ -328,12 +217,90 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="1" rowspan="17" colspan="2">
-     <widget class="QGraphicsView" name="entiteView">
+    <item row="15" column="4" rowspan="3" colspan="2">
+     <spacer name="horizontalSpacer_12">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="11" column="3" colspan="12">
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="4" column="3" colspan="12">
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="12" column="4" colspan="11">
+     <widget class="QPushButton" name="correctButton">
+      <property name="text">
+       <string>Correct</string>
+      </property>
+     </widget>
+    </item>
+    <item row="18" column="1" colspan="14">
+     <spacer name="verticalSpacer_7">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="6" column="11">
+     <widget class="QLabel" name="helpLogo">
+      <property name="maximumSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>:help.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1" rowspan="15" colspan="2">
+     <widget class="QGraphicsView" name="instanceView">
       <property name="minimumSize">
        <size>
         <width>500</width>
-        <height>400</height>
+        <height>500</height>
        </size>
       </property>
       <property name="maximumSize">
@@ -343,6 +310,26 @@
        </size>
       </property>
      </widget>
+    </item>
+    <item row="3" column="5" colspan="5">
+     <widget class="QLabel" name="questionLabel">
+      <property name="text">
+       <string>Is this instance well classified?</string>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="8" rowspan="3" colspan="2">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>
@@ -354,8 +341,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1003</width>
-     <height>26</height>
+     <width>1025</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="contextMenuPolicy">
@@ -368,19 +355,19 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="chargerAction"/>
+    <addaction name="loaderAction"/>
    </widget>
    <addaction name="fichierMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="chargerAction">
+  <action name="loaderAction">
    <property name="text">
     <string>Charger ...</string>
    </property>
   </action>
  </widget>
  <resources>
-  <include location="images.qrc"/>
+  <include location="../ressources/ressources.qrc"/>
  </resources>
  <connections/>
 </ui>
