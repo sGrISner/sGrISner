@@ -133,9 +133,9 @@ class LoaderWindow(QDialog, Ui_ChargerFichier):
                             if cle == self.modeComboBox.currentText()]
 
         if strat[0] == 'Naive':
-            return(strategy.Naive().filtre(results))
+            return(strategy.Naive().filter(results))
         if strat[0] == 'Random':
-            return(strategy.Random(int(self.nbrEdit.text())).filtre(results))
+            return(strategy.Random(int(self.nbrEdit.text())).filter(results))
 
 
 class CorrectionWindow(QDialog, Ui_ChoixClasse):
