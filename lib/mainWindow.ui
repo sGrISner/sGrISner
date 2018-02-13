@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>InterfacePrincipale</class>
- <widget class="QMainWindow" name="InterfacePrincipale">
+ <class>mainWindow</class>
+ <widget class="QMainWindow" name="mainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -20,7 +20,7 @@
    <enum>Qt::ActionsContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>Classification active</string>
+   <string>Sgrisner</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -171,21 +171,21 @@
      </spacer>
     </item>
     <item row="16" column="7">
-     <widget class="QLabel" name="borneLabel">
+     <widget class="QLabel" name="boundLabel">
       <property name="text">
        <string>Scene bounds:</string>
       </property>
      </widget>
     </item>
     <item row="16" column="11">
-     <widget class="QLabel" name="bornexValueLabel">
+     <widget class="QLabel" name="boundxValueLabel">
       <property name="text">
        <string>(xmin, ymin)</string>
       </property>
      </widget>
     </item>
     <item row="17" column="11">
-     <widget class="QLabel" name="borneyValueLabel">
+     <widget class="QLabel" name="boundyValueLabel">
       <property name="text">
        <string>(xmax, ymax)</string>
       </property>
@@ -351,18 +351,24 @@
    <property name="defaultUp">
     <bool>false</bool>
    </property>
-   <widget class="QMenu" name="fichierMenu">
+   <widget class="QMenu" name="fileMenu">
     <property name="title">
-     <string>Fichier</string>
+     <string>File</string>
     </property>
     <addaction name="loaderAction"/>
+    <addaction name="actionExit"/>
    </widget>
-   <addaction name="fichierMenu"/>
+   <addaction name="fileMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="loaderAction">
    <property name="text">
-    <string>Charger ...</string>
+    <string>Open...</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
    </property>
   </action>
  </widget>
