@@ -180,7 +180,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         _id = choice_window.get_choice()
         self.new_label = (
             possible_classes[_id]
-            if _id >= 0 else self.correction_window()
+            if _id >= 0 else None
         )
 
     def show_building(self):
@@ -230,10 +230,13 @@ class MainWindow(QMainWindow, Ui_mainWindow):
     def correct(self):
         if self.current:
             self.correction_window()
-            self.current.classe = self.new_label
-            self.current.probability = 1
-            self.output_buildings.append(self.current)
-            self.next()
+            if self.new_label is None:
+                self.show_building()
+            else:
+                self.current.classe = self.new_label
+                self.current.probability = 1
+                self.output_buildings.append(self.current)
+                self.next()
 
     def next(self):
         if self.input_buildings:
