@@ -13,11 +13,6 @@ class CorrectionWindow(QtWidgets.QDialog):
         self.buttonBox.rejected.connect(self.reject)
 
     def setupUi(self, choices):
-        _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(
-            _translate('CorrectionWindow', "Instance class correction")
-        )
-
         self.setObjectName('CorrectionWindow')
         self.main_layout = QtWidgets.QVBoxLayout(
             sizeConstraint=QtWidgets.QLayout.SetFixedSize
@@ -26,16 +21,7 @@ class CorrectionWindow(QtWidgets.QDialog):
         self.main_layout.setSpacing(20)
         self.main_layout.setContentsMargins(10, 10, 10, 10)
 
-        self.main_layout.addWidget(
-            QtWidgets.QLabel(
-                _translate('CorrectionWindow', 'Class correction:')
-            ),
-            QtCore.Qt.AlignLeft
-        )
-
-        self.choice_box = QtWidgets.QGroupBox(
-            _translate('CorrectionWindow', 'Please choose the right class:')
-        )
+        self.choice_box = QtWidgets.QGroupBox()
         self.choice_group = QtWidgets.QButtonGroup()
         self.choice_layout = QtWidgets.QVBoxLayout()
         for _id, choice in enumerate(choices):
@@ -62,12 +48,22 @@ class CorrectionWindow(QtWidgets.QDialog):
 
         self.setLayout(self.main_layout)
 
+    def retranslate_ui(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(
+            _translate('CorrectionWindow', "Instance class correction")
+        )
+        self.choice_box.setTitle(
+            _translate('CorrectionWindow', 'Please choose the right class:')
+        )
+
     def get_choice(self):
         return (
             self.choice_group.checkedId()
             if self.result() == QtWidgets.QDialog.Accepted
             else -1
         )
+
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -371,8 +367,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.close()
 
     def save(self):
-
-        # Sélection du chemin d'enregistrement
         self.save_entries_path, test = QFileDialog.getSaveFileName(
             self,
             "Création du fichier de sauvegarde",
@@ -381,7 +375,6 @@ class MainWindow(QtWidgets.QMainWindow):
             options=QFileDialog.Options()
         )
 
-        # Lecture du fichier csv et remplissage avec output_buildings
         if self.save_entries_path:
             with open(self.save_entries_path, 'w', newline='') as save_file:
                 output_writer = csv.writer(
