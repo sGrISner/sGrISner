@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDi
 import PyQt5.QtCore
 
 from lib.mainWindow import Ui_mainWindow
-from lib.classChoice import CorrectionWindow
+from lib.vue import CorrectionWindow
 from lib.chargementFichiers import *
 
 
