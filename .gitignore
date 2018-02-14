@@ -3,3 +3,7 @@
 # Python Binaries
 __pycache__
 *.pyc
+
+# Mock Data
+mock\ data
+*.csv
