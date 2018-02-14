@@ -206,8 +206,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.actionQuit.triggered.connect(self.close)
         self.actionSubmitIssue.triggered.connect(self.submite_issue)
         self.actionAbout.triggered.connect(self.about)
-        # self.validateButton.clicked.connect(self.validate)
-        # self.correctButton.clicked.connect(self.correct)
+        self.validate_button.clicked.connect(self.validate)
+        self.correct_button.clicked.connect(self.correct)
 
     def setup_ui(self):
         self.setObjectName("sGrISner")
@@ -292,20 +292,18 @@ class MainWindow(QtWidgets.QMainWindow):
             None if self.current is None else self.current.probability
         )
         self.info_grid.addWidget(self.probability_value, 2, 1)
-        self.validationBox = QtWidgets.QDialogButtonBox(QtCore.Qt.Vertical)
-        self.validationBox.setCenterButtons(True)
-        self.validationBox.addButton(
-            'Validate', QtWidgets.QDialogButtonBox.AcceptRole
-        )
-        self.validationBox.addButton(
-            'Correct', QtWidgets.QDialogButtonBox.RejectRole
-        )
         self.info_box.setSizePolicy(
             QtWidgets.QSizePolicy(
                 QtWidgets.QSizePolicy.Preferred,
                 QtWidgets.QSizePolicy.Fixed
             )
         )
+        self.validationBox = QtWidgets.QVBoxLayout()
+        self.validate_button = QtWidgets.QPushButton('Validate')
+        self.validationBox.addWidget(self.validate_button)
+        self.correct_button = QtWidgets.QPushButton('Correct')
+        self.validationBox.addWidget(self.correct_button)
+
         self.info_layout.addWidget(self.info_box, QtCore.Qt.AlignVCenter)
         self.info_layout.addItem(
             QtWidgets.QSpacerItem(
@@ -315,7 +313,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 QtWidgets.QSizePolicy.Maximum
             )
         )
-        self.info_layout.addWidget(
+        self.info_layout.addLayout(
             self.validationBox,
             QtCore.Qt.AlignBottom
         )
@@ -487,7 +485,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.show_building()
         else:
             self.save()
-            self.close()
 
     def save(self):
         self.save_entries_path, test = QtWidgets.QFileDialog.getSaveFileName(
