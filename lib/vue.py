@@ -1,8 +1,132 @@
 # -*- coding: utf-8 -*-
 
+import csv
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import lib.model
+from lib.chargementFichiers import *
+
+
+class LoaderWindow(QtWidgets.QDialog, Ui_ChargerFichier):
+    """
+    INTERFACE DE CHARGEMENT FICHIERS
+
+    HERITAGE: Boite de dialogue "ChargerFichier"
+    ==========
+
+    ATTRIBUTS PRINCIPAUX :
+    ======================
+        - classe_path: chemin du fichier .CSV contenant les classes
+        - result_path: chemin du fichier .CSV contenant les résultats
+        - orthoimage_path: chemin de l'orthoimage
+        - footprint_path: chemin du dossier contenant les géométries
+
+    METHODES:
+    ==========
+        - select_classes: demande le chemin de la classe
+        - select_entries: demande le chemin du fichier de résultats
+        - select_background: demande le chemin de l'orthoimage
+        - select_buildings_dir: demande le chemin du dossier des emprises
+        - param_stratregy: activation/désactivation des Label des stratégies
+        - get_margins: retourne les valeurs des marges
+        - current_strategy(entries=list):
+                sélectionne les entités à présenter selon la stratégie
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+
+        """Adresses des fichiers"""
+        self.classes_path = ''
+        self.entries_path = ''
+        self.orthoimage_path = ''
+        self.footprint_path = ''
+
+        """Connexions pour charger les fichiers"""
+        self.chargerClasseButton.clicked.connect(self.select_classes)
+        self.chargerResultButton.clicked.connect(self.select_entries)
+        self.chargerOrthoButton.clicked.connect(self.select_background)
+        self.chargerEmpriseButton.clicked.connect(self.select_buildings_dir)
+
+        """Connexion pour la comboBox"""
+        self.modeComboBox.activated.connect(self.param_stratregy)
+
+    def param_stratregy(self):
+        type_strategy = self.modeComboBox.currentText()
+
+        if type_strategy == 'Naive':
+            self.nbrLabel.setEnabled(False)
+            self.nbrEdit.setEnabled(False)
+
+        if type_strategy == 'Random':
+            self.nbrLabel.setEnabled(True)
+            self.nbrEdit.setEnabled(True)
+
+    def select_classes(self):
+        self.classes_path, test = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "Sélection du fichier des classes",
+            "",
+            "Fichier CSV(*.csv)",
+            options=QtWidgets.QFileDialog.Options()
+        )
+        if self.classes_path:
+            self.chemClasseLabel.setText(self.classes_path)
+
+    def select_entries(self):
+        self.entries_path, test = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "Sélection des résultats de la classification",
+            "",
+            "Fichiers CSV(*.csv)",
+            options=QtWidgets.QFileDialog.Options()
+        )
+        if self.entries_path:
+            self.cheminResultLabel.setText(self.entries_path)
+
+    def select_background(self):
+        self.orthoimage_path, test = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "Sélection de l'orthoimage",
+            "",
+            "Fichiers GEOTIFF(*.geotiff)",
+            options=QtWidgets.QFileDialog.Options()
+        )
+        if self.orthoimage_path:
+            self.cheminOrthoLabel.setText(self.orthoimage_path)
+
+    def select_buildings_dir(self):
+        self.footprint_path = QtWidgets.QFileDialog.getExistingDirectory(
+            self,
+            "Sélection du dossier contenant les emprises",
+            "",
+            options=QtWidgets.QFileDialog.Options()
+        )
+        if self.footprint_path:
+            self.cheminEmpriseLabel.setText(self.footprint_path)
+
+    def get_margins(self):
+        return(
+            (
+                int(self.margeXEdit.text()),
+                int(self.margeYEdit.text())
+            )
+        )
+
+    def current_strategy(self, entries):
+        strat = [
+            cle for cle in lib.strategy.STRATEGIES.keys()
+            if cle == self.modeComboBox.currentText()
+        ]
+
+        if strat[0] == 'Naive':
+            return(lib.strategy.Naive().filter(entries))
+        if strat[0] == 'Random':
+            return lib.strategy.Random(
+                int(self.nbrEdit.text())
+            ).filter(entries)
 
 
 class CorrectionWindow(QtWidgets.QDialog):
@@ -144,7 +268,7 @@ class MainWindow(QtWidgets.QMainWindow):
         )
         policy.setWidthForHeight(True)
         self.building_viewer.setSizePolicy(policy)
-        self.building_viewer.setObjectName("instanceView")
+        self.building_viewer.setObjectName("buildingViewer")
         self.main_layout.addWidget(self.building_viewer, 0, 0, 10, 10)
 
         self.info_layout = QtWidgets.QVBoxLayout()
@@ -246,61 +370,60 @@ class MainWindow(QtWidgets.QMainWindow):
         self.bounds_label.setText(_translate("sGrISner", 'Bounds:'))
 
     def load(self):
-        pass
-        # loader = LoaderWindow()
-        # loader.show()
-        # loader.exec_()
-        #
-        # self.margins = loader.get_margins()
-        #
-        # if(
-        #     loader.classes_path != ''
-        #     and
-        #     loader.orthoimage_path != ''
-        #     and
-        #     loader.footprint_path != ''
-        #     and
-        #     loader.entries_path != ''
-        # ):
-        #     # Lecture du fichier csv des classes et remplissage du dictionnaire
-        #     with open(loader.classes_path, newline='') as cls_file:
-        #         reader = csv.DictReader(
-        #             cls_file, fieldnames=['Nom', 'Description']
-        #         )
-        #         for row in reader:
-        #             self.classes[row['Nom']] = row['Description']
-        #
-        #     # Lecture des résultats de la classification
-        #     with open(loader.entries_path, newline='') as resuts_file:
-        #         reader = csv.DictReader(
-        #             resuts_file,
-        #             fieldnames=['ID', 'Classe', 'Proba']
-        #         )
-        #         for row in reader:
-        #             self.entries.append(
-        #                 (row['ID'], row['Classe'], row['Proba'])
-        #             )
-        #
-        #     # Selection des entités à présenter
-        #     self.selected_entries = loader.current_strategy(self.entries)
-        #
-        #     # Création d'une liste d'objets Building
-        #     self.input_buildings = [
-        #         lib.model.Building.from_shapefile(
-        #             loader.footprint_path,
-        #             building_id,
-        #             classe,
-        #             prob
-        #         )
-        #         for building_id, classe, prob in self.selected_entries
-        #     ]
-        #     # Chargement de l'orthoimage
-        #     self.background = lib.model.Background.from_geotiff(
-        #         loader.orthoimage_path
-        #     )
-        #
-        #     # Affichage et interaction
-        #     self.next()
+        loader = LoaderWindow()
+        loader.show()
+        loader.exec_()
+
+        self.margins = loader.get_margins()
+
+        if(
+            loader.classes_path != ''
+            and
+            loader.orthoimage_path != ''
+            and
+            loader.footprint_path != ''
+            and
+            loader.entries_path != ''
+        ):
+            # Lecture du fichier csv des classes et remplissage du dictionnaire
+            with open(loader.classes_path, newline='') as cls_file:
+                reader = csv.DictReader(
+                    cls_file, fieldnames=['Nom', 'Description']
+                )
+                for row in reader:
+                    self.classes[row['Nom']] = row['Description']
+
+            # Lecture des résultats de la classification
+            with open(loader.entries_path, newline='') as resuts_file:
+                reader = csv.DictReader(
+                    resuts_file,
+                    fieldnames=['ID', 'Classe', 'Proba']
+                )
+                for row in reader:
+                    self.entries.append(
+                        (row['ID'], row['Classe'], row['Proba'])
+                    )
+
+            # Selection des entités à présenter
+            self.selected_entries = loader.current_strategy(self.entries)
+
+            # Création d'une liste d'objets Building
+            self.input_buildings = [
+                lib.model.Building.from_shapefile(
+                    loader.footprint_path,
+                    building_id,
+                    classe,
+                    prob
+                )
+                for building_id, classe, prob in self.selected_entries
+            ]
+            # Chargement de l'orthoimage
+            self.background = lib.model.Background.from_geotiff(
+                loader.orthoimage_path
+            )
+
+            # Affichage et interaction
+            self.next()
 
     def correction_window(self):
         possible_classes = [
@@ -321,7 +444,7 @@ class MainWindow(QtWidgets.QMainWindow):
         )
 
     def show_building(self):
-        scene = QGraphicsScene(self)
+        scene = QtWidgets.QGraphicsScene(self)
         self.building_viewer.setScene(scene)
 
         # Affichage de l'othoimage rognées
@@ -339,7 +462,7 @@ class MainWindow(QtWidgets.QMainWindow):
         ):
             scene.addPolygon(polygon)
 
-        self.instanceView.fitInView(item, PyQt5.QtCore.Qt.KeepAspectRatio)
+        self.building_viewer.fitInView(item, QtCore.Qt.KeepAspectRatio)
 
     def validate(self):
         if self.current:
@@ -367,12 +490,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.close()
 
     def save(self):
-        self.save_entries_path, test = QFileDialog.getSaveFileName(
+        self.save_entries_path, test = QtWidgets.QFileDialog.getSaveFileName(
             self,
             "Création du fichier de sauvegarde",
             "output_entries.csv",
             "Fichiers CSV(*.csv)",
-            options=QFileDialog.Options()
+            options=QtWidgets.QFileDialog.Options()
         )
 
         if self.save_entries_path:
@@ -384,13 +507,6 @@ class MainWindow(QtWidgets.QMainWindow):
                     output_writer.writerow(
                         [build.identity, build.classe, build.probability]
                     )
-        else:
-            QMessageBox.about(
-                self,
-                'Error',
-                'Chemin d\'enregistrement non défini'
-            )
-            self.save()
 
     def submite_issue(self):
         QtGui.QDesktopServices.openUrl(
