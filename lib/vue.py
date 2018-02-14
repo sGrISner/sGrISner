@@ -7,7 +7,8 @@ class CorrectionWindow(QtWidgets.QDialog):
     def __init__(self, classes):
         super().__init__()
         self.setupUi(classes)
-        self.okButton.clicked.connect(self.close)
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
 
     def setupUi(self, choices):
         _translate = QtCore.QCoreApplication.translate
@@ -46,15 +47,22 @@ class CorrectionWindow(QtWidgets.QDialog):
             QtCore.Qt.AlignVCenter
         )
 
-        self.okButton = QtWidgets.QPushButton(
-            _translate('CorrectionWindow', "OK")
+        self.buttonBox = QtWidgets.QDialogButtonBox()
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok
         )
+        self.buttonBox.setObjectName("buttonBox")
         self.main_layout.addWidget(
-            self.okButton,
-            QtCore.Qt.AlignVCenter
+            self.buttonBox,
+            QtCore.Qt.AlignRight
         )
 
         self.setLayout(self.main_layout)
 
     def get_choice(self):
-        return self.choice_group.checkedId()
+        return (
+            self.choice_group.checkedId()
+            if self.result() == QtWidgets.QDialog.Accepted
+            else -1
+        )
