@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow, QFileDi
 import PyQt5.QtCore
 
 from lib.mainWindow import Ui_mainWindow
-from lib.classChoice import Ui_classChoice
+from lib.classChoice import CorrectionWindow
 from lib.chargementFichiers import *
 
 
@@ -136,30 +136,6 @@ class LoaderWindow(QDialog, Ui_ChargerFichier):
             return(lib.strategy.Random(int(self.nbrEdit.text())).filter(entries))
 
 
-class CorrectionWindow(QDialog, Ui_classChoice):
-    """
-    INTERFACE DE SELECTION DES CLASSES
-
-    HERITAGE: Boite de dialogue "CorrectionWindow"
-    ==========
-
-    METHODES:
-    ==========
-        - check(building=Building, classes=dictionnary):
-                affiche les classes possibles
-        - get_choice: retourne la classe sélectionnée
-    """
-
-    def __init__(self, classes):
-        super().__init__()
-        self.setupUi(self, classes)
-        self.okButton.clicked.connect(self.close)
-
-    def get_choice(self):
-        _id = self.choice_group.checkedId()
-        return _id
-
-
 class MainWindow(QMainWindow, Ui_mainWindow):
     """
         Main Window
@@ -203,7 +179,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         _id = choice_window.get_choice()
         self.new_label = (
-            possible_classes[_id] if _id >= 0 else self.correction_window()
+            possible_classes[_id]
+            if _id >= 0 else self.correction_window()
         )
 
     def show_building(self):
