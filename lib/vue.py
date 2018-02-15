@@ -184,7 +184,7 @@ class LoaderWindow(QtWidgets.QDialog):
         self.strategy_parameters = [
             (
                 QtWidgets.QLabel(arg),
-                QtWidgets.QLineEdit()
+                QtWidgets.QLineEdit('1')
             )
             for arg
             in inspect.getargspec(self.strategy.__init__).args
@@ -606,6 +606,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.show_building()
         else:
             self.save()
+            self.close()
 
     def save(self):
         self.save_path, test = QtWidgets.QFileDialog.getSaveFileName(
