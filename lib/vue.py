@@ -173,7 +173,6 @@ class LoaderWindow(QtWidgets.QDialog):
             )
         )
 
-        # getattr(lib.strategy, 'Naive').__init__.__annotations__ not working in 3.5
         for parameter_label, parameter_value in self.strategy_parameters:
             self.strategy_grid.removeWidget(parameter_label)
             self.strategy_grid.removeWidget(parameter_value)
