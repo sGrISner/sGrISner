@@ -15,7 +15,9 @@ class LoaderWindow(QtWidgets.QDialog):
         super().__init__()
 
         self.setup_ui()
-        self.select_strategy()
+
+        self.strategy_parameters = []
+        self.strategy = self.select_strategy()
 
         self.classes_button.clicked.connect(self.select_classes)
         self.entries_table_button.clicked.connect(self.select_entries_table)
@@ -165,7 +167,6 @@ class LoaderWindow(QtWidgets.QDialog):
         )
 
     def select_strategy(self):
-        self.strategy_parameters = []
         self.strategy = getattr(
             lib.strategy,
             str(
