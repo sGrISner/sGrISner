@@ -249,7 +249,7 @@ class LoaderWindow(QtWidgets.QDialog):
     def get_classes(self):
         with open(self.classes_value.text(), newline='') as cls_file:
             return {
-                name: description
+                name.strip(): description
                 for name, description in csv.reader(cls_file, delimiter=',')
             } if self.result() == QtWidgets.QDialog.Accepted else {}
 
@@ -258,9 +258,9 @@ class LoaderWindow(QtWidgets.QDialog):
             return [
                 lib.model.Building.from_shapefile(
                     self.instances_value.text(),
-                    building_id,
-                    classe,
-                    prob
+                    building_id.strip(),
+                    classe.strip(),
+                    float(prob)
                 )
                 for building_id, classe, prob in csv.reader(
                     table_file, delimiter=','
@@ -557,6 +557,10 @@ class MainWindow(QtWidgets.QMainWindow):
         )
 
     def show_building(self):
+        self.identity_value.setText(self.current.identity)
+        self.class_value.setText(self.current.classe)
+        self.probability_value.setText(str(self.current.probability))
+
         scene = QtWidgets.QGraphicsScene(self)
         self.building_viewer.setScene(scene)
 
