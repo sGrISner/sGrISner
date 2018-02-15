@@ -2,141 +2,294 @@
 
 import csv
 
+import inspect
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import lib.model
-from lib.chargementFichiers import *
+import lib.strategy
 
 
-class LoaderWindow(QtWidgets.QDialog, Ui_ChargerFichier):
-    """
-    INTERFACE DE CHARGEMENT FICHIERS
-
-    HERITAGE: Boite de dialogue "ChargerFichier"
-    ==========
-
-    ATTRIBUTS PRINCIPAUX :
-    ======================
-        - classe_path: chemin du fichier .CSV contenant les classes
-        - result_path: chemin du fichier .CSV contenant les résultats
-        - orthoimage_path: chemin de l'orthoimage
-        - footprint_path: chemin du dossier contenant les géométries
-
-    METHODES:
-    ==========
-        - select_classes: demande le chemin de la classe
-        - select_entries: demande le chemin du fichier de résultats
-        - select_background: demande le chemin de l'orthoimage
-        - select_buildings_dir: demande le chemin du dossier des emprises
-        - param_stratregy: activation/désactivation des Label des stratégies
-        - get_margins: retourne les valeurs des marges
-        - current_strategy(entries=list):
-                sélectionne les entités à présenter selon la stratégie
-    """
-
+class LoaderWindow(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
 
-        """Adresses des fichiers"""
-        self.classes_path = ''
-        self.entries_path = ''
-        self.orthoimage_path = ''
-        self.footprint_path = ''
+        self.setup_ui()
+        self.select_strategy()
 
-        """Connexions pour charger les fichiers"""
-        self.chargerClasseButton.clicked.connect(self.select_classes)
-        self.chargerResultButton.clicked.connect(self.select_entries)
-        self.chargerOrthoButton.clicked.connect(self.select_background)
-        self.chargerEmpriseButton.clicked.connect(self.select_buildings_dir)
+        self.classes_button.clicked.connect(self.select_classes)
+        self.entries_table_button.clicked.connect(self.select_entries_table)
+        self.background_button.clicked.connect(self.select_background)
+        self.instances_button.clicked.connect(self.select_instances)
+        self.strategy_combo.activated.connect(self.select_strategy)
+        self.button_box.accepted.connect(self.accept)
+        self.button_box.rejected.connect(self.reject)
 
-        """Connexion pour la comboBox"""
-        self.modeComboBox.activated.connect(self.param_stratregy)
+    def setup_ui(self):
+        self.setObjectName('LoadingWindow')
+        self.setMaximumWidth(800)
+        self.setMinimumWidth(600)
+        self.main_layout = QtWidgets.QVBoxLayout()
+        self.loading_box = QtWidgets.QGroupBox()
+        self.loading_grid = QtWidgets.QGridLayout(self.loading_box)
+        self.classes_label = QtWidgets.QLabel()
+        self.loading_grid.addWidget(self.classes_label, 0, 0, 1, 1)
+        self.entries_table_label = QtWidgets.QLabel()
+        self.loading_grid.addWidget(self.entries_table_label, 1, 0, 1, 1)
+        self.instances_label = QtWidgets.QLabel()
+        self.loading_grid.addWidget(self.instances_label, 2, 0, 1, 1)
+        self.background_label = QtWidgets.QLabel()
+        self.loading_grid.addWidget(self.background_label, 3, 0, 1, 1)
+        self.classes_button = QtWidgets.QPushButton()
+        self.loading_grid.addWidget(self.classes_button, 0, 5, 1, 1)
+        self.entries_table_button = QtWidgets.QPushButton()
+        self.loading_grid.addWidget(self.entries_table_button, 1, 5, 1, 1)
+        self.instances_button = QtWidgets.QPushButton()
+        self.loading_grid.addWidget(self.instances_button, 2, 5, 1, 1)
+        self.background_button = QtWidgets.QPushButton()
+        self.loading_grid.addWidget(self.background_button, 3, 5, 1, 1)
+        self.classes_value = QtWidgets.QLineEdit()
+        self.loading_grid.addWidget(self.classes_value, 0, 1, 1, 4)
+        self.entries_table_value = QtWidgets.QLineEdit()
+        self.loading_grid.addWidget(self.entries_table_value, 1, 1, 1, 4)
+        self.instances_value = QtWidgets.QLineEdit()
+        self.loading_grid.addWidget(self.instances_value, 2, 1, 1, 4)
+        self.background_value = QtWidgets.QLineEdit()
+        self.loading_grid.addWidget(self.background_value, 3, 1, 1, 4)
+        self.main_layout.addWidget(self.loading_box, QtCore.Qt.AlignRight)
 
-    def param_stratregy(self):
-        type_strategy = self.modeComboBox.currentText()
+        self.strategy_box = QtWidgets.QGroupBox()
+        self.strategy_grid = QtWidgets.QGridLayout(self.strategy_box)
+        self.strategy_label = QtWidgets.QLabel()
+        self.strategy_grid.addWidget(self.strategy_label, 0, 0, 1, 1)
+        self.strategy_combo = QtWidgets.QComboBox()
+        self.strategy_combo.addItems(
+            [
+                strat.__name__
+                for strat in lib.strategy.Strategy.__subclasses__()
+            ]
+        )
+        self.strategy_grid.addWidget(self.strategy_combo, 0, 1, 1, 4)
+        self.main_layout.addWidget(self.strategy_box)
 
-        if type_strategy == 'Naive':
-            self.nbrLabel.setEnabled(False)
-            self.nbrEdit.setEnabled(False)
+        self.margins_box = QtWidgets.QGroupBox()
+        self.margins_grid = QtWidgets.QGridLayout(self.margins_box)
+        self.xmarging_label = QtWidgets.QLabel()
+        self.xmarging_value = QtWidgets.QLineEdit('50')
+        self.xmarging_value.setMaximumWidth(100)
+        self.ymarging_label = QtWidgets.QLabel()
+        self.ymarging_value = QtWidgets.QLineEdit('50')
+        self.ymarging_value.setMaximumWidth(100)
+        self.margins_grid.addWidget(self.xmarging_label, 0, 0, 1, 1)
+        self.margins_grid.addWidget(self.xmarging_value, 0, 1, 1, 1)
+        self.margins_grid.addWidget(self.ymarging_label, 1, 0, 1, 1)
+        self.margins_grid.addWidget(self.ymarging_value, 1, 1, 1, 1)
+        self.margins_grid.addItem(
+            QtWidgets.QSpacerItem(
+                1,
+                4,
+                QtWidgets.QSizePolicy.Maximum,
+                QtWidgets.QSizePolicy.Maximum
+            ),
+            0,
+            2,
+            1,
+            4
+        )
+        self.margins_grid.addItem(
+            QtWidgets.QSpacerItem(1, 4),
+            1,
+            2,
+            1,
+            4
+        )
+        self.main_layout.addWidget(self.margins_box)
 
-        if type_strategy == 'Random':
-            self.nbrLabel.setEnabled(True)
-            self.nbrEdit.setEnabled(True)
+        self.button_box = QtWidgets.QDialogButtonBox(QtCore.Qt.Horizontal)
+        self.button_box.setStandardButtons(
+            QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok
+        )
+        self.main_layout.addWidget(
+            self.button_box,
+            QtCore.Qt.AlignRight
+        )
+
+        self.setLayout(self.main_layout)
+        self.retranslate_ui()
+
+    def retranslate_ui(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.loading_box.setTitle(
+            _translate('LoadingWindow', 'Loading files:')
+        )
+        self.classes_label.setText(
+            _translate('LoadingWindow', 'Classes/Labels definition:')
+        )
+        self.entries_table_label.setText(
+            _translate('LoadingWindow', 'Results:')
+        )
+        self.instances_label.setText(
+            _translate('LoadingWindow', 'Instances:')
+        )
+        self.background_label.setText(
+            _translate('LoadingWindow', 'Background:')
+        )
+        self.classes_button.setText(
+            _translate('LoadingWindow', 'Browse...')
+        )
+        self.entries_table_button.setText(
+            _translate('LoadingWindow', 'Browse...')
+        )
+        self.instances_button.setText(
+            _translate('LoadingWindow', 'Browse...')
+        )
+        self.background_button.setText(
+            _translate('LoadingWindow', 'Browse...')
+        )
+
+        self.strategy_box.setTitle(
+            _translate('LoadingWindow', 'Selecting strategy:')
+        )
+        self.strategy_label.setText(
+            _translate('LoadingWindow', 'Strategy:')
+        )
+
+        self.margins_box.setTitle(
+            _translate('LoadingWindow', 'Margins:')
+        )
+        self.xmarging_label.setText(
+            _translate('LoadingWindow', 'Horizontal margin:')
+        )
+        self.ymarging_label.setText(
+            _translate('LoadingWindow', 'Vertical margin:')
+        )
+
+    def select_strategy(self):
+        self.strategy_parameters = []
+        self.strategy = getattr(
+            lib.strategy,
+            str(
+                self.strategy_combo.currentText()
+            )
+        )
+
+        # getattr(lib.strategy, 'Naive').__init__.__annotations__ not working in 3.5
+        for parameter_label, parameter_value in self.strategy_parameters:
+            self.strategy_grid.removeWidget(parameter_label)
+            self.strategy_grid.removeWidget(parameter_value)
+            parameter_label.deleteLater()
+            parameter_value.deleteLater()
+            parameter_label = None
+            parameter_value = None
+        self.strategy_parameters = [
+            (
+                QtWidgets.QLabel(arg),
+                QtWidgets.QLineEdit()
+            )
+            for arg
+            in inspect.getargspec(self.strategy.__init__).args
+            if arg != 'self'
+        ]
+        for index, (parameter_label, parameter_value) in enumerate(
+            self.strategy_parameters
+        ):
+            self.strategy_grid.addWidget(parameter_label, 1 + index, 1, 1, 2)
+            self.strategy_grid.addWidget(parameter_value, 1 + index, 3, 1, 2)
 
     def select_classes(self):
         self.classes_path, test = QtWidgets.QFileDialog.getOpenFileName(
             self,
-            "Sélection du fichier des classes",
-            "",
+            "Classes file selecetion",
+            self.classes_value.text(),
             "Fichier CSV(*.csv)",
             options=QtWidgets.QFileDialog.Options()
         )
         if self.classes_path:
-            self.chemClasseLabel.setText(self.classes_path)
+            self.classes_value.setText(self.classes_path)
 
-    def select_entries(self):
-        self.entries_path, test = QtWidgets.QFileDialog.getOpenFileName(
+    def select_entries_table(self):
+        self.entries_table_path, test = QtWidgets.QFileDialog.getOpenFileName(
             self,
             "Sélection des résultats de la classification",
-            "",
+            self.entries_table_value.text(),
             "Fichiers CSV(*.csv)",
             options=QtWidgets.QFileDialog.Options()
         )
-        if self.entries_path:
-            self.cheminResultLabel.setText(self.entries_path)
+        if self.entries_table_path:
+            self.entries_table_value.setText(self.entries_table_path)
 
     def select_background(self):
-        self.orthoimage_path, test = QtWidgets.QFileDialog.getOpenFileName(
+        self.background_path, test = QtWidgets.QFileDialog.getOpenFileName(
             self,
             "Sélection de l'orthoimage",
-            "",
+            self.background_value.text(),
             "Fichiers GEOTIFF(*.geotiff)",
             options=QtWidgets.QFileDialog.Options()
         )
-        if self.orthoimage_path:
-            self.cheminOrthoLabel.setText(self.orthoimage_path)
+        if self.background_path:
+            self.background_value.setText(self.background_path)
 
-    def select_buildings_dir(self):
-        self.footprint_path = QtWidgets.QFileDialog.getExistingDirectory(
+    def select_instances(self):
+        self.instances_path = QtWidgets.QFileDialog.getExistingDirectory(
             self,
             "Sélection du dossier contenant les emprises",
-            "",
+            self.instances_value.text(),
             options=QtWidgets.QFileDialog.Options()
         )
-        if self.footprint_path:
-            self.cheminEmpriseLabel.setText(self.footprint_path)
+        if self.instances_path:
+            self.instances_value.setText(self.instances_path)
+
+    def get_strategy(self):
+        return self.strategy(
+            *[
+                int(parameter_value.text())
+                for _, parameter_value in self.strategy_parameters
+            ]
+        ) if self.result() == QtWidgets.QDialog.Accepted else None
+
+    def get_classes(self):
+        with open(self.classes_value.text(), newline='') as cls_file:
+            return {
+                name: description
+                for name, description in csv.reader(cls_file, delimiter=',')
+            } if self.result() == QtWidgets.QDialog.Accepted else {}
+
+    def get_entries(self):
+        with open(self.entries_table_value.text(), newline='') as table_file:
+            return [
+                lib.model.Building.from_shapefile(
+                    self.instances_value.text(),
+                    building_id,
+                    classe,
+                    prob
+                )
+                for building_id, classe, prob in csv.reader(
+                    table_file, delimiter=','
+                )
+            ] if self.result() == QtWidgets.QDialog.Accepted else []
+
+    def get_background(self):
+        return lib.model.Background.from_geotiff(
+            self.background_value.text()
+        ) if self.result() == QtWidgets.QDialog.Accepted else None
 
     def get_margins(self):
         return(
-            (
-                int(self.margeXEdit.text()),
-                int(self.margeYEdit.text())
-            )
-        )
-
-    def current_strategy(self, entries):
-        strat = [
-            cle for cle in lib.strategy.STRATEGIES.keys()
-            if cle == self.modeComboBox.currentText()
-        ]
-
-        if strat[0] == 'Naive':
-            return(lib.strategy.Naive().filter(entries))
-        if strat[0] == 'Random':
-            return lib.strategy.Random(
-                int(self.nbrEdit.text())
-            ).filter(entries)
+            int(self.xmarging_value.text()),
+            int(self.ymarging_value.text())
+        ) if self.result() == QtWidgets.QDialog.Accepted else None
 
 
 class CorrectionWindow(QtWidgets.QDialog):
     def __init__(self, classes):
         super().__init__()
-        self.setupUi(classes)
-        self.buttonBox.accepted.connect(self.accept)
-        self.buttonBox.rejected.connect(self.reject)
 
-    def setupUi(self, choices):
+        self.setup_ui(classes)
+
+        self.button_box.accepted.connect(self.accept)
+        self.button_box.rejected.connect(self.reject)
+
+    def setup_ui(self, choices):
         self.setObjectName('CorrectionWindow')
         self.main_layout = QtWidgets.QVBoxLayout(
             sizeConstraint=QtWidgets.QLayout.SetFixedSize
@@ -159,18 +312,19 @@ class CorrectionWindow(QtWidgets.QDialog):
             QtCore.Qt.AlignVCenter
         )
 
-        self.buttonBox = QtWidgets.QDialogButtonBox()
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(
+        self.button_box = QtWidgets.QDialogButtonBox()
+        self.button_box.setOrientation(QtCore.Qt.Horizontal)
+        self.button_box.setStandardButtons(
             QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok
         )
-        self.buttonBox.setObjectName("buttonBox")
+        self.button_box.setObjectName("button_box")
         self.main_layout.addWidget(
-            self.buttonBox,
+            self.button_box,
             QtCore.Qt.AlignRight
         )
 
         self.setLayout(self.main_layout)
+        self.retranslate_ui()
 
     def retranslate_ui(self):
         _translate = QtCore.QCoreApplication.translate
@@ -194,14 +348,14 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__()
         self.classes = {}
         self.entries = []
-        self.output_buildings = []
+        self.output_instances = []
 
         self.new_label = None
         self.current = None
 
         self.setup_ui()
 
-        self.actionLoader.triggered.connect(self.load)
+        self.actionLoader.triggered.connect(self.pop_load)
         self.actionSave.triggered.connect(self.save)
         self.actionQuit.triggered.connect(self.close)
         self.actionSubmitIssue.triggered.connect(self.submite_issue)
@@ -211,7 +365,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def setup_ui(self):
         self.setObjectName("sGrISner")
-        self.resize(800, 600)
         self.setMinimumSize(QtCore.QSize(800, 600))
 
         self.setup_menu_bar()
@@ -367,63 +520,26 @@ class MainWindow(QtWidgets.QMainWindow):
         self.probability_label.setText(_translate("sGrISner", 'Probability:'))
         self.bounds_label.setText(_translate("sGrISner", 'Bounds:'))
 
-    def load(self):
+    def pop_load(self):
         loader = LoaderWindow()
         loader.show()
         loader.exec_()
 
         self.margins = loader.get_margins()
+        self.strategy = loader.get_strategy()
 
-        if(
-            loader.classes_path != ''
-            and
-            loader.orthoimage_path != ''
-            and
-            loader.footprint_path != ''
-            and
-            loader.entries_path != ''
-        ):
-            # Lecture du fichier csv des classes et remplissage du dictionnaire
-            with open(loader.classes_path, newline='') as cls_file:
-                reader = csv.DictReader(
-                    cls_file, fieldnames=['Nom', 'Description']
-                )
-                for row in reader:
-                    self.classes[row['Nom']] = row['Description']
+        try:
+            self.classes = loader.get_classes()
+            self.entries = loader.get_entries()
+            self.background = loader.get_background()
+        except FileNotFoundError:
+            pass
 
-            # Lecture des résultats de la classification
-            with open(loader.entries_path, newline='') as resuts_file:
-                reader = csv.DictReader(
-                    resuts_file,
-                    fieldnames=['ID', 'Classe', 'Proba']
-                )
-                for row in reader:
-                    self.entries.append(
-                        (row['ID'], row['Classe'], row['Proba'])
-                    )
-
-            # Selection des entités à présenter
-            self.selected_entries = loader.current_strategy(self.entries)
-
-            # Création d'une liste d'objets Building
-            self.input_buildings = [
-                lib.model.Building.from_shapefile(
-                    loader.footprint_path,
-                    building_id,
-                    classe,
-                    prob
-                )
-                for building_id, classe, prob in self.selected_entries
-            ]
-            # Chargement de l'orthoimage
-            self.background = lib.model.Background.from_geotiff(
-                loader.orthoimage_path
-            )
-
-            # Affichage et interaction
+        if self.classes and self.entries and self.strategy and self.background:
+            self.input_instances = self.strategy.filter(self.entries)
             self.next()
 
-    def correction_window(self):
+    def pop_correction(self):
         possible_classes = [
             cls
             for cls in self.classes.keys()
@@ -445,7 +561,6 @@ class MainWindow(QtWidgets.QMainWindow):
         scene = QtWidgets.QGraphicsScene(self)
         self.building_viewer.setScene(scene)
 
-        # Affichage de l'othoimage rognées
         item = scene.addPixmap(
             self.background.crop(
                 self.current.get_bounding_box(),
@@ -453,7 +568,6 @@ class MainWindow(QtWidgets.QMainWindow):
             )
         )
 
-        # Affichage de la géométrie
         for polygon in self.current.get_qgeometry(
             self.background,
             self.margins
@@ -465,42 +579,42 @@ class MainWindow(QtWidgets.QMainWindow):
     def validate(self):
         if self.current:
             self.current.probability = 1
-            self.output_buildings.append(self.current)
+            self.output_instances.append(self.current)
             self.next()
 
     def correct(self):
         if self.current:
-            self.correction_window()
+            self.pop_correction()
             if self.new_label is None:
                 self.show_building()
             else:
                 self.current.classe = self.new_label
                 self.current.probability = 1
-                self.output_buildings.append(self.current)
+                self.output_instances.append(self.current)
                 self.next()
 
     def next(self):
-        if self.input_buildings:
-            self.current = self.input_buildings.pop()
+        if self.input_instances:
+            self.current = self.input_instances.pop()
             self.show_building()
         else:
             self.save()
 
     def save(self):
-        self.save_entries_path, test = QtWidgets.QFileDialog.getSaveFileName(
+        self.save_path, test = QtWidgets.QFileDialog.getSaveFileName(
             self,
             "Création du fichier de sauvegarde",
-            "output_entries.csv",
+            "output.csv",
             "Fichiers CSV(*.csv)",
             options=QtWidgets.QFileDialog.Options()
         )
 
-        if self.save_entries_path:
-            with open(self.save_entries_path, 'w', newline='') as save_file:
+        if self.save_path:
+            with open(self.save_path, 'w', newline='') as save_file:
                 output_writer = csv.writer(
                     save_file, delimiter=',', quoting=csv.QUOTE_MINIMAL
                 )
-                for build in self.output_buildings:
+                for build in self.output_instances:
                     output_writer.writerow(
                         [build.identity, build.classe, build.probability]
                     )
