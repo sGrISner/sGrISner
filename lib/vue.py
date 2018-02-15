@@ -561,6 +561,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.identity_value.setText(self.current.identity)
         self.class_value.setText(self.current.classe)
         self.probability_value.setText(str(self.current.probability))
+        xs, ys = self.get_view_bounds()
+        self.xbound_value.setText(xs)
+        self.ybound_value.setText(ys)
 
         scene = QtWidgets.QGraphicsScene(self)
         self.building_viewer.setScene(scene)
