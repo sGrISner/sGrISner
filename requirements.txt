@@ -1,0 +1,5 @@
+PyQt5
+gdal
+pyshp
+numpy
+qimage2ndarray
