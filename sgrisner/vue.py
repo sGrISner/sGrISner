@@ -82,7 +82,7 @@ class LoaderWindow(QtWidgets.QDialog):
         self.strategy_combo.addItems(
             [
                 strat.__name__
-                for strat in lib.strategy.Strategy.__subclasses__()
+                for strat in sgrisner.strategy.Strategy.__subclasses__()
             ]
         )
         self.strategy_grid.addWidget(self.strategy_combo, 0, 1, 1, 4)
@@ -192,7 +192,7 @@ class LoaderWindow(QtWidgets.QDialog):
 
     def select_strategy(self):
         self.strategy = getattr(
-            lib.strategy,
+            sgrisner.strategy,
             str(
                 self.strategy_combo.currentText()
             )
@@ -281,7 +281,7 @@ class LoaderWindow(QtWidgets.QDialog):
     def get_entries(self):
         with open(self.entries_table_value.text(), newline='') as table_file:
             return [
-                lib.model.Building.from_shapefile(
+                sgrisner.model.Building.from_shapefile(
                     self.instances_value.text(),
                     building_id.strip(),
                     labels[::2],
@@ -293,7 +293,7 @@ class LoaderWindow(QtWidgets.QDialog):
             ] if self.result() == QtWidgets.QDialog.Accepted else []
 
     def get_background(self):
-        return lib.model.Background.from_geotiff(
+        return sgrisner.model.Background.from_file(
             self.background_value.text()
         ) if self.result() == QtWidgets.QDialog.Accepted else None
 

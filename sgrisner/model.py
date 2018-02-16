@@ -20,8 +20,7 @@
 __docformat__ = 'reStructuredText'
 
 
-import gdal
-import gdalconst
+import georasters as gr
 
 import shapefile
 
@@ -61,26 +60,21 @@ class Background:
         self.image = image
 
     @classmethod
-    def from_geotiff(cls, filename):
+    def from_file(cls, filename):
         """
-            Create Background `cls` from geotiff in `filname`.
+            Create Background `cls` from file in `filname`.
 
-            :param filename: geotiff path
+            :param filename: file path
             :type filename: string
             :return: cls
             :rtype: Background
         """
-        dataset = gdal.Open(filename, gdalconst.GA_ReadOnly)
-        Ox, px, _, Oy, _, py = dataset.GetGeoTransform()
+        data = gr.from_file(filename)
+        Ox, px, _, Oy, _, py = data.geot
         return cls(
             (Ox, Oy),
             (px, py),
-            np.dstack(
-                [
-                    dataset.GetRasterBand(band).ReadAsArray()
-                    for band in range(1, dataset.RasterCount + 1)
-                ]
-            )
+            np.moveaxis(data.raster.data, 0, -1)
         )
 
     def get_crop_points(self, bbox):
