@@ -6,8 +6,8 @@ import inspect
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-import lib.model
-import lib.strategy
+import sgrisner.model
+import sgrisner.strategy
 
 
 class LoaderWindow(QtWidgets.QDialog):

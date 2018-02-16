@@ -22,11 +22,12 @@ setup(
         'Programming Language :: Python :: 3.5'
     ],
     keywords='qualification building 3d reconstruction graphs computer vision',
-    url='https://gitlab.com/ethiy/sgrisner',
+    url='https://github.com/sgrisner/sgrisner',
     author='Oussama Ennafii',
     author_email='oussama.ennafii@ign.fr',
     license='GNU GPL',
-    packages=find_packages(exclude=['tests']).append('sgrisner'),
+    packages=find_packages(exclude=['tests']),
+    scripts=['sgrisner']
     install_requires=[
             'PyQt5',
             'gdal',

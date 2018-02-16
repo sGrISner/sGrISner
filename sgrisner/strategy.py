@@ -26,8 +26,6 @@ __docformat__ = 'reStructuredText'
 import numpy as np
 import random
 
-import inspect
-
 
 class Strategy:
     """
@@ -100,12 +98,3 @@ class Random(Strategy):
             :rtype: list
         """
         return random.sample(buildings, self.selection_number)
-
-
-STRATEGIES = {
-    strategy.__name__: (
-        inspect.getargspec(strategy.__init__),
-        inspect.getargspec(strategy.filter)
-    )
-    for strategy in Strategy.__subclasses__()
-}
