@@ -19,10 +19,13 @@ class LoaderWindow(QtWidgets.QDialog):
         self.strategy_parameters = []
         self.strategy = self.select_strategy()
 
+        self.type = self.select_type()
+
         self.classes_button.clicked.connect(self.select_classes)
         self.entries_table_button.clicked.connect(self.select_entries_table)
         self.background_button.clicked.connect(self.select_background)
         self.instances_button.clicked.connect(self.select_instances)
+        self.type_combo.activated.connect(self.select_type)
         self.strategy_combo.activated.connect(self.select_strategy)
         self.button_box.accepted.connect(self.accept)
         self.button_box.rejected.connect(self.reject)
@@ -59,6 +62,17 @@ class LoaderWindow(QtWidgets.QDialog):
         self.background_value = QtWidgets.QLineEdit()
         self.loading_grid.addWidget(self.background_value, 3, 1, 1, 4)
         self.main_layout.addWidget(self.loading_box, QtCore.Qt.AlignRight)
+
+        self.type_box = QtWidgets.QGroupBox()
+        self.type_grid = QtWidgets.QGridLayout(self.type_box)
+        self.type_label = QtWidgets.QLabel()
+        self.type_grid.addWidget(self.type_label, 0, 0, 1, 1)
+        self.type_combo = QtWidgets.QComboBox()
+        self.type_combo.addItems(
+            ['Multiclass', 'Multilabel']
+        )
+        self.type_grid.addWidget(self.type_combo, 0, 1, 1, 4)
+        self.main_layout.addWidget(self.type_box)
 
         self.strategy_box = QtWidgets.QGroupBox()
         self.strategy_grid = QtWidgets.QGridLayout(self.strategy_box)
@@ -149,6 +163,13 @@ class LoaderWindow(QtWidgets.QDialog):
             _translate('LoadingWindow', 'Browse...')
         )
 
+        self.type_box.setTitle(
+            _translate('LoadingWindow', 'Selecting label type:')
+        )
+        self.type_label.setText(
+            _translate('LoadingWindow', 'Label type:')
+        )
+
         self.strategy_box.setTitle(
             _translate('LoadingWindow', 'Selecting strategy:')
         )
@@ -165,6 +186,9 @@ class LoaderWindow(QtWidgets.QDialog):
         self.ymarging_label.setText(
             _translate('LoadingWindow', 'Vertical margin:')
         )
+
+    def select_type(self):
+        self.type = self.type_combo.currentText()
 
     def select_strategy(self):
         self.strategy = getattr(
@@ -260,10 +284,10 @@ class LoaderWindow(QtWidgets.QDialog):
                 lib.model.Building.from_shapefile(
                     self.instances_value.text(),
                     building_id.strip(),
-                    classe.strip(),
-                    float(prob)
+                    labels[::2],
+                    [float(prob) for prob in labels[1::2]]
                 )
-                for building_id, classe, prob in csv.reader(
+                for building_id, *labels in csv.reader(
                     table_file, delimiter=','
                 )
             ] if self.result() == QtWidgets.QDialog.Accepted else []
@@ -281,15 +305,17 @@ class LoaderWindow(QtWidgets.QDialog):
 
 
 class CorrectionWindow(QtWidgets.QDialog):
-    def __init__(self, classes):
+    def __init__(self, classes, multilabel):
         super().__init__()
 
-        self.setup_ui(classes)
+        self.classes = classes
+        self.multilabel = multilabel
+        self.setup_ui()
 
         self.button_box.accepted.connect(self.accept)
         self.button_box.rejected.connect(self.reject)
 
-    def setup_ui(self, choices):
+    def setup_ui(self):
         self.setObjectName('CorrectionWindow')
         self.main_layout = QtWidgets.QVBoxLayout(
             sizeConstraint=QtWidgets.QLayout.SetFixedSize
@@ -301,12 +327,17 @@ class CorrectionWindow(QtWidgets.QDialog):
         self.choice_box = QtWidgets.QGroupBox()
         self.choice_group = QtWidgets.QButtonGroup()
         self.choice_layout = QtWidgets.QVBoxLayout()
-        for _id, choice in enumerate(choices):
-            choice_button = QtWidgets.QRadioButton(choice)
+        for _id, choice in enumerate(self.classes):
+            choice_button = (
+                QtWidgets.QRadioButton(choice)
+                if not self.multilabel
+                else QtWidgets.QCheckBox(choice)
+            )
             self.choice_layout.addWidget(choice_button)
             self.choice_group.addButton(choice_button)
             self.choice_group.setId(choice_button, _id)
         self.choice_box.setLayout(self.choice_layout)
+        self.choice_group.setExclusive(not self.multilabel)
         self.main_layout.addWidget(
             self.choice_box,
             QtCore.Qt.AlignVCenter
@@ -337,9 +368,13 @@ class CorrectionWindow(QtWidgets.QDialog):
 
     def get_choice(self):
         return (
-            self.choice_group.checkedId()
+            [
+                button.text()
+                for button in self.choice_group.buttons()
+                if button.isChecked()
+            ]
             if self.result() == QtWidgets.QDialog.Accepted
-            else -1
+            else None
         )
 
 
@@ -348,9 +383,10 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__()
         self.classes = {}
         self.entries = []
+        self.infos = []
         self.output_instances = []
 
-        self.new_label = None
+        self.new_labels = []
         self.current = None
 
         self.setup_ui()
@@ -435,16 +471,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.info_grid.addWidget(self.identity_value, 0, 1)
         self.class_label = QtWidgets.QLabel()
         self.info_grid.addWidget(self.class_label, 1, 0)
-        self.class_value = QtWidgets.QLabel(
-            None if self.current is None else self.current.classe
-        )
-        self.info_grid.addWidget(self.class_value, 1, 1)
         self.probability_label = QtWidgets.QLabel()
         self.info_grid.addWidget(self.probability_label, 2, 0)
-        self.probability_value = QtWidgets.QLabel(
-            None if self.current is None else self.current.probability
-        )
-        self.info_grid.addWidget(self.probability_value, 2, 1)
         self.info_box.setSizePolicy(
             QtWidgets.QSizePolicy(
                 QtWidgets.QSizePolicy.Preferred,
@@ -525,6 +553,7 @@ class MainWindow(QtWidgets.QMainWindow):
         loader.show()
         loader.exec_()
 
+        self.type = loader.type
         self.margins = loader.get_margins()
         self.strategy = loader.get_strategy()
 
@@ -543,24 +572,32 @@ class MainWindow(QtWidgets.QMainWindow):
         possible_classes = [
             cls
             for cls in self.classes.keys()
-            if cls != self.current.classe
-        ]
+            if cls != self.current.labels
+        ] if self.type == 'Multiclass' else self.classes.keys()
         choice_window = CorrectionWindow(
-            possible_classes
+            possible_classes,
+            self.type == 'Multilabel'
         )
         choice_window.show()
         choice_window.exec_()
 
-        _id = choice_window.get_choice()
-        self.new_label = (
-            possible_classes[_id]
-            if _id >= 0 else None
-        )
+        self.new_labels = choice_window.get_choice()
 
     def show_building(self):
         self.identity_value.setText(self.current.identity)
-        self.class_value.setText(self.current.classe)
-        self.probability_value.setText(str(self.current.probability))
+        for lvalue, pvalue in self.infos:
+            self.info_grid.removeWidget(lvalue)
+            self.info_grid.removeWidget(pvalue)
+            lvalue.deleteLater()
+            pvalue.deleteLater()
+        self.infos = [
+            (QtWidgets.QLabel(str(l)), QtWidgets.QLabel(str(p)))
+            for l, p in zip(self.current.labels, self.current.probabilities)
+        ]
+        for index, (lvalue, pvalue) in enumerate(self.infos):
+            self.info_grid.addWidget(lvalue, 1, 1 + index)
+            self.info_grid.addWidget(pvalue, 2, 1 + index)
+
         xs, ys = self.get_view_bounds()
         self.xbound_value.setText(xs)
         self.ybound_value.setText(ys)
@@ -585,18 +622,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def validate(self):
         if self.current:
-            self.current.probability = 1
+            self.current.probabilities = [1] * len(self.current.labels)
             self.output_instances.append(self.current)
             self.next()
 
     def correct(self):
         if self.current:
             self.pop_correction()
-            if self.new_label is None:
+            if self.new_labels is None:
                 self.show_building()
             else:
-                self.current.classe = self.new_label
-                self.current.probability = 1
+                self.current.labels = self.new_labels
+                self.current.probabilities = [1] * len(self.new_labels)
                 self.output_instances.append(self.current)
                 self.next()
 
@@ -605,8 +642,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.current = self.input_instances.pop()
             self.show_building()
         else:
-            self.save()
-            self.close()
+            if self.save():
+                self.close()
 
     def save(self):
         self.save_path, test = QtWidgets.QFileDialog.getSaveFileName(
@@ -624,8 +661,20 @@ class MainWindow(QtWidgets.QMainWindow):
                 )
                 for build in self.output_instances:
                     output_writer.writerow(
-                        [build.identity, build.classe, build.probability]
+                        [build.identity]
+                        +
+                        sum(
+                            [
+                                [l, p]
+                                for l, p
+                                in zip(build.labels, build.probabilities)
+                            ],
+                            []
+                        )
                     )
+            return True
+        else:
+            return False
 
     def submite_issue(self):
         QtGui.QDesktopServices.openUrl(
