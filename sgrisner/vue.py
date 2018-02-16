@@ -678,10 +678,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def submite_issue(self):
         QtGui.QDesktopServices.openUrl(
-            QtCore.QUrl('https://github.com/ethiy/sgrisner/issues')
+            QtCore.QUrl('https://github.com/sgrisner/sgrisner/issues')
         )
 
     def about(self):
         QtGui.QDesktopServices.openUrl(
-            QtCore.QUrl('https://github.com/ethiy/sgrisner')
+            QtCore.QUrl('https://github.com/sgrisner/sgrisner')
         )
