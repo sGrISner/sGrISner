@@ -8,7 +8,7 @@ RUN apt install -y build-essential
 
 RUN add-apt-repository -y ppa:ubuntugis/ppa
 
-RUN apt install -y python3 python3-pip python3-gdal
+RUN apt install -y python3 python3-pip
 
 RUN mkdir /home/sgrisner
 COPY . /home/sgrisner

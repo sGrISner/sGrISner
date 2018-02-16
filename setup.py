@@ -30,7 +30,7 @@ setup(
     scripts=['sGrISner'],
     install_requires=[
             'PyQt5',
-            'gdal',
+            'georasters',
             'pyshp',
             'numpy',
             'qimage2ndarray'
