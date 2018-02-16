@@ -15,5 +15,4 @@ WORKDIR /home
 RUN git clone https://github.com/sgrisner/sgrisner.git
 WORKDIR sgrisner/
 RUN pip3 install -r requirements.txt
-RUN chmod a+x ./setup.py
 RUN ./setup.py install
