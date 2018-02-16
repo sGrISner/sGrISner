@@ -7,3 +7,6 @@ __pycache__
 # Mock Data
 mock\ data
 *.csv
+
+# Build files
+build
