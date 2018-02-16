@@ -150,11 +150,11 @@ class Building:
 
         Attribute `identity` stores the building identity.
         Attribute `geometry` stores the building geometry.
-        Attribute `classe` stores the building class or label.
-        Attribute `probability` stores the building class probability.
+        Attribute `labels` stores the building class or labels.
+        Attribute `probabilities` stores the building class probabilities.
     """
 
-    def __init__(self, identity, geometry, classe, probability):
+    def __init__(self, identity, geometry, labels, probabilities):
         """
             Initiate Building class.
 
@@ -162,18 +162,18 @@ class Building:
             :type identity: string
             :param geometry: building geometry
             :type geometry: list
-            :param classe: building label
-            :type classe: string
-            :param probability: building label probability
-            :type probability: float
+            :param labels: building labels
+            :type labels: string
+            :param probabilities: building labels probabilities
+            :type probabilities: float
         """
         self.identity = identity
         self.geometry = geometry
-        self.classe = classe
-        self.probability = probability
+        self.labels = labels
+        self.probabilities = probabilities
 
     @classmethod
-    def from_shapefile(cls, directory, building_id, classe, probability):
+    def from_shapefile(cls, directory, building_id, labels, probabilities):
         """
             Create Building `cls` from shapefile in `directory`.
 
@@ -181,10 +181,10 @@ class Building:
             :type directory: string
             :param building_id: building identity
             :type building_id: string
-            :param classe: building label
-            :type classe: string
-            :param probability: building label probability
-            :type probability: float
+            :param labels: building labels
+            :type labels: string
+            :param probabilities: building labels probabilities
+            :type probabilities: float
             :return: cls
             :rtype: Building
         """
@@ -196,8 +196,8 @@ class Building:
                     os.path.join(directory, str(building_id) + '.shp')
                 ).shapes()
             ],
-            classe,
-            probability
+            labels,
+            probabilities
         )
 
     def get_qgeometry(self, background, margins):
