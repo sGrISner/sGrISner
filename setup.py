@@ -4,6 +4,8 @@
 from setuptools import setup, find_packages
 from requirements import parse
 
+from sGrISner import config
+
 
 def readme():
     """
@@ -23,7 +25,7 @@ def requirements():
 
 setup(
     name='sgrisner',
-    version=__version__,
+    version=config.__version__,
     description='Active GIS annotator',
     long_description=readme(),
     classifiers=[

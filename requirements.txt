@@ -7,4 +7,4 @@ pyshp >= 1.2.12
 pathos >= 0.2.1
 tqdm >= 4.19
 pyyaml >=3.12
--e git+https://github.com/ethiy/geo2d.git@v0.1.0a0#egg=geo2d
+-e git+https://github.com/ethiy/geo2d.git@v0.1.1a0#egg=geo2d
