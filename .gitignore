@@ -3,6 +3,11 @@
 # Python Binaries
 __pycache__
 *.pyc
+*.egg-info
+*.egg
+
+# venv
+venv
 
 # Mock Data
 mock\ data

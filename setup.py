@@ -27,7 +27,7 @@ setup(
     author_email='oussama.ennafii@ign.fr',
     license='GNU GPL',
     packages=find_packages(exclude=['tests']),
-    scripts=['sGrISner'],
+    scripts=['sGrISner-app'],
     install_requires=[
             'PyQt5',
             'georasters',
