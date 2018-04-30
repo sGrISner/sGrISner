@@ -18,7 +18,7 @@ from . import utils, GeoRaster
 geo_vector_logger = logging.getLogger(__name__)
 
 
-class GeoBuilding:
+class GeoShape:
     """
         Geographic raster.
         Attribute `reference_point` stores the reference point.
@@ -28,7 +28,7 @@ class GeoBuilding:
 
     def __init__(self, geometry):
         """
-            Initiate GeoBuilding class.
+            Initiate GeoShape class.
             :param :
             :type geometry:
         """
@@ -39,11 +39,11 @@ class GeoBuilding:
     @classmethod
     def from_file(cls, filename):
         """
-            Create GeoBuilding `cls` from file in `filname`.
+            Create GeoShape `cls` from file in `filname`.
             :param filename: file path
             :type filename: string
             :return: cls
-            :rtype: GeoBuilding
+            :rtype: GeoShape
         """
         sr = shapefile.Reader(filename)
         facets = sr.shapes()
