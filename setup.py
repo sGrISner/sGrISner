@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+from requirements import parse
 
 
 def readme():
@@ -12,29 +13,31 @@ def readme():
         return readmefile.read()
 
 
+def requirements():
+    """
+    Get requirements to install.
+    """
+    with open('requirements.txt', 'r') as req:
+        return [dep.name for dep in parse(req)]
+
+
 setup(
     name='sgrisner',
-    version='0.1.0',
+    version=__version__,
     description='Active GIS annotator',
     long_description=readme(),
     classifiers=[
         'License :: GNU GPL v3.0',
         'Programming Language :: Python :: 3.5'
     ],
-    keywords='qualification building 3d reconstruction graphs computer vision',
+    keywords='annotation gis pyqt5',
     url='https://github.com/sgrisner/sgrisner',
     author='Oussama Ennafii',
     author_email='oussama.ennafii@ign.fr',
     license='GNU GPL',
     packages=find_packages(exclude=['tests']),
     scripts=['sGrISner-app'],
-    install_requires=[
-            'PyQt5',
-            'georasters',
-            'pyshp',
-            'numpy',
-            'qimage2ndarray'
-    ],
+    install_requires=requirements(),
     include_package_data=False,
     zip_safe=False
 )

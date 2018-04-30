@@ -1,5 +1,10 @@
-PyQt5
-georasters
-pyshp
-numpy
-qimage2ndarray
+requirements-parser >= 0.1.0
+PyQt5 >= 5.10
+gdal == 2.1.3
+numpy >= 1.13.2
+matplotlib >= 2.0.2
+pyshp >= 1.2.12
+pathos >= 0.2.1
+tqdm >= 4.19
+pyyaml >=3.12
+-e git+https://github.com/ethiy/geo2d.git@v0.1.0a0#egg=geo2d
