@@ -5,10 +5,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from sgrisner.vue import MainWindow
-
-import sgrisner.strategy
-import sgrisner.model
+from sGrISner.vue import MainWindow
 
 
 def main():

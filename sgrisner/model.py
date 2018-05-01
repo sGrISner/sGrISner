@@ -20,22 +20,17 @@
 __docformat__ = 'reStructuredText'
 
 
-import georasters as gr
-
-import shapefile
-
 import math
-import numpy as np
-
 
 import PyQt5.QtGui
 import PyQt5.QtCore
+
+from geo2d import GeoShape, GeoRaster
+
 import qimage2ndarray
 
-import os
 
-
-class Background:
+class Background(GeoRaster.GeoRaster):
     """
         Canvas background.
 
@@ -46,8 +41,7 @@ class Background:
 
     def __init__(self, reference_point, pixel_sizes, image):
         """
-            Initiate Background class.
-
+            Extend `GeoRaster` to initiate `Background`.
             :param reference_point: reference point
             :type reference_point: tuple
             :param pixel_sizes: pixel resolutions
@@ -55,90 +49,19 @@ class Background:
             :param image: 3d image matrix
             :type image: np.array
         """
-        self.reference_point = reference_point
-        self.pixel_sizes = pixel_sizes
-        self.image = image
+        super().__init__(reference_point, pixel_sizes, image)
 
-    @classmethod
-    def from_file(cls, filename):
-        """
-            Create Background `cls` from file in `filname`.
-
-            :param filename: file path
-            :type filename: string
-            :return: cls
-            :rtype: Background
-        """
-        data = gr.from_file(filename)
-        Ox, px, _, Oy, _, py = data.geot
-        return cls(
-            (Ox, Oy),
-            (px, py),
-            np.moveaxis(data.raster.data, 0, -1)
+    def to_qimage(self):
+        return qimage2ndarray.array2qimage(
+            self.image
         )
 
-    def get_crop_points(self, bbox):
-        """
-            Get crop points in coordinates in image.
-
-            :param bbox: bounding box
-            :type bbox: list
-            :return: extremal points defining the crop region
-            :rtype: list
-        """
-        return [
-            (
-                (y - self.reference_point[1])/self.pixel_sizes[1],
-                (x - self.reference_point[0])/self.pixel_sizes[0]
-            )
-            for x, y in bbox
-        ]
-
-    def get_translation(self, bbox, margins):
-        """
-            Get translation if crop points are outside image.
-
-            :param bbox: bounding box
-            :type bbox: list
-            :param margins: crop margins
-            :type margins: tuple
-            :return: vertical and horizontal translation
-            :rtype: tuple
-        """
-        (i_max, j_min), (i_min, j_max) = self.get_crop_points(bbox)
-        return [
-            max(-l_min, 0) - max(l_max - self.image.shape[0], 0)
-            for l_min, l_max in [(j_min, j_max), (i_min, i_max)]
-        ]
-
-    def crop(self, bbox, margins):
-        """
-            Crop the corresponding matrix to the bounding box and the defined
-            margins.
-
-            :param bbox: bounding box
-            :type bbox: list
-            :param margins: crop margins
-            :type margins: tuple
-            :return: 3d croped image matrix
-            :rtype: np.array
-        """
-        (i_max, j_min), (i_min, j_max) = self. get_crop_points(bbox)
-        (pi_min, pi_max), (pj_min, pj_max) = [
-            (
-                max(math.floor(l_min) - margins[1], 0),
-                min(math.ceil(l_max) + margins[1], self.image.shape[0])
-            )
-            for l_min, l_max in [(i_min, i_max), (j_min, j_max)]
-        ]
+    def to_qpixmap(self):
         return PyQt5.QtGui.QPixmap.fromImage(
-            qimage2ndarray.array2qimage(
-                self.image[pi_min: pi_max, pj_min: pj_max, :]
-            )
+            self.to_qimage()
         )
 
-
-class Building:
+class Building(GeoShape.GeoShape):
     """
         Building to show and annotate.
 
@@ -161,16 +84,16 @@ class Building:
             :param probabilities: building labels probabilities
             :type probabilities: float
         """
+        super().__init__(geometry)
+
         self.identity = identity
-        self.geometry = geometry
         self.labels = labels
         self.probabilities = probabilities
 
     @classmethod
-    def from_shapefile(cls, directory, building_id, labels, probabilities):
+    def from_file(cls, directory, building_id, labels, probabilities):
         """
-            Create Building `cls` from shapefile in `directory`.
-
+            Create Building `cls` from file in `directory`.
             :param directory: directory path
             :type directory: string
             :param building_id: building identity
@@ -182,19 +105,17 @@ class Building:
             :return: cls
             :rtype: Building
         """
-        return cls(
-            building_id,
-            [
-                polygon.points
-                for polygon in shapefile.Reader(
-                    os.path.join(directory, str(building_id) + '.shp')
-                ).shapes()
-            ],
-            labels,
-            probabilities
+        cls = super().from_file(
+            os.path.join(
+                directory, str(building_id) + '.shp'
+            )
         )
+        cls.identity = building_id
+        cls.labels = labels
+        cls.probabilities = probabilities
+        return cls
 
-    def get_qgeometry(self, background, margins):
+    def to_qgeometry(self, background, margins):
         (x_min, y_min), (x_max, y_max) = self.get_bounding_box()
         dx, dy = background.get_translation(
             [(x_min, y_min), (x_max, y_max)],
@@ -212,24 +133,3 @@ class Building:
             ).translated(dx, dy)
             for polygon in self.geometry
         ]
-
-    def get_bounding_box(self):
-        """
-            Get building bounding box.
-
-            :return: bounding box rectangle
-            :rtype: list
-        """
-        X, Y = zip(
-            *self.get_points()
-        )
-        return [(min(X), min(Y)), (max(X), max(Y))]
-
-    def get_points(self):
-        """
-            Get all building points.
-
-            :return: all points
-            :rtype: list
-        """
-        return [point for polygon in self.geometry for point in polygon]
