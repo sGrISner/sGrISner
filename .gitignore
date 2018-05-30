@@ -10,7 +10,7 @@ __pycache__
 venv
 
 # Mock Data
-mock\ data
+mock_data
 *.csv
 
 # Build files
