@@ -382,6 +382,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.new_labels = []
         self.current = None
+        self.scene = None
 
         self.setup_ui()
 
@@ -599,17 +600,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
         im = self.background.crop(self.current.shape.bbox, self.margins)
 
-        self.item = scene.addPixmap(
+        self.scene = scene.addPixmap(
             model.to_qpixmap(im)
         )
 
         for polygon in self.current.to_qgeometry(im, self.margins):
             scene.addPolygon(polygon)
 
-        self.building_viewer.fitInView(self.item, QtCore.Qt.KeepAspectRatio)
+        self.building_viewer.fitInView(self.scene, QtCore.Qt.KeepAspectRatio)
     
     def resizeEvent(self, event):
-        self.building_viewer.fitInView(self.item, QtCore.Qt.KeepAspectRatio)
+        if self.scene:
+            self.building_viewer.fitInView(self.scene, QtCore.Qt.KeepAspectRatio)
 
     def validate(self):
         if self.current:
