@@ -599,14 +599,17 @@ class MainWindow(QtWidgets.QMainWindow):
 
         im = self.background.crop(self.current.shape.bbox, self.margins)
 
-        item = scene.addPixmap(
+        self.item = scene.addPixmap(
             model.to_qpixmap(im)
         )
 
         for polygon in self.current.to_qgeometry(im, self.margins):
             scene.addPolygon(polygon)
 
-        self.building_viewer.fitInView(item, QtCore.Qt.KeepAspectRatio)
+        self.building_viewer.fitInView(self.item, QtCore.Qt.KeepAspectRatio)
+    
+    def resizeEvent(self, event):
+        self.building_viewer.fitInView(self.item, QtCore.Qt.KeepAspectRatio)
 
     def validate(self):
         if self.current:
