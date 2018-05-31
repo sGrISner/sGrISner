@@ -6,7 +6,7 @@
 
     Defines an interface like structure for strategies:
 
-    1. Naive strategy
+    1. Annotation strategy
     -------------------
 
     Defines the naive strategy where you need all samples. It is suitable for
@@ -47,16 +47,16 @@ class Strategy:
         pass
 
 
-class Naive(Strategy):
+class Annotation(Strategy):
     """
-        Naive strategy.
+        Annotation strategy.
 
         Extends `Strategy`.
     """
 
     def __init__(self):
         """
-            Extend `Strategy` to initiate `Naive`.
+            Extend `Strategy` to initiate `Annotation`.
         """
         super().__init__()
 
