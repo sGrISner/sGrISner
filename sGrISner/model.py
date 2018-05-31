@@ -21,57 +21,39 @@ __docformat__ = 'reStructuredText'
 
 
 import math
+import os
+import fnmatch
+import functools
+
+import numpy as np
+import qimage2ndarray
+import shapely
 
 import PyQt5.QtGui
 import PyQt5.QtCore
 
 from geo2d import GeoShape, GeoRaster
 
-import qimage2ndarray
 
 
-class Background(GeoRaster.GeoRaster):
+def to_qimage(georaster):
+    return qimage2ndarray.array2qimage(
+        georaster.image
+    )
+
+
+def to_qpixmap(georaster):
+    return PyQt5.QtGui.QPixmap.fromImage(
+        to_qimage(georaster)
+    )
+
+
+class Background:
     """
-        Canvas background.
-
-        Attribute `reference_point` stores the reference point.
-        Attribute `pixel_sizes` stores the horizontal and vertical resolutions.
-        Attribute `image` stores the matrix image.
-    """
-
-    def __init__(self, reference_point, pixel_sizes, image):
-        """
-            Extend `GeoRaster` to initiate `Background`.
-            :param reference_point: reference point
-            :type reference_point: tuple
-            :param pixel_sizes: pixel resolutions
-            :type pixel_sizes: tuple
-            :param image: 3d image matrix
-            :type image: np.array
-        """
-        super().__init__(reference_point, pixel_sizes, image)
-
-    def to_qimage(self):
-        return qimage2ndarray.array2qimage(
-            self.image
-        )
-
-    def to_qpixmap(self):
-        return PyQt5.QtGui.QPixmap.fromImage(
-            self.to_qimage()
-        )
-
-class Building(GeoShape.GeoShape):
-    """
-        Building to show and annotate.
-
-        Attribute `identity` stores the building identity.
-        Attribute `geometry` stores the building geometry.
-        Attribute `labels` stores the building class or labels.
-        Attribute `probabilities` stores the building class probabilities.
+        Manages background for the building.
     """
 
-    def __init__(self, identity, geometry, labels, probabilities):
+    def __init__(self, directory, extension='.geotiff'):
         """
             Initiate Building class.
 
@@ -84,16 +66,74 @@ class Building(GeoShape.GeoShape):
             :param probabilities: building labels probabilities
             :type probabilities: float
         """
-        super().__init__(geometry)
+        self.background_infos = {
+            os.path.join(directory, filename):
+            GeoRaster.geo_info(os.path.join(directory, filename))
+            for filename in fnmatch.filter(
+                os.listdir(directory),
+                '*' + extension
+            )
+        }
+    
+    def crop(self, bbox, margins):
+        return functools.reduce(
+            lambda lhs, rhs: lhs.union(rhs),
+            [
+                GeoRaster.GeoRaster.from_file(
+                    ortho,
+                    dtype=np.uint8
+                ).crop(
+                    GeoRaster.add_margins(
+                        bbox,
+                        ortho_res,
+                        margins
+                    )
+                )
+                for ortho, (ortho_bbox, ortho_res) in self.background_infos.items()
+                if GeoRaster.overlap(
+                    GeoRaster.add_margins(
+                        bbox,
+                        ortho_res,
+                        margins
+                    ),
+                    ortho_bbox
+                )
+            ]
+        )
+
+class Building:
+    """
+        Building to show and annotate.
+
+        Attribute `identity` stores the building identity.
+        Attribute `geometry` stores the building geometry.
+        Attribute `labels` stores the building class or labels.
+        Attribute `probabilities` stores the building class probabilities.
+    """
+
+    def __init__(self, identity='', shape=GeoShape.GeoShape(), labels=[], probabilities=[]):
+        """
+            Initiate Building class.
+
+            :param identity: building identity
+            :type identity: string
+            :param shape: building shape
+            :type shape: GeoShape.GeoShape
+            :param labels: building labels
+            :type labels: string
+            :param probabilities: building labels probabilities
+            :type probabilities: float
+        """
+        self.shape = shape
 
         self.identity = identity
         self.labels = labels
         self.probabilities = probabilities
 
-    @classmethod
-    def from_file(cls, directory, building_id, labels, probabilities):
+    @staticmethod
+    def read(directory, building_id, labels, probabilities):
         """
-            Create Building `cls` from file in `directory`.
+            Create Building from file in `directory`.
             :param directory: directory path
             :type directory: string
             :param building_id: building identity
@@ -102,25 +142,22 @@ class Building(GeoShape.GeoShape):
             :type labels: string
             :param probabilities: building labels probabilities
             :type probabilities: float
-            :return: cls
+            :return: Building object
             :rtype: Building
         """
-        cls = super().from_file(
-            os.path.join(
-                directory, str(building_id) + '.shp'
-            )
+        return Building(
+            building_id,
+            GeoShape.GeoShape.from_file(
+                os.path.join(
+                    directory, str(building_id) + '.shp'
+                )
+            ),
+            labels,
+            probabilities
         )
-        cls.identity = building_id
-        cls.labels = labels
-        cls.probabilities = probabilities
-        return cls
 
     def to_qgeometry(self, background, margins):
-        (x_min, y_min), (x_max, y_max) = self.get_bounding_box()
-        dx, dy = background.get_translation(
-            [(x_min, y_min), (x_max, y_max)],
-            margins
-        )
+        (x_min, _), (_, y_max) = self.shape.bbox
         return [
             PyQt5.QtGui.QPolygonF(
                 [
@@ -128,8 +165,16 @@ class Building(GeoShape.GeoShape):
                         (x_min - x) / background.pixel_sizes[1] + margins[0],
                         (y_max - y) / background.pixel_sizes[0] + margins[1]
                     )
-                    for x, y in polygon
+                    for x, y in polygon.exterior.coords
                 ]
-            ).translated(dx, dy)
-            for polygon in self.geometry
+            )
+            for polygon in self.shape.geometry
         ]
+
+    def find_background(self, background, margins):
+        return to_qpixmap(
+            background.crop(
+                self.shape.bbox,
+                margins
+            )
+        )
