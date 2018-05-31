@@ -313,6 +313,12 @@ class CorrectionWindow(QtWidgets.QDialog):
         self.button_box.accepted.connect(self.accept)
         self.button_box.rejected.connect(self.reject)
 
+        for button in self.choice_group.buttons():
+            if self.multilabel:
+                button.stateChanged.connect(self.state_changed)
+            else:
+                button.toggled.connect(self.state_changed)
+
     def setup_ui(self):
         self.setObjectName('CorrectionWindow')
         self.main_layout = QtWidgets.QVBoxLayout(
@@ -324,14 +330,16 @@ class CorrectionWindow(QtWidgets.QDialog):
 
         self.choice_box = QtWidgets.QGroupBox()
         self.choice_group = QtWidgets.QButtonGroup()
-        self.choice_layout = QtWidgets.QVBoxLayout()
-        for _id, choice in enumerate(self.classes):
+        self.choice_layout = QtWidgets.QFormLayout()
+        self.label_scores = len(self.classes) * [QtWidgets.QLineEdit('10')]
+        for _id, (choice, label_score) in enumerate(zip(self.classes, self.label_scores)):
             choice_button = (
                 QtWidgets.QRadioButton(choice)
                 if not self.multilabel
                 else QtWidgets.QCheckBox(choice)
             )
-            self.choice_layout.addWidget(choice_button)
+            label_score.setEnabled(False)
+            self.choice_layout.addRow(choice_button, label_score)
             self.choice_group.addButton(choice_button)
             self.choice_group.setId(choice_button, _id)
         self.choice_box.setLayout(self.choice_layout)
@@ -355,6 +363,12 @@ class CorrectionWindow(QtWidgets.QDialog):
         self.setLayout(self.main_layout)
         self.retranslate_ui()
 
+    def state_changed(self):
+        for button, label_score in zip(self.choice_group.buttons(), self.label_scores):
+            if button.isChecked():
+                label_score.setEnabled(True)
+
+
     def retranslate_ui(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(
@@ -366,10 +380,10 @@ class CorrectionWindow(QtWidgets.QDialog):
 
     def get_choice(self):
         return [
-                button.text()
-                for button in self.choice_group.buttons()
+                (button.text(), int(label_score.text()))
+                for button, label_score in zip(self.choice_group.buttons(), self.label_scores)
                 if button.isChecked()
-            ] if self.result() == QtWidgets.QDialog.Accepted else None
+            ] if self.result() == QtWidgets.QDialog.Accepted else (None, None)
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -380,7 +394,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.infos = []
         self.output_instances = []
 
-        self.new_labels = []
+        self.new_labels = None
+        self.new_scores = None
         self.current = None
         self.scene = None
 
@@ -574,7 +589,7 @@ class MainWindow(QtWidgets.QMainWindow):
         choice_window.show()
         choice_window.exec_()
 
-        self.new_labels = choice_window.get_choice()
+        self.new_labels, self.new_scores = zip(*choice_window.get_choice())
 
     def show_building(self):
         self.identity_value.setText(self.current.identity)
@@ -627,6 +642,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 self.current.labels = self.new_labels
                 self.current.probabilities = [1] * len(self.new_labels)
+                self.current.scores = self.new_scores
                 self.output_instances.append(self.current)
                 self.next()
 
