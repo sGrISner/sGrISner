@@ -508,9 +508,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.current is None:
             return ('(x_min, xmax)', '(y_min, ymax)')
         else:
-            (i_max, j_min), (i_min, j_max) = self.background.get_crop_points(
-                self.current.get_bounding_box()
-            )
+            (i_max, j_min), (i_min, j_max) = self.current.shape.bbox
             return (
                 '{:0.2f}, {:0.2f}'.format(j_min, j_max),
                 '{:0.2f}, {:0.2f}'.format(i_max, i_min)
@@ -599,17 +597,13 @@ class MainWindow(QtWidgets.QMainWindow):
         scene = QtWidgets.QGraphicsScene(self)
         self.building_viewer.setScene(scene)
 
+        im = self.background.crop(self.current.shape.bbox, self.margins)
+
         item = scene.addPixmap(
-            self.background.crop(
-                self.current.get_bounding_box(),
-                self.margins
-            )
+            model.to_qpixmap(im)
         )
 
-        for polygon in self.current.get_qgeometry(
-            self.background,
-            self.margins
-        ):
+        for polygon in self.current.to_qgeometry(im, self.margins):
             scene.addPolygon(polygon)
 
         self.building_viewer.fitInView(item, QtCore.Qt.KeepAspectRatio)
