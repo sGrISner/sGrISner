@@ -365,15 +365,11 @@ class CorrectionWindow(QtWidgets.QDialog):
         )
 
     def get_choice(self):
-        return (
-            [
+        return [
                 button.text()
                 for button in self.choice_group.buttons()
                 if button.isChecked()
-            ]
-            if self.result() == QtWidgets.QDialog.Accepted
-            else None
-        )
+            ] if self.result() == QtWidgets.QDialog.Accepted else None
 
 
 class MainWindow(QtWidgets.QMainWindow):
