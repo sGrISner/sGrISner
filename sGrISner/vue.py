@@ -17,9 +17,8 @@ class LoaderWindow(QtWidgets.QDialog):
         self.setup_ui()
 
         self.strategy_parameters = []
-        self.strategy = self.select_strategy()
-
-        self.type = self.select_type()
+        self.select_strategy()
+        self.select_type()
 
         self.classes_button.clicked.connect(self.select_classes)
         self.entries_table_button.clicked.connect(self.select_entries_table)
