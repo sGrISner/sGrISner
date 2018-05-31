@@ -220,7 +220,7 @@ class LoaderWindow(QtWidgets.QDialog):
             self.strategy_grid.addWidget(parameter_value, 1 + index, 3, 1, 2)
 
     def select_classes(self):
-        self.classes_path, test = QtWidgets.QFileDialog.getOpenFileName(
+        self.classes_path, _ = QtWidgets.QFileDialog.getOpenFileName(
             self,
             "Classes file selecetion",
             self.classes_value.text(),
@@ -231,7 +231,7 @@ class LoaderWindow(QtWidgets.QDialog):
             self.classes_value.setText(self.classes_path)
 
     def select_entries_table(self):
-        self.entries_table_path, test = QtWidgets.QFileDialog.getOpenFileName(
+        self.entries_table_path, _ = QtWidgets.QFileDialog.getOpenFileName(
             self,
             "Sélection des résultats de la classification",
             self.entries_table_value.text(),
@@ -242,11 +242,10 @@ class LoaderWindow(QtWidgets.QDialog):
             self.entries_table_value.setText(self.entries_table_path)
 
     def select_background(self):
-        self.background_path, test = QtWidgets.QFileDialog.getOpenFileName(
+        self.background_path, _ = QtWidgets.QFileDialog.getOpenFileName(
             self,
-            "Sélection de l'orthoimage",
+            "Sélection du répertoire de background",
             self.background_value.text(),
-            "Fichiers GEOTIFF(*.geotiff)",
             options=QtWidgets.QFileDialog.Options()
         )
         if self.background_path:
@@ -645,7 +644,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.close()
 
     def save(self):
-        self.save_path, test = QtWidgets.QFileDialog.getSaveFileName(
+        self.save_path, _ = QtWidgets.QFileDialog.getSaveFileName(
             self,
             "Création du fichier de sauvegarde",
             "output.csv",
