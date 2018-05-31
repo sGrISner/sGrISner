@@ -331,15 +331,17 @@ class CorrectionWindow(QtWidgets.QDialog):
         self.choice_box = QtWidgets.QGroupBox()
         self.choice_group = QtWidgets.QButtonGroup()
         self.choice_layout = QtWidgets.QFormLayout()
-        self.label_scores = len(self.classes) * [QtWidgets.QLineEdit('10')]
-        for _id, (choice, label_score) in enumerate(zip(self.classes, self.label_scores)):
+        self.label_scores = len(self.classes) * [None]
+        for _id, choice in enumerate(self.classes):
             choice_button = (
                 QtWidgets.QRadioButton(choice)
                 if not self.multilabel
                 else QtWidgets.QCheckBox(choice)
             )
+            label_score = QtWidgets.QLineEdit('10')
             label_score.setEnabled(False)
             self.choice_layout.addRow(choice_button, label_score)
+            self.label_scores[_id] = label_score
             self.choice_group.addButton(choice_button)
             self.choice_group.setId(choice_button, _id)
         self.choice_box.setLayout(self.choice_layout)
@@ -365,8 +367,7 @@ class CorrectionWindow(QtWidgets.QDialog):
 
     def state_changed(self):
         for button, label_score in zip(self.choice_group.buttons(), self.label_scores):
-            if button.isChecked():
-                label_score.setEnabled(True)
+            label_score.setEnabled(button.isChecked())
 
 
     def retranslate_ui(self):
@@ -383,7 +384,7 @@ class CorrectionWindow(QtWidgets.QDialog):
                 (button.text(), int(label_score.text()))
                 for button, label_score in zip(self.choice_group.buttons(), self.label_scores)
                 if button.isChecked()
-            ] if self.result() == QtWidgets.QDialog.Accepted else (None, None)
+            ] if self.result() == QtWidgets.QDialog.Accepted else None
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -589,7 +590,9 @@ class MainWindow(QtWidgets.QMainWindow):
         choice_window.show()
         choice_window.exec_()
 
-        self.new_labels, self.new_scores = zip(*choice_window.get_choice())
+        choices = choice_window.get_choice()
+        if not choices is None:
+            self.new_labels, self.new_scores = zip(*choices)
 
     def show_building(self):
         self.identity_value.setText(self.current.identity)
