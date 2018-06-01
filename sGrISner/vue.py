@@ -687,6 +687,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.current.probabilities = [1] * len(self.new_labels)
                 self.current.scores = self.new_scores
                 self.output_instances.append(self.current)
+                self.new_labels = None
                 self.next()
 
     def next(self):
