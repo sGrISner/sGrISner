@@ -111,7 +111,7 @@ class Building:
         Attribute `probabilities` stores the building class probabilities.
     """
 
-    def __init__(self, identity='', shape=GeoShape.GeoShape(), labels=[], probabilities=[]):
+    def __init__(self, identity='', shape=GeoShape.GeoShape(), labels=[], probabilities=[], scores=[]):
         """
             Initiate Building class.
 
@@ -123,12 +123,15 @@ class Building:
             :type labels: string
             :param probabilities: building labels probabilities
             :type probabilities: float
+            :param scores: building labels scores
+            :type scores: int
         """
         self.shape = shape
 
         self.identity = identity
         self.labels = labels
         self.probabilities = probabilities
+        self.scores = scores if scores else len(probabilities) * [10]
 
     @staticmethod
     def read(directory, building_id, labels, probabilities):
