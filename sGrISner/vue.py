@@ -677,9 +677,9 @@ class MainWindow(QtWidgets.QMainWindow):
                         +
                         sum(
                             [
-                                [l, p]
-                                for l, p
-                                in zip(build.labels, build.probabilities)
+                                [l, p, s]
+                                for l, p, s
+                                in zip(build.labels, build.probabilities, build.scores)
                             ],
                             []
                         )
