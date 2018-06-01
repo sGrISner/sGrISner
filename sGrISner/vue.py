@@ -412,6 +412,12 @@ class CorrectionWindow(QtWidgets.QDialog):
             ] if self.choice_group.buttons()[-1].isChecked() else []
         ) if self.result() == QtWidgets.QDialog.Accepted else None
 
+    def new_classe(self):
+        return (
+            self.other_class.text()
+            if self.choice_group.buttons()[-1].isChecked() and self.result() == QtWidgets.QDialog.Accepted
+            else None
+        )
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -620,16 +626,20 @@ class MainWindow(QtWidgets.QMainWindow):
         choice_window.exec_()
 
         choices = choice_window.get_choice()
+        if choice_window.new_classe():
+            self.classes[choice_window.new_classe()] = None
         if not choices is None:
             self.new_labels, self.new_scores = zip(*choices)
 
     def show_building(self):
         self.identity_value.setText(self.current.identity)
-        for lvalue, pvalue in self.infos:
+        for lvalue, pvalue, svalue in self.infos:
             self.info_grid.removeWidget(lvalue)
             self.info_grid.removeWidget(pvalue)
+            self.info_grid.removeWidget(svalue)
             lvalue.deleteLater()
             pvalue.deleteLater()
+            svalue.deleteLater()
         self.infos = [
             (QtWidgets.QLabel(str(l)), QtWidgets.QLabel(str(p)), QtWidgets.QLabel(str(s)))
             for l, p, s in zip(self.current.labels, self.current.probabilities, self.current.scores)
