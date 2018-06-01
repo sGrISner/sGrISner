@@ -344,6 +344,21 @@ class CorrectionWindow(QtWidgets.QDialog):
             self.label_scores[_id] = label_score
             self.choice_group.addButton(choice_button)
             self.choice_group.setId(choice_button, _id)
+        
+        other_button = (
+            QtWidgets.QRadioButton('Other')
+            if not self.multilabel
+            else QtWidgets.QCheckBox('Other')
+        )
+        self.other_layout = QtWidgets.QFormLayout()
+        self.other_class = QtWidgets.QLineEdit('Error Class')
+        self.other_class.setEnabled(False)
+        self.other_score = QtWidgets.QLineEdit('10')
+        self.other_score.setEnabled(False)
+        self.other_layout.addRow(self.other_class, self.other_score)
+        self.choice_layout.addRow(other_button, self.other_layout)
+        self.choice_group.addButton(other_button)
+        self.choice_group.setId(other_button, len(self.classes) + 1)
         self.choice_box.setLayout(self.choice_layout)
         self.choice_group.setExclusive(not self.multilabel)
         self.main_layout.addWidget(
@@ -365,10 +380,6 @@ class CorrectionWindow(QtWidgets.QDialog):
         self.setLayout(self.main_layout)
         self.retranslate_ui()
 
-    def state_changed(self):
-        for button, label_score in zip(self.choice_group.buttons(), self.label_scores):
-            label_score.setEnabled(button.isChecked())
-
 
     def retranslate_ui(self):
         _translate = QtCore.QCoreApplication.translate
@@ -379,12 +390,27 @@ class CorrectionWindow(QtWidgets.QDialog):
             _translate('CorrectionWindow', 'Please choose the right class:')
         )
 
+    def state_changed(self):
+        for button, label_score in zip(self.choice_group.buttons()[:-1], self.label_scores):
+            label_score.setEnabled(button.isChecked())
+        self.other_class.setEnabled(self.choice_group.buttons()[-1].isChecked())
+        self.other_score.setEnabled(self.choice_group.buttons()[-1].isChecked())
+        
     def get_choice(self):
-        return [
+        return (
+            [
                 (button.text(), int(label_score.text()))
-                for button, label_score in zip(self.choice_group.buttons(), self.label_scores)
+                for button, label_score in zip(self.choice_group.buttons()[:-1], self.label_scores)
                 if button.isChecked()
-            ] if self.result() == QtWidgets.QDialog.Accepted else None
+            ]
+            +
+            [
+                (
+                    self.other_class.text(),
+                    int(self.other_score.text())
+                )
+            ] if self.choice_group.buttons()[-1].isChecked() else []
+        ) if self.result() == QtWidgets.QDialog.Accepted else None
 
 
 class MainWindow(QtWidgets.QMainWindow):
