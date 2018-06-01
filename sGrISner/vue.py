@@ -484,6 +484,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.info_grid.addWidget(self.class_label, 1, 0)
         self.probability_label = QtWidgets.QLabel()
         self.info_grid.addWidget(self.probability_label, 2, 0)
+        self.score_label = QtWidgets.QLabel()
+        self.info_grid.addWidget(self.score_label, 3, 0)
         self.info_box.setSizePolicy(
             QtWidgets.QSizePolicy(
                 QtWidgets.QSizePolicy.Preferred,
@@ -555,6 +557,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.identity_label.setText(_translate("sGrISner", 'Identifier:'))
         self.class_label.setText(_translate("sGrISner", 'Class:'))
         self.probability_label.setText(_translate("sGrISner", 'Probability:'))
+        self.score_label.setText(_translate("sGrISner", 'Score:'))
         self.bounds_label.setText(_translate("sGrISner", 'Bounds:'))
 
     def pop_load(self):
@@ -602,12 +605,13 @@ class MainWindow(QtWidgets.QMainWindow):
             lvalue.deleteLater()
             pvalue.deleteLater()
         self.infos = [
-            (QtWidgets.QLabel(str(l)), QtWidgets.QLabel(str(p)))
-            for l, p in zip(self.current.labels, self.current.probabilities)
+            (QtWidgets.QLabel(str(l)), QtWidgets.QLabel(str(p)), QtWidgets.QLabel(str(s)))
+            for l, p, s in zip(self.current.labels, self.current.probabilities, self.current.scores)
         ]
-        for index, (lvalue, pvalue) in enumerate(self.infos):
+        for index, (lvalue, pvalue, svalue) in enumerate(self.infos):
             self.info_grid.addWidget(lvalue, 1, 1 + index)
             self.info_grid.addWidget(pvalue, 2, 1 + index)
+            self.info_grid.addWidget(svalue, 3, 1 + index)
 
         xs, ys = self.get_view_bounds()
         self.xbound_value.setText(xs)
