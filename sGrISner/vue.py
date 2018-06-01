@@ -279,7 +279,7 @@ class LoaderWindow(QtWidgets.QDialog):
     def get_entries(self):
         with open(self.entries_table_value.text(), newline='') as table_file:
             return [
-                model.Building.from_shapefile(
+                model.Building.read(
                     self.instances_value.text(),
                     building_id.strip(),
                     labels[::2],
@@ -291,12 +291,12 @@ class LoaderWindow(QtWidgets.QDialog):
             ] if self.result() == QtWidgets.QDialog.Accepted else []
 
     def get_background(self):
-        return model.Background.from_file(
+        return model.Background(
             self.background_value.text()
         ) if self.result() == QtWidgets.QDialog.Accepted else None
 
     def get_margins(self):
-        return(
+        return (
             int(self.xmarging_value.text()),
             int(self.ymarging_value.text())
         ) if self.result() == QtWidgets.QDialog.Accepted else None
