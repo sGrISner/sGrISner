@@ -242,7 +242,7 @@ class LoaderWindow(QtWidgets.QDialog):
             self.entries_table_value.setText(self.entries_table_path)
 
     def select_background(self):
-        self.background_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+        self.background_path = QtWidgets.QFileDialog.getExistingDirectory(
             self,
             "Sélection du répertoire de background",
             self.background_value.text(),
@@ -404,12 +404,14 @@ class CorrectionWindow(QtWidgets.QDialog):
                 if button.isChecked()
             ]
             +
-            [
-                (
-                    self.other_class.text(),
-                    int(self.other_score.text())
-                )
-            ] if self.choice_group.buttons()[-1].isChecked() else []
+            (
+                [
+                    (
+                        self.other_class.text(),
+                        int(self.other_score.text())
+                    )
+                ] if self.choice_group.buttons()[-1].isChecked() else []
+            )
         ) if self.result() == QtWidgets.QDialog.Accepted else None
 
     def new_classe(self):
