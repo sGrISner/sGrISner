@@ -134,7 +134,7 @@ class Building:
         self.scores = scores if scores else len(probabilities) * [10]
 
     @staticmethod
-    def read(directory, building_id, labels, probabilities):
+    def read(directory, building_id, labels, probabilities, scores):
         """
             Create Building from file in `directory`.
             :param directory: directory path
@@ -156,7 +156,8 @@ class Building:
                 )
             ),
             labels,
-            probabilities
+            probabilities,
+            scores
         )
 
     def to_qgeometry(self, background, margins):

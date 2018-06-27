@@ -282,8 +282,9 @@ class LoaderWindow(QtWidgets.QDialog):
                 model.Building.read(
                     self.instances_value.text(),
                     building_id.strip(),
-                    labels[::2],
-                    [float(prob) for prob in labels[1::2]]
+                    labels[::3],
+                    [float(prob) for prob in labels[1::3]],
+                    [float(score) for score in labels[2::3]]
                 )
                 for building_id, *labels in csv.reader(
                     table_file, delimiter=','
@@ -615,11 +616,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.next()
 
     def pop_correction(self):
-        possible_classes = [
-            cls
-            for cls in self.classes.keys()
-            if cls != self.current.labels
-        ] if self.type == 'Multiclass' else self.classes.keys()
+        possible_classes = sorted(
+            [
+                cls
+                for cls in self.classes.keys()
+                if cls != self.current.labels
+            ]
+        ) if self.type == 'Multiclass' else sorted(self.classes.keys())
         choice_window = CorrectionWindow(
             possible_classes,
             self.type == 'Multilabel'
