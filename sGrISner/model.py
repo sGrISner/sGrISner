@@ -26,6 +26,7 @@ import fnmatch
 import functools
 
 import numpy as np
+from skimage import img_as_ubyte, img_as_float, exposure
 import qimage2ndarray
 import shapely
 
@@ -38,7 +39,7 @@ from geo2d import GeoShape, GeoRaster
 
 def to_qimage(georaster):
     return qimage2ndarray.array2qimage(
-        georaster.image
+        img_as_ubyte(exposure.equalize_adapthist(georaster.image, clip_limit=0.05))
     )
 
 
@@ -76,13 +77,21 @@ class Background:
         }
     
     def crop(self, bbox, margins):
+        print(
+            [
+                filepath
+                for (filepath, (back_bbox, _))
+                in self.background_infos.items()
+                if GeoRaster.overlap(
+                    bbox,
+                    back_bbox
+                )
+            ]
+        )
         return functools.reduce(
             lambda lhs, rhs: lhs.union(rhs),
             [
-                GeoRaster.GeoRaster.from_file(
-                    ortho,
-                    dtype=np.uint8
-                ).crop(
+                GeoRaster.GeoRaster.from_file(ortho).crop(
                     GeoRaster.add_margins(
                         bbox,
                         ortho_res,
